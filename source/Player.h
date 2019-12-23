@@ -1,6 +1,6 @@
 #ifndef _Player_h_
 #define _Player_h_
-
+/*{ 他の所でも必要な変数 }**********************************************************/
 typedef struct
 {
 	int x[16] = { 400,400,400,400,400,400,400,400,400,400,400,400,400,400,400,400 };
@@ -13,9 +13,23 @@ typedef struct
 	bool flg = false;
 }PLAYER;
 
-//Playerの全体管理
-void Player_All();
+static PLAYER Player;            // Playerの構造体
+/***********************************************************************************/
 
+/*{ Player.cpp内だけで使う変数 }****************************************************/
+typedef struct
+{
 
+}Animation;
+
+static Animation ani;            // Player_Animationの構造体
+
+void Player_All();       //Playerの全体管理
+void Player_Init();      //Playerの初期化管理
+void Player_Draw();      //Playerの描画の管理
+void Player_Move();      //Playerの動きの管理
+void Player_Animation(); //Playerのアニメーションの管理
+void Player_Shot();      //Playerの弾の全体管理
+void Player_judgment();  //Playerの当たり判定の管理
 
 #endif
