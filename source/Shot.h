@@ -15,3 +15,4 @@ typedef struct shot{
 
 #endif 
 
+j
