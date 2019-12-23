@@ -1,4 +1,5 @@
 #include"DxLib.h"
+#include"Scene_mgr.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -7,7 +8,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
-		Scene_change();
+		Scenemgr_update();
+		Scenemgr_draw();
 	}
 	DxLib_End();
 	return 0;
