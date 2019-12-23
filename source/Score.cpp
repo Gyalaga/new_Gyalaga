@@ -1,6 +1,9 @@
 #include "DxLib.h"
 #include "Score.h"
 
+int Black = GetColor(0, 0, 0);            //黒の色
+int Red = GetColor(255, 0, 0);            //赤の色
+int White = GetColor(255, 255, 255);      //塗りつぶす用（白）
 
 //更新
 void Score_Update() {
