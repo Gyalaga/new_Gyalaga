@@ -2,7 +2,7 @@
 #define _SCENE_MGR_H_
 
 typedef enum {
-	eScene_MENU,  //メニュー画面
+	eScene_TITLE,  //タイトル画面
 	eScene_GAME,  //ゲーム画面
 	eScene_RESULT,//設定画面
 }eScene;
@@ -13,6 +13,7 @@ void Scenemgr_update();
 //描画
 void Scenemgr_draw();
 
-void Changescene(eScene nextScene);
+//引数　nextSceneのシーンに変更。
+void Scene_change(eScene nextScene);
 #endif // !_SCENE_MGR_H_
 
