@@ -1,5 +1,7 @@
 #ifndef _Player_h_
 #define _Player_h_
+
+#define PI 3.14    // 角度求めるのに使用
 /*{ 他の所でも必要な変数 }**********************************************************/
 typedef struct
 {
@@ -7,10 +9,12 @@ typedef struct
 	int y[16] = { 700,700,700,700,700,700,700,700,700,700,700,700,700,700,700,700 };
 	//  width:横幅, height:縦幅, center:中心
 	int width = 32, height = 32, center = width / 2;
-	//  mode:  0_通常 ,1_捕縛 ,2_デュアルモード
+	//  rote:角度,image:画像
+	int rote = 0, image[2];
+	//  mode:  0_通常 ,1_デュアルモード ,2_捕縛されそう ,3_捕縛 ,4_破壊(非表示)
 	int mode = 0;
 	//表示フラグ
-	bool flg = false;
+	bool flg = true;
 }PLAYER;
 
 static PLAYER Player;            // Playerの構造体
