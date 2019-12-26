@@ -38,13 +38,13 @@ void Score_Draw() {
 	fclose(fp);*/
 
 
-
 	// ハイスコアの文字描画
-	DrawFormatString(900, 30, Red, "HIGH ");
-	DrawFormatString(950, 50, Red, " SCORE");
+	int HISCORE = LoadGraph("画像/HISCORE.png");
+	DrawGraph(900, 50, HISCORE, TRUE);
 
 	//スコア文字の描画
-	DrawFormatString(900, 160, Red, "1UP");
+	int UP = LoadGraph("画像/1UP.png");
+	DrawGraph(900, 160, UP, TRUE);
 
 	//スコア数字の描画
 	DrawFormatString(scorex, scorey, White, "%d", score);
