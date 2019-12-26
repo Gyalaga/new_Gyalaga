@@ -65,6 +65,12 @@ void Score_Draw() {
 		DrawFormatString(h_scorex, h_scorey, White, "%d", h_score);
 	}
 
+	//点滅(60回中30回表示のペース）
+	count = (count + 1) % 60;
+	if (count < 30) {
+		DrawGraph(900, 160, UP, TRUE);
+	}
+
 }
 
 void Score_Title() {
