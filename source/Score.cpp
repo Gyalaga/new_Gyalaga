@@ -37,14 +37,10 @@ void Score_Draw() {
 
 	fclose(fp);*/
 
-
 	// ハイスコアの文字描画
-	int HISCORE = LoadGraph("画像/HISCORE.png");
-	DrawGraph(900, 50, HISCORE, TRUE);
+	DrawFormatString(900, 30, Red, "HIGH");
+	DrawFormatString(950, 60, Red, "SCORE");
 
-	//スコア文字の描画
-	int UP = LoadGraph("画像/1UP.png");
-	DrawGraph(900, 160, UP, TRUE);
 
 	//スコア数字の描画
 	DrawFormatString(scorex, scorey, White, "%d", score);
@@ -65,10 +61,10 @@ void Score_Draw() {
 		DrawFormatString(h_scorex, h_scorey, White, "%d", h_score);
 	}
 
-	//点滅(60回中30回表示のペース）
+	//点滅(60回中30回表示のペース)でスコアを描画
 	count = (count + 1) % 60;
 	if (count < 30) {
-		DrawGraph(900, 160, UP, TRUE);
+		DrawFormatString(950, 160, Red, "1UP");
 	}
 
 }
