@@ -1,6 +1,7 @@
 #include"DxLib.h"
 #include"Scene_mgr.h"
 #include"Backglound.h"
+#include"ShotGV.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {

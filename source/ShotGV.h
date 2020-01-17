@@ -1,6 +1,5 @@
-#ifndef _SHOT_H_
-
-#define _SHOT_H_
+#ifndef _SHOTGV_H_
+#define _SHOTGV_H_
 
 #define SHOT 2
 int Shot_init();
@@ -17,8 +16,8 @@ typedef struct {
 	int sf2;
 } BULLET;
 
-BULLET bullet;
-/*
+ BULLET bullet;
+
 typedef struct {
 	int px = 550, py = 700;
 	int ph = 32, pw = 32;
@@ -26,6 +25,6 @@ typedef struct {
 }PLAYER;
 
 PLAYER player;
-*/
+
 #endif 
 

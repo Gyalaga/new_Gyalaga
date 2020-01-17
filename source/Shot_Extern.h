@@ -1,5 +1,5 @@
-#ifndef _SHOTGV_H_
-#define _SHOTGV_H_
+#ifndef _SHOT_EXTERN_H_
+#define _SHOT_EXTERN_H_
 #define SHOT 2
 extern int Shot_init();
 extern int Shot_draw();
@@ -14,9 +14,8 @@ typedef struct {
 	int sf[SHOT];
 	int sf2;
 } BULLET;
-
 extern BULLET bullet;
-/*
+
 typedef struct {
 	int px = 550, py = 700;
 	int ph = 32, pw = 32;
@@ -24,5 +23,5 @@ typedef struct {
 }PLAYER;
 
 extern PLAYER player;
-*/
+
 #endif 
