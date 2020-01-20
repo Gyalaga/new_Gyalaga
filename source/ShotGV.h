@@ -18,13 +18,7 @@ typedef struct {
 
  BULLET bullet;
 
-typedef struct {
-	int px = 550, py = 700;
-	int ph = 32, pw = 32;
 
-}PLAYER;
-
-PLAYER player;
 
 #endif 
 
