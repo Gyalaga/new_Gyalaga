@@ -14,9 +14,11 @@ ENEMYMGR::~ENEMYMGR() {
 //初期化処理
 void ENEMYMGR::Init() {
 
-	int x, y;	//※ファイルからデータを読み込む機能実装後削除します
+	int x, y, x2, y2;	//※ファイルからデータを読み込む機能実装後削除します
 	x = 310;
 	y = 72;
+	x2 = 328;
+	y2 = 36;
 
 	//敵の画像を一時的にbaseGhに格納する
 	LoadDivGraph("./res/img/Galaga_OBJ_enemy.png", 50, 5, 10, 18, 18, baseGh);
@@ -36,8 +38,19 @@ void ENEMYMGR::Init() {
 		zako[i]->Load_Image(zakoGh);
 		x += 18;
 		if (i == 9) {
-			y *= 2;
+			y -= 18;
 			x =	310;
+		}
+
+		if (i < 16) {
+			goei[i] = new GOEI(x2, y2);
+			goei[i]->Load_Image(goeiGh);
+			x2 += 18;
+
+			if (i == 8) {
+				y -= 18;
+				x = 328;
+			}
 		}
 	}
 }
@@ -48,6 +61,7 @@ void ENEMYMGR::Final() {
 	//確保していたメモリを解放する
 	for (int i = 0; i < 20; i++) {
 		delete zako[i];
+		if (i < 16)delete goei[i];
 	}
 }
 
@@ -56,6 +70,7 @@ void ENEMYMGR::Update() {
 
 	for (int i = 0; i < 20; i++) {
 		zako[i]->Update();
+		if (i < 16)goei[i]->Update();
 	}
 }
 
@@ -64,5 +79,6 @@ void ENEMYMGR::Draw() {
 
 	for (int i = 0; i < 20; i++) {
 		zako[i]->Draw();
+		if (i < 16)goei[i]->Draw();
 	}
 }

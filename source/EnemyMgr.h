@@ -2,6 +2,7 @@
 #define _ENEMYMGR_H_
 
 #include "Task.h"
+#include "Goei.h"
 #include "Zako.h"
 
 #define GOEI_START		5		//ゴエイの先頭の場所
@@ -18,6 +19,7 @@ private:
 	int goeiGh[5];		//ゴエイクラスへ画像を送る用変数
 	int bossGh[10];		//ボスギャラガクラスへ画像を送る用変数
 	ZAKO* zako[20];		//ザコの実体の配列
+	GOEI* goei[16];		//ゴエイの実体の配列
 public:
 	ENEMYMGR();			//コンストラクタ
 	~ENEMYMGR();		//デストラクタ
