@@ -1,19 +1,19 @@
-#include"DxLib.h"
-#include"Scene_mgr.h"
-#include"Title.h"
-#include"Keyborad.h"
+#include "DxLib.h"
+#include "SceneMgr.h"
+#include "Title.h"
+#include "Keyborad.h"
 
-int PLAYER1_Y = 1170;    //「1PLAYER」文字のy座標
-int PLAYER2_Y = 1210;   //「2PLAYER」文字のy座標
-int TITLE_Y = 900;   //「タイトルロゴ」のy座標
-int SCORE_Y = 800;   //「HI-SCORE」のｙ座標
-int ONEUP_Y = 800;   //「1UP」のｙ座標
-int TWOUP_Y = 800;   //「2UP」のｙ座標
-int NAMCO_Y = 1350;  //「namco」のｙ座標
 
-static int Select = eMenu_1PLAYER;
+TITLE::TITLE(ISCENECHANGER* changer) :BASESCENE(changer) {
 
-void Title_update() {
+}
+
+void TITLE::Update() {
+
+	if (CheckHitKey(KEY_INPUT_ESCAPE) != 0) {
+		mSceneChanger->ChangeScene(eScene_Game);
+	}
+
 	if (Key_get(KEY_INPUT_DOWN) == 1) {//下キーが押されていたら
 		Select = (Select + 1) % eMenu_Num;//選択状態を一つ下げる
 	}
@@ -26,19 +26,18 @@ void Title_update() {
 		case eMenu_1PLAYER:                           //ゲーム選択中なら
 			PLAYER1_Y = 1170;
 			PLAYER2_Y = 1210;
-			Scene_change(eScene_GAME);       //シーンをゲーム画面に変更
+			mSceneChanger->ChangeScene(eScene_Game);
 			break;
 		case eMenu_2PLAYER://設定選択中なら
 			PLAYER1_Y = 1170;
 			PLAYER2_Y = 1210;
-			Scene_change(eScene_GAME);    //シーンを設定画面に変更
+			mSceneChanger->ChangeScene(eScene_Game);
 			break;
 		}
 	}
-
 }
 
-void Title_draw() {
+void TITLE::Draw() {
 	static int title = LoadGraph("./res/img/Gyaraga.jpg"); static int namuco = LoadGraph("./res/img/NAMUCO.png");
 	static int player1 = LoadGraph("./res/img/PLAYER1.png"); static int player2 = LoadGraph("./res/img/PLAYER2.png");
 	static int score1 = LoadGraph("./res/img/1UP.png"); static int score2 = LoadGraph("./res/img/2UP.png");
@@ -95,6 +94,5 @@ void Title_draw() {
 		break;
 	}
 	DrawString(250, y, "■", GetColor(255, 255, 255));
-	
 
 }

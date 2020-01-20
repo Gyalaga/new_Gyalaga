@@ -1,14 +1,14 @@
 #ifndef _GAME_H_
 #define _GAME_H_
 
+#include "BaseScene.h"
 #include "Control.h"
-#include "Task.h"
 
-class GAME :public TASK {
+class GAME :public BASESCENE {
 private:
 	CONTROL* control;
 public:
-	GAME();
+	GAME(ISCENECHANGER* changer);
 	~GAME();
 	void Update();
 	void Draw(){}

@@ -1,5 +1,6 @@
 #include "DxLib.h"
 #include "Keyborad.h"
+#include "SceneMgr.h"
 
 //ƒL[“ü—Í
 int Key[256];  //0:“ü—Í‚³‚ê‚Ä‚È‚¢
