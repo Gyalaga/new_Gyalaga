@@ -2,6 +2,7 @@
 #define _ENEMYMGR_H_
 
 #include "Task.h"
+#include "Boss.h"
 #include "Goei.h"
 #include "Zako.h"
 
@@ -20,6 +21,7 @@ private:
 	int bossGh[10];		//ボスギャラガクラスへ画像を送る用変数
 	ZAKO* zako[20];		//ザコの実体の配列
 	GOEI* goei[16];		//ゴエイの実体の配列
+	BOSS* boss[4];		//ボスギャラガの実体の配列
 public:
 	ENEMYMGR();			//コンストラクタ
 	~ENEMYMGR();		//デストラクタ
