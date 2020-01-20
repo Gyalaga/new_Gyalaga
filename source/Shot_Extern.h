@@ -16,12 +16,4 @@ typedef struct {
 } BULLET;
 extern BULLET bullet;
 
-typedef struct {
-	int px = 550, py = 700;
-	int ph = 32, pw = 32;
-
-}PLAYER;
-
-extern PLAYER player;
-
 #endif 
