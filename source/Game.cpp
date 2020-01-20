@@ -1,11 +1,14 @@
-#include"DxLib.h"
-#include"Game.h"
+#include "Game.h"
+#include "DxLib.h"
 
-void Game_draw() {
-
-
+GAME::GAME() {
+	control = new CONTROL;
 }
 
-void Game_update() {
+GAME::~GAME() {
+	delete control;
+}
 
+void GAME::Update() {
+	control->GameControl();
 }

@@ -14,11 +14,13 @@ ENEMYMGR::~ENEMYMGR() {
 //初期化処理
 void ENEMYMGR::Init() {
 
-	int x, y, x2, y2;	//※ファイルからデータを読み込む機能実装後削除します
+	int x, y, x2, y2, x3, y3;	//※ファイルからデータを読み込む機能実装後削除します
 	x = 310;
 	y = 72;
 	x2 = 328;
 	y2 = 36;
+	x3 = 364;
+	y3 = 0;
 
 	//敵の画像を一時的にbaseGhに格納する
 	LoadDivGraph("./res/img/Galaga_OBJ_enemy.png", 50, 5, 10, 18, 18, baseGh);
@@ -42,15 +44,22 @@ void ENEMYMGR::Init() {
 			x =	310;
 		}
 
+		//ゴエイの実体を生成する
 		if (i < 16) {
 			goei[i] = new GOEI(x2, y2);
 			goei[i]->Load_Image(goeiGh);
 			x2 += 18;
 
-			if (i == 8) {
-				y -= 18;
-				x = 328;
+			if (i == 7) {
+				y2 -= 18;
+				x2 = 328;
 			}
+		}
+
+		if (i < 4) {
+			boss[i] = new BOSS(x3, y3);
+			boss[i]->Load_Image(bossGh);
+			x3 += 18;
 		}
 	}
 }
@@ -62,6 +71,7 @@ void ENEMYMGR::Final() {
 	for (int i = 0; i < 20; i++) {
 		delete zako[i];
 		if (i < 16)delete goei[i];
+		if (i < 4)delete boss[i];
 	}
 }
 
@@ -71,6 +81,7 @@ void ENEMYMGR::Update() {
 	for (int i = 0; i < 20; i++) {
 		zako[i]->Update();
 		if (i < 16)goei[i]->Update();
+		if (i < 4)boss[i]->Update();
 	}
 }
 
@@ -80,5 +91,6 @@ void ENEMYMGR::Draw() {
 	for (int i = 0; i < 20; i++) {
 		zako[i]->Draw();
 		if (i < 16)goei[i]->Draw();
+		if (i < 4)boss[i]->Draw();
 	}
 }

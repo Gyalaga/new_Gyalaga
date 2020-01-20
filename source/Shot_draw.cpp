@@ -9,6 +9,7 @@ int Shot_Check() {
 					bullet.sf[i] = 1;
 					bullet.sx[i] = (Player.width - bullet.sw) / 2 + Player.x[i];
 					bullet.sy[i] = (Player.height - bullet.sh) / 2 + Player.y[i];
+
 					break;
 				}
 			}
