@@ -1,11 +1,17 @@
 #ifndef _GAME_H_
 #define _GAME_H_
 
+#include "Control.h"
+#include "Task.h"
 
-//ï`âÊ
-void Game_draw();
-
-//çXêV
-void Game_update();
+class GAME :public TASK {
+private:
+	CONTROL* control;
+public:
+	GAME();
+	~GAME();
+	void Update();
+	void Draw(){}
+};
 
 #endif // !_GAME_H_

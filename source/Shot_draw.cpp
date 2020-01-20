@@ -7,8 +7,8 @@ int Shot_Check() {
 			if (bullet.sf2 == 0) {
 				if (bullet.sf[i] == 0) {
 					bullet.sf[i] = 1;
-					bullet.sx[i] = (Player.pw - bullet.sw) / 2 + Player.px;
-					bullet.sy[i] = (Player.ph - bullet.sh) / 2 + Player.py;
+//					bullet.sx[i] = (Player.pw - bullet.sw) / 2 + Player.px;
+//					bullet.sy[i] = (Player.ph - bullet.sh) / 2 + Player.py;
 					break;
 				}
 			}

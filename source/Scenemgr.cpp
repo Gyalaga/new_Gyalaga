@@ -4,6 +4,8 @@
 #include"Game.h"
 #include"Keyborad.h"
 static eScene Scene = eScene_TITLE;
+//static GAME* game = new GAME;	//ゲームクラスの生成
+GAME* game;	//ゲームクラスの生成
 
 //更新
 void Scenemgr_update() {
@@ -13,7 +15,7 @@ void Scenemgr_update() {
 		Title_update();
 		break;
 	case eScene_GAME:
-	    Game_update();
+		game->Update();
 		break;
 	case eScene_RESULT:
 		//Result_update();
@@ -27,7 +29,7 @@ void Scenemgr_draw() {
 		Title_draw();
 		break;
 	case eScene_GAME:
-		Game_draw();
+		game->Draw();
 		break;
 	case eScene_RESULT:
 		//Result_draw();
@@ -38,4 +40,7 @@ void Scenemgr_draw() {
 void Scene_change(eScene nextScene) {
 
 	Scene = nextScene;
+
+	if (nextScene != eScene_GAME && game!=NULL)delete game;
+	else game = new GAME;
 }

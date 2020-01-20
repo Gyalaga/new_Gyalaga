@@ -42,14 +42,15 @@ void ENEMYMGR::Init() {
 			x =	310;
 		}
 
+		//ÉSÉGÉCÇÃé¿ëÃÇê∂ê¨Ç∑ÇÈ
 		if (i < 16) {
 			goei[i] = new GOEI(x2, y2);
 			goei[i]->Load_Image(goeiGh);
 			x2 += 18;
 
-			if (i == 8) {
-				y -= 18;
-				x = 328;
+			if (i == 7) {
+				y2 -= 18;
+				x2 = 328;
 			}
 		}
 	}
