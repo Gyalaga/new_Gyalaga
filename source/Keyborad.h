@@ -5,6 +5,6 @@
 void Keyborad();
 
 //引数のキーコードのキーの入力状態を返す
-int Keyborad_Get(int KeyCode);
+int Key_get(int KeyCode);
 
 #endif // !_KEYBORAD_H_
