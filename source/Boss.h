@@ -3,16 +3,19 @@
 
 #include "Enemy.h"
 
+//ボスギャラガクラスの宣言
 class BOSS :public ENEMY {
 private:
 	int gh[10];		//画像格納変数
 public:
-	BOSS(int getX, int getY);		//コンストラクタ
-	void Init(int ix, int iy);		//初期化処理
-	void Final();					//終了処理
-	void Update();					//更新処理
-	void Draw();					//描画処理
-	void Load_Image(int* sGh);		//画像読み込み処理
+	BOSS(int getX, int getY);			//コンストラクタ
+	void Init(int ix, int iy);			//初期化処理
+	void Final();						//終了処理
+	void Update();						//更新処理
+	void Draw();						//描画処理
+	void Load_Image(int* sGh);			//画像読み込み処理
+	void Overall_Move();				//全体共通の動き
+	void Load_AddMove(int addMove);		//エネミー管理クラスからの読み込み
 };
 
 #endif // !_BOSS_H_

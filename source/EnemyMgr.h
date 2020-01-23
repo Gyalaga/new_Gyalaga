@@ -21,7 +21,6 @@ private:
 	int bossGh[10];		//ボスギャラガクラスへ画像を送る用変数
 	int enemyAllMove;	//エネミー全体の移動用変数
 	int enemyAll;		//各敵に送る用変数
-	int direction_flg;	//方向の判定　0:右　1:左
 	int intervalCnt;	//全体で動く間隔カウント
 	ZAKO* zako[20];		//ザコの実体の配列
 	GOEI* goei[16];		//ゴエイの実体の配列

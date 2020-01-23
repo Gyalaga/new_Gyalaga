@@ -14,6 +14,17 @@ void BOSS::Load_Image(int* sGh) {
 	}
 }
 
+//エネミー管理クラスから全体の移動量を取得する
+void BOSS::Load_AddMove(int addMove) {
+	
+	allMoveAmount = addMove;
+
+	//攻撃中ではない場合
+	if (atkActive == false) {
+		Overall_Move();
+	}
+}
+
 //初期化処理
 void BOSS::Init(int ix, int iy) {
 	x			= ix;		//x座標の初期化
@@ -38,4 +49,9 @@ void BOSS::Update() {
 //描画処理
 void BOSS::Draw() {
 	DrawGraph(x, y, gh[0], TRUE);
+}
+
+//全体の動き
+void BOSS::Overall_Move() {
+	x += allMoveAmount;
 }

@@ -50,7 +50,6 @@ void ZAKO::Update() {
 //•`‰æˆ—
 void ZAKO::Draw() {
 	DrawGraph(x, y, gh[0], TRUE);
-	DrawFormatString(0, 30, GetColor(255, 255, 255), "%d", allMoveAmount);
 }
 
 //‘S‘Ì‚Ì“®‚«

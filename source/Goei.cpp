@@ -14,6 +14,17 @@ void GOEI::Load_Image(int* sGh) {
 	}
 }
 
+//エネミー管理クラスから全体の移動量を取得する
+void GOEI::Load_AddMove(int addMove) {
+
+	allMoveAmount = addMove;		//全体の移動量をゴエイクラスに適用させる
+
+	//攻撃中ではないとき
+	if (atkActive == false) {
+		Overall_Move();
+	}
+}
+
 //初期化処理
 void GOEI::Init(int ix, int iy) {
 	x			= ix;		//x座標
@@ -38,4 +49,9 @@ void GOEI::Update() {
 //描画処理
 void GOEI::Draw() {
 	DrawGraph(x, y, gh[0], TRUE);
+}
+
+//全体の動き
+void GOEI::Overall_Move() {
+	x += allMoveAmount;
 }

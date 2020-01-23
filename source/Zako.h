@@ -3,7 +3,7 @@
 
 #include "Enemy.h"
 
-//ザコクラス
+//ザコクラスの宣言
 class ZAKO :public ENEMY {
 private:
 	int gh[5];		//画像格納変数
