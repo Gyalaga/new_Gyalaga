@@ -16,10 +16,13 @@ void BOSS::Load_Image(int* sGh) {
 
 //初期化処理
 void BOSS::Init(int ix, int iy) {
-	x = ix;	//x座標の初期化
-	y = iy;	//y座標の初期化
-	width = 18;	//横幅
-	height = 18;	//高さ
+	x			= ix;		//x座標の初期化
+	y			= iy;		//y座標の初期化
+	width		= 18;		//横幅
+	height		= 18;		//高さ
+	durability	= 1;		//耐久力
+	atkActive	= false;	//攻撃判定
+	onAcitve	= true;		//生存判定
 }
 
 //終了処理

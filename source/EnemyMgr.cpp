@@ -22,6 +22,11 @@ void ENEMYMGR::Init() {
 	x3 = 364;
 	y3 = 0;
 
+	enemyAll		= 0;
+	enemyAllMove	= ENEMY_MOVERIGHT;
+	direction_flg	= 0;
+	intervalCnt		= 0;
+
 	//敵の画像を一時的にbaseGhに格納する
 	LoadDivGraph("./res/img/Galaga_OBJ_enemy.png", 50, 5, 10, 18, 18, baseGh);
 
@@ -83,10 +88,37 @@ void ENEMYMGR::Update() {
 		if (i < 16)goei[i]->Update();
 		if (i < 4)boss[i]->Update();
 	}
+
+	//間隔カウントが60を超えるとき初期化する
+	if (intervalCnt > 120)intervalCnt = 0;
+
+	//カウントが60の時全体を動かす
+	if (intervalCnt == 120) {
+		enemyAll += enemyAllMove;
+
+		//ザコに全体の移動量を送る
+		for (int i = 0; i < 20; i++) {
+			zako[i]->Load_AddMove(enemyAllMove);
+		}
+
+	}
+
+	//全体で動く方向の判定
+	if (enemyAll <= 0) {
+		enemyAllMove = ENEMY_MOVERIGHT;
+		direction_flg = 0;
+	}
+	if (enemyAll >= 50) {
+		enemyAllMove = ENEMY_MOVELEFT;
+		direction_flg = 1;
+	}
+
+	intervalCnt++;		//間隔カウントを増やす
 }
 
 //描画処理
 void ENEMYMGR::Draw() {
+	DrawFormatString(0, 30, GetColor(255, 255, 255), "%d",enemyAll);
 
 	for (int i = 0; i < 20; i++) {
 		zako[i]->Draw();
