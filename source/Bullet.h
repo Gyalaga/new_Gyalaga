@@ -5,7 +5,7 @@
 
 //弾クラスの宣言
 class BULLET :public TASK {
-private:
+protected:
 	double x, y;			//座標
 	int width, height;		//横幅・高さ
 	bool onActive;			//描画してるかしてないかの判定
