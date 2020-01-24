@@ -16,4 +16,5 @@ void CONTROL::GameControl() {
 
 	enemyMgr->Update();
 	enemyMgr->Draw();
+
 }

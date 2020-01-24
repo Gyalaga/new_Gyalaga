@@ -10,10 +10,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	SCENEMGR sceneMgr;
 	sceneMgr.Init();
-
+	//ENEMY* enemy = new ENEMY;
 	while (ScreenFlip() == 0 && ProcessMessage() == 0 && ClearDrawScreen() == 0)
 	{
 		Backgraph_all();
+		//enemy->Enemy_all();
 		sceneMgr.Update();
 		sceneMgr.Draw();
 	}
