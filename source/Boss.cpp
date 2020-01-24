@@ -48,7 +48,7 @@ void BOSS::Update() {
 
 //•`‰æˆ—
 void BOSS::Draw() {
-	DrawGraph(x, y, gh[0], TRUE);
+	DrawRotaGraph(x, y, 2.0, 0, gh[0], TRUE);
 }
 
 //‘S‘Ì‚Ì“®‚«

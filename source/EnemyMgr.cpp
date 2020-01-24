@@ -1,5 +1,7 @@
 #include "EnemyMgr.h"
 #include "DxLib.h"
+#include<math.h>
+#define PI 3.1415926f
 
 //コンストラクタ
 ENEMYMGR::ENEMYMGR() {
@@ -16,11 +18,12 @@ void ENEMYMGR::Init() {
 
 	int x, y, x2, y2, x3, y3;	//※ファイルからデータを読み込む機能実装後削除します
 	x = 310;
-	y = 72;
+	y = 120;
 	x2 = 328;
-	y2 = 36;
-	x3 = 364;
-	y3 = 0;
+	y2 = 68;
+	x3 = 380;
+	y3 = 15;
+	sincount = 0;
 
 	enemyAll = 0;
 	enemyAllMove = ENEMY_MOVERIGHT;
@@ -42,9 +45,9 @@ void ENEMYMGR::Init() {
 	for (int i = 0; i < 20; i++) {
 		zako[i] = new ZAKO(x, y);
 		zako[i]->Load_Image(zakoGh);
-		x += 18;
+		x += 30;
 		if (i == 9) {
-			y -= 18;
+			y -= 25;
 			x = 310;
 		}
 	}
@@ -53,9 +56,9 @@ void ENEMYMGR::Init() {
 	for (int i = 0; i < 16; i++) {
 		goei[i] = new GOEI(x2, y2);
 		goei[i]->Load_Image(goeiGh);
-		x2 += 18;
+		x2 += 35;
 		if (i == 7) {
-			y2 -= 18;
+			y2 -= 20;
 			x2 = 328;
 		}
 	}
@@ -64,7 +67,7 @@ void ENEMYMGR::Init() {
 	for (int i = 0; i < 4; i++) {
 		boss[i] = new BOSS(x3, y3);
 		boss[i]->Load_Image(bossGh);
-		x3 += 18;
+		x3 += 35;
 	}
 }
 
@@ -107,16 +110,24 @@ void ENEMYMGR::Update() {
 
 	//間隔カウントが60を超えるとき初期化する
 	if (intervalCnt > 120)intervalCnt = 0;
+	
+	//sinカウントが100を超えると動かす
+	if (sincount >= 100) {
+		bool atkActive = true;
+		zako[0]->Atacck(atkActive);
+	}
 
 	//カウントが60の時全体を動かす
 	if (intervalCnt == 120) {
 		enemyAll += enemyAllMove;
+		
 
 		//ザコに全体の移動量を送る
 		for (int i = 0; i < 20; i++) {
 			zako[i]->Load_AddMove(enemyAllMove);
 		}
 
+		
 		//ゴエイに全体の移動量を送る
 		for (int i = 0; i < 16; i++) {
 			goei[i]->Load_AddMove(enemyAllMove);
@@ -136,7 +147,7 @@ void ENEMYMGR::Update() {
 	if (enemyAll >= 50) {
 		enemyAllMove = ENEMY_MOVELEFT;
 	}
-
+	sincount++;         //sin移動カウントを増やす
 	intervalCnt++;		//間隔カウントを増やす
 
 

@@ -48,7 +48,7 @@ void GOEI::Update() {
 
 //•`‰æˆ—
 void GOEI::Draw() {
-	DrawGraph(x, y, gh[0], TRUE);
+	DrawRotaGraph(x, y, 2.0, 0, gh[0], TRUE);
 }
 
 //‘S‘Ì‚Ì“®‚«
