@@ -9,9 +9,9 @@ class CONTROL {
 private:
 	ENEMYMGR* enemyMgr;
 public:
-	CONTROL();				//コンストラクタ
-	~CONTROL();				//デストラクタ
-	void GameControl();		//ゲームの全体管理
+	CONTROL();									//コンストラクタ
+	~CONTROL();									//デストラクタ
+	void GameControl();							//ゲームの全体管理
 };
 
 #endif // !_CONTROL_H_
