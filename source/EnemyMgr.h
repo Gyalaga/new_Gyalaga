@@ -22,6 +22,8 @@ private:
 	int enemyAllMove;	//エネミー全体の移動用変数
 	int enemyAll;		//各敵に送る用変数
 	int intervalCnt;	//全体で動く間隔カウント
+	double enemyX[40];	//敵のX座標を取得
+	double enemyY[40];	//敵のY座標を取得
 	ZAKO* zako[20];		//ザコの実体の配列
 	GOEI* goei[16];		//ゴエイの実体の配列
 	BOSS* boss[4];		//ボスギャラガの実体の配列

@@ -2,11 +2,13 @@
 #define _ZAKO_H_
 
 #include "Enemy.h"
+#include "EnemyBullet.h"
 
 //ザコクラスの宣言
 class ZAKO :public ENEMY {
 private:
-	int gh[5];		//画像格納変数
+	int gh[5];				//画像格納変数
+	ENEMYBULLET* bullet;	//弾
 public:
 	ZAKO(int getX, int getY);			//コンストラクタ
 	void Init(int ix, int iy);			//初期化処理

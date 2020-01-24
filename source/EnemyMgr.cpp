@@ -138,6 +138,8 @@ void ENEMYMGR::Update() {
 	}
 
 	intervalCnt++;		//ŠÔŠuƒJƒEƒ“ƒg‚ğ‘‚â‚·
+
+
 }
 
 //•`‰æˆ—
