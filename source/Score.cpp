@@ -14,7 +14,7 @@ void Score_Update() {
 void Score_Save() {
 
 	//ハイスコアのファイルを開く
-	FileHandle = FileRead_open("h_score.dat");
+	FileHandle = FileRead_open("./res/source/h_score.dat");
 
 	// 一行読む
 	FileRead_gets(String, 256, FileHandle);
@@ -31,16 +31,17 @@ void Score_Draw() {
 
 	FILE* fp;
 
-	/*//ハイスコアの記録
-	fp = fopen("h_score.dat", "wb");
+	// ハイスコアの記録
+	/*fp = fopen("./res/source/h_score.dat", "wb");
 	fprintf(fp, "%d", h_score);
 
 	fclose(fp);*/
 
+	score = 0;
+
 	// ハイスコアの文字描画
 	DrawFormatString(900, 30, Red, "HIGH");
 	DrawFormatString(950, 60, Red, "SCORE");
-
 
 	//スコア数字の描画
 	DrawFormatString(scorex, scorey, White, "%d", score);
@@ -72,7 +73,7 @@ void Score_Draw() {
 void Score_Title() {
 
 	//ハイスコアのファイルを開く
-	FileHandle = FileRead_open("h_score.dat");
+	FileHandle = FileRead_open("./res/source/h_score.dat");
 
 	// 一行読む
 	FileRead_gets(String, 256, FileHandle);

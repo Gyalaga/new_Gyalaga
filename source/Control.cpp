@@ -1,4 +1,5 @@
 #include "Control.h"
+#include "Score.h"
 #include "DxLib.h"
 
 //コントロールクラスのコンストラクタ
@@ -16,4 +17,5 @@ void CONTROL::GameControl() {
 
 	enemyMgr->Update();
 	enemyMgr->Draw();
+	Score_Draw();
 }

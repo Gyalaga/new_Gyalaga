@@ -2,6 +2,7 @@
 #include "SceneMgr.h"
 #include "Title.h"
 #include "Keyborad.h"
+#include "Score.h"
 
 
 TITLE::TITLE(ISCENECHANGER* changer) :BASESCENE(changer) {
@@ -56,6 +57,10 @@ void TITLE::Draw() {
 	if (ONEUP_Y > 50) {
 		ONEUP_Y -= 2;
 		TWOUP_Y -= 2;
+	}
+
+	if (ONEUP_Y == 50) {
+		Score_Title();
 	}
 	/*****************************/
 
