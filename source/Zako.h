@@ -9,7 +9,6 @@ class ZAKO :public ENEMY {
 private:
 	int gh[5];				//‰æ‘œŠi”[•Ï”
 	ENEMYBULLET* bullet;	//’e
-	int gh[5];		//‰æ‘œŠi”[•Ï”
 	int sincount;
 	double Roto_x, Roto_y;
 	int angle;
