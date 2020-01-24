@@ -1,9 +1,10 @@
 #include "DxLib.h"
 #include "Score.h"
+//#pragma warning(disable : 4996)
 
-int Black = GetColor(0, 0, 0);            //黒の色
+int Black = GetColor(0, 0, 0);            //塗りつぶす用の黒の色
 int Red = GetColor(255, 0, 0);            //赤の色
-int White = GetColor(255, 255, 255);      //塗りつぶす用（白）
+int White = GetColor(255, 255, 255);      //白の色
 
 //更新
 void Score_Update() {
@@ -14,7 +15,7 @@ void Score_Update() {
 void Score_Save() {
 
 	//ハイスコアのファイルを開く
-	FileHandle = FileRead_open("./res/source/h_score.dat");
+	FileHandle = FileRead_open("res/source/high_score.dat");
 
 	// 一行読む
 	FileRead_gets(String, 256, FileHandle);
@@ -30,14 +31,19 @@ void Score_Save() {
 void Score_Draw() {
 
 	FILE* fp;
+	errno_t error;
 
 	// ハイスコアの記録
-	/*fp = fopen("./res/source/h_score.dat", "wb");
-	fprintf(fp, "%d", h_score);
+	if ((error = fopen_s(&fp, "res/source/high_score.dat", "wb")) != 0) {
+		//printf("ファイルオープンエラー");
+		exit(EXIT_FAILURE);
+	}
 
-	fclose(fp);*/
+		fprintf(fp, "%d", h_score);
 
-	score = 0;
+		fclose(fp);
+
+	score += 1;
 
 	// ハイスコアの文字描画
 	DrawFormatString(900, 30, Red, "HIGH");
@@ -73,7 +79,7 @@ void Score_Draw() {
 void Score_Title() {
 
 	//ハイスコアのファイルを開く
-	FileHandle = FileRead_open("./res/source/h_score.dat");
+	FileHandle = FileRead_open("res/source/high_score.dat");
 
 	// 一行読む
 	FileRead_gets(String, 256, FileHandle);

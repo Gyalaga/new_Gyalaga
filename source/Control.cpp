@@ -16,5 +16,6 @@ void CONTROL::GameControl() {
 	Player_All();
 	enemyMgr->Update();
 	enemyMgr->Draw();
+	Score_Save();
 	Score_Draw();
 }
