@@ -1,6 +1,5 @@
 #include "Control.h"
 #include "DxLib.h"
-
 //コントロールクラスのコンストラクタ
 CONTROL::CONTROL() {
 	enemyMgr = new ENEMYMGR;
@@ -13,7 +12,7 @@ CONTROL::~CONTROL() {
 
 //ゲームの全体制御
 void CONTROL::GameControl() {
-
+	Player_All();
 	enemyMgr->Update();
 	enemyMgr->Draw();
 }

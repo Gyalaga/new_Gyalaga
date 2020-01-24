@@ -2,6 +2,7 @@
 #define _CONTROL_H_
 
 #include "EnemyMgr.h"
+#include "Player.h"
 
 //ƒQ[ƒ€ŠÇ—ƒNƒ‰ƒX‚ÌéŒ¾
 class CONTROL {

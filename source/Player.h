@@ -25,10 +25,20 @@ typedef struct
 
 }PLAYER;
 
- PLAYER Player;    // Playerの構造体
+static PLAYER Player;    // Playerの構造体
 /*************************************************************************************/
 
 /*{ Player.cpp内だけで使う構造体 }****************************************************/
+
+ typedef struct
+ {
+	 int cnt = 0, i = 0;
+	 int n, j = 1;
+	 bool init = false;
+	 bool teki = true;
+	 int teki_x = 200, teki_y = 550, c = 0;
+ }C;
+
 typedef struct
 {
 	int i = 0, j = 0;          //左の自機の i:アニメーションの速さ, j:表示
@@ -65,6 +75,7 @@ typedef struct
 	bool ani_flg[2] = { false,false};  //敵の座標に合わせるフラグ配列
 }DUAL;      //デュアルアニメーション用の構造体
 
+static C c;                    // カウント用構造体
 static DUAL dual;              // 爆発用の構造体
 static EXPLOSION explosion;    // 爆発用の構造体
 static TRACTOR tractor;        //デュアルアニメーション用の構造体

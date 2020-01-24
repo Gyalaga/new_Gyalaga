@@ -3,7 +3,7 @@
 
 int Shot_init() {
 	int i;
-	shot = LoadGraph("bullet.png");
+	shot = LoadGraph("./res/img/bullet.png");
 
 	//’e‚ª‰æ–Êã‚É‘¶İ‚µ‚Ä‚¢‚é‚©•Û‚·‚é•Ï”‚É
 	//u‘¶İ‚µ‚Ä‚¢‚È‚¢v‚ğˆÓ–¡‚·‚é0‚ğ‘ã“ü‚µ‚Ä‚¨‚­

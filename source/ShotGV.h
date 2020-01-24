@@ -4,7 +4,7 @@
 #define SHOT 2
 int Shot_init();
 int Shot_draw();
-int Shot_Check();
+int Shot_Check(int,int);
 
 int shot;
 
