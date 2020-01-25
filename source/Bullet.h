@@ -4,7 +4,7 @@
 #include "Task.h"
 
 //弾クラスの宣言
-class BULLET :public TASK {
+class ENEMY_BULLET :public TASK {
 protected:
 	double x, y;			//座標
 	int width, height;		//横幅・高さ

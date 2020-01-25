@@ -9,9 +9,13 @@ class CONTROL {
 private:
 	ENEMYMGR* enemyMgr;
 public:
+	int X;
+    int Y;
 	CONTROL();									//コンストラクタ
 	~CONTROL();									//デストラクタ
-	void GameControl();							//ゲームの全体管理
+	void GameControl();
+	void PlayerGet(int,int);	//ゲームの全体管理
 };
-
+static int A ;//　void PlayerGet(int,int)で受け取ったPlayer.x代入
+static int S; //　void PlayerGet(int,int)で受け取ったPlayer.y代入
 #endif // !_CONTROL_H_

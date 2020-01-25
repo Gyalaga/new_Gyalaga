@@ -1,6 +1,6 @@
 #ifndef _Player_h_
 #define _Player_h_
-
+#include "Control.h"
 #define PI 3.14    // 角度求めるのに使用
 /*{ 他の所でも必要な変数 }**********************************************************/
 typedef struct

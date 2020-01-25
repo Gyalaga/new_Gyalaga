@@ -4,7 +4,7 @@
 #include "Bullet.h"
 
 //エネミーの弾クラスの宣言
-class ENEMYBULLET :public BULLET {
+class ENEMYBULLET :public ENEMY_BULLET {
 private:
 	int shot[4];		//弾の画像格納
 	double ex, ey;

@@ -154,7 +154,7 @@ void Player_Animation()//アニメーション
 
 		if (dual.ani_flg[1] == false && Player.x[c.i] == Player.x[c.n] - 30)
 		{
-			dual.ani_flg[0] == true;
+			dual.ani_flg[0] = true;
 			Player.y[c.n]++;    //座標合わせ
 			Player.R_rote = 0;//回転止める
 		}
@@ -425,6 +425,11 @@ void Player_Animation()//アニメーション
 
 void Player_judgment()//当たり判定
 {
+	//Control.cppに座標を渡す
+	CONTROL* Y = 0;
+	CONTROL* X = 0;
+	X->PlayerGet(Player.x[c.i], Player.y[c.i]);
+	Y->PlayerGet(Player.x[c.i], Player.y[c.i]);
 	//Control.cppから値持ってくる
 	//1:左が敵に普通にあたる, 2:左が敵の弾に当たる
 	//3:右が敵に普通にあたる, 4:右が敵の弾に当たる
