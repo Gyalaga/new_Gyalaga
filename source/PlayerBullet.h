@@ -4,7 +4,7 @@
 #include "Bullet.h"
 
 //プレイヤーの弾クラスの宣言
-class PLAYERBULLET :public BULLET {
+class PLAYERBULLET :public ENEMY_BULLET {
 public:
 	PLAYERBULLET();		//コンストラクタ
 	void Init();		//初期化処理
