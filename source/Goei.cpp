@@ -55,3 +55,13 @@ void GOEI::Draw() {
 void GOEI::Overall_Move() {
 	x += allMoveAmount;
 }
+
+//xÀ•W‚ğ‘—‚éˆ—
+double GOEI::Send_X() {
+	return x;
+}
+
+//yÀ•W‚ğ‘—‚éˆ—
+double GOEI::Send_Y() {
+	return y;
+}

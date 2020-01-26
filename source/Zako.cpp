@@ -1,7 +1,9 @@
 #include "Zako.h"
 #include "DxLib.h"
 #include<math.h>
+
 #define PI 3.1415926f
+
 //コンストラクタ
 ZAKO::ZAKO(int getX, int getY) {
 	Init(getX, getY);
@@ -75,4 +77,14 @@ void ZAKO::Draw() {
 void ZAKO::Overall_Move() {
 	
 	x += allMoveAmount;
+}
+
+//x座標を送る処理
+double ZAKO::Send_X() {
+	return x;
+}
+
+//y座標を送る処理
+double ZAKO::Send_Y() {
+	return y;
 }

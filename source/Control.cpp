@@ -24,6 +24,7 @@ void CONTROL::GameControl() {
 	Player_All();
 	enemyMgr->Update();
 	enemyMgr->Draw();
+	enemyMgr->Send_Coordinate(ex, ey);
 	Score_Save();
 	Score_Draw();
 }

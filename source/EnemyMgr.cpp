@@ -108,6 +108,24 @@ void ENEMYMGR::Update() {
 		boss[i]->Update();
 	}
 
+	//ザコの現在の座標を取得する
+	for (int i = 0; i < 20; i++) {
+		enemyX[i] = zako[i]->Send_X();
+		enemyY[i] = zako[i]->Send_Y();
+	}
+
+	//ゴエイの現在の座標を取得する
+	for (int i = 0; i < 16; i++) {
+		enemyX[i + GOEI_ORDER] = goei[i]->Send_X();
+		enemyY[i + GOEI_ORDER] = goei[i]->Send_Y();
+	}
+
+	//ボスギャラガの現在の座標を取得する
+	for (int i = 0; i < 4; i++) {
+		enemyX[i + BOSS_ORDER] = boss[i]->Send_X();
+		enemyY[i + BOSS_ORDER] = boss[i]->Send_Y();
+	}
+
 	//間隔カウントが60を超えるとき初期化する
 	if (intervalCnt > 120)intervalCnt = 0;
 	
@@ -169,5 +187,13 @@ void ENEMYMGR::Draw() {
 	//ボスギャラガ
 	for (int i = 0; i < 4; i++) {
 		boss[i]->Draw();
+	}
+}
+
+//コントロールクラスで定義した変数のポインタに座標を代入する
+void ENEMYMGR::Send_Coordinate(double* setX, double* setY) {
+	for (int i = 0; i < 40; i++) {
+		*(setX + i) = enemyX[i];
+		*(setY + i) = enemyY[i];
 	}
 }

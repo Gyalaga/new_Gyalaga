@@ -7,6 +7,8 @@
 //ƒQ[ƒ€ŠÇ—ƒNƒ‰ƒX‚ÌéŒ¾
 class CONTROL {
 private:
+	double ex[40];
+	double ey[40];
 	ENEMYMGR* enemyMgr;
 public:
 	int X;

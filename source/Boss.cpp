@@ -55,3 +55,13 @@ void BOSS::Draw() {
 void BOSS::Overall_Move() {
 	x += allMoveAmount;
 }
+
+//xÀ•W‚ğ‘—‚éˆ—
+double BOSS::Send_X() {
+	return x;
+}
+
+//yÀ•W‚ğ‘—‚éˆ—
+double BOSS::Send_Y() {
+	return y;
+}

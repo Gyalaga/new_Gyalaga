@@ -11,6 +11,8 @@
 #define MAX_TYPE		10		//画像の最大数
 #define MIN_TYPE		4		//画像の最小数	※拡張用で今回は使用できない可能性が...
 #define GENERAL_TYPE	5		//最大数と最小数の間の数
+#define GOEI_ORDER		20		//ゴエイの順番
+#define BOSS_ORDER		36		//ボスギャラガの順番
 
 //エネミー管理クラスの宣言
 class ENEMYMGR :public TASK {
@@ -29,12 +31,13 @@ private:
 	GOEI* goei[16];		//ゴエイの実体の配列
 	BOSS* boss[4];		//ボスギャラガの実体の配列
 public:
-	ENEMYMGR();			//コンストラクタ
-	~ENEMYMGR();		//デストラクタ
-	void Init();		//初期化処理
-	void Final();		//終了処理
-	void Update();		//更新処理
-	void Draw();		//描画処理
+	ENEMYMGR();											//コンストラクタ
+	~ENEMYMGR();										//デストラクタ
+	void Init();										//初期化処理
+	void Final();										//終了処理
+	void Update();										//更新処理
+	void Draw();										//描画処理
+	void Send_Coordinate(double* setX, double* setY);	//取得したポインタにポインタを代入する
 };
 
 #endif // !_ENEMYMGR_H_
