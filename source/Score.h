@@ -1,6 +1,6 @@
 #ifndef _SCORE_H_
 #define _SCORE_H_
-
+#include "Player.h"
 static int score = 0;                            //スコア
 static int h_score = 0;                          //ハイスコア
 static char String[256];                         //保存変数
@@ -21,4 +21,5 @@ void Score_Save();
 //タイトル画面スコア
 void Score_Title();
 
+void Score_up(int p);
 #endif

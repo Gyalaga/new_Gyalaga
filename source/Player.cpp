@@ -3,6 +3,7 @@
 #include "Keyborad.h"
 #include "Shot_Extern.h"
 int qwert = 0;
+int asdfg = 0;
 void Player_All()//全体
 {
 	DrawFormatString(0, 20, GetColor(255, 255, 255), "Player_All動き卍");
@@ -14,8 +15,10 @@ void Player_All()//全体
 	//Player_int();        //数値の確認用
 	Player_Draw();       //描画
 	Player_Move();       //動き
-	Player_Shot();            //Playerの弾の全体管理
+	if (asdfg == 0)Player_Shot();            //Playerの弾の全体管理
 	Player_Animation();  //アニメーション
+	Player_hit(c.c);
+	if (Player.hitflg == 0)Player_hitflg(Player.hitflg);
 }
 
 void Player_int()//数値の確認用
@@ -61,6 +64,10 @@ void Player_Draw()//描画
 	if (Player.left_flg[c.i] == false)DrawRotaGraph(Player.x[c.i], Player.y[c.i], 2, PI / 180 * Player.L_rote, Player.image[0], TRUE);
 	//右の自機表示
 	if (Player.right_flg[c.n] == true)DrawRotaGraph(Player.x[c.n], Player.y[c.n], 2, PI / 180 * Player.R_rote, Player.image[c.j], TRUE);
+	for (int i = 0; i < Player.zanki + Player.hp - 1; i++)
+	{
+		DrawRotaGraph(i * 32+ Player.center, 780, 1.8, PI / 180 * 0, Player.image[0], TRUE);
+	}
 }
 void Player_Move()//動き
 {
@@ -106,8 +113,10 @@ void Player_Move()//動き
 
 	}
 
-	if (Player.hp == 0)//hpが0になったら
+	if (Player.zanki+Player.hp == 0)//hpが0になったら
 	{
+		asdfg = 1;
+		Player.right_flg[c.n] = false; Player.left_flg[c.i] = true;
 		Player.mode = 4;//操作拒否
 		DrawFormatString(340, 400, GetColor(255, 255, 255), "ゲームオーバー");  //文字を描画する
 
@@ -125,7 +134,7 @@ void Player_Shot()//Playerの弾の全体管理
 		qwert = 1;
 	}
 	Shot_draw();
-	Shot_Check(Player.x[c.i] - 1 , Player.y[c.i] - Player.center);
+	Shot_Check(Player.x[c.i] , Player.y[c.i] - Player.center);
 }
 
 void Player_Animation()//アニメーション
@@ -141,6 +150,7 @@ void Player_Animation()//アニメーション
 	//奪還時
 	if (dual.flg == true)
 	{
+		Player.hitflg = 1;
 		Player.mode = 4;     //操作拒否
 		Player.R_rote += 18; //回転
 		c.j = 0;               //自機の色を元に
@@ -166,6 +176,7 @@ void Player_Animation()//アニメーション
 			Player.hp += 1;
 			Player.mode = 0;
 			Player.dualmode = true;
+			Player.hitflg = 0;
 		}
 	}
 	//撃墜された時
@@ -202,6 +213,7 @@ void Player_Animation()//アニメーション
 			Player.dualmode = false;
 			explosion.L = false;
 			dual.c = false;
+			Player.hitflg = 0;
 		}
 		//右側
 		if (explosion.right_flg == true)
@@ -233,6 +245,7 @@ void Player_Animation()//アニメーション
 			Player.dualmode = false;
 			explosion.R = false;
 			dual.c = false;
+			Player.hitflg = 0;
 		}
 	}
 	//デュアルモード時
@@ -266,6 +279,7 @@ void Player_Animation()//アニメーション
 			dual.flg_L = false;
 			Player.dualmode = false;
 			explosion.L = false;
+			Player.hitflg = 0;
 		}
 		//右側
 		if (explosion.right_flg == true)
@@ -296,6 +310,7 @@ void Player_Animation()//アニメーション
 			c.j = 1;
 			Player.dualmode = false;
 			explosion.R = false;
+			Player.hitflg = 0;
 		}
 	}
 	if (dual.flg_L == true && dual.flg_R == true)
@@ -355,6 +370,7 @@ void Player_Animation()//アニメーション
 			dual.flg_L = false;
 			tractor.left_flg = false;
 			c.c = 0;
+			Player.hitflg = 0;
 			for (int i = 0; i < 4; i++)
 			{
 				tractor.check_flg[i] = false;
@@ -412,6 +428,8 @@ void Player_Animation()//アニメーション
 			dual.flg_R = true;
 			tractor.right_flg = false;
 			c.c = 0;
+			Player.hitflg = 0;
+
 			for (int i = 0; i < 4; i++)
 			{
 				tractor.check_flg[i] = false;
@@ -423,7 +441,8 @@ void Player_Animation()//アニメーション
 }//Player_Animation()終了
 
 void Player_judgment(int* PX, int* PY, int* PW, int* PH,
-                 	 int* SX, int* SY, int* SW, int* SH)//当たり判定
+                 	 int* SX, int* SY, int* SW, int* SH,
+                 	 int* SX2, int* SY2,int* HF)//当たり判定
 {
 	//Control.cppに座標を渡す
 
@@ -432,33 +451,49 @@ void Player_judgment(int* PX, int* PY, int* PW, int* PH,
 	*PW = Player.height;
 	*PH = Player.width;
 
-	*SX = Player.x[c.i]+16;
-	*SY = bullet.sx[bullet.bi];
-	*SW = bullet.sh;
-	*SH = bullet.sw;
-	//CONTROL* Y = 0;
-	//CONTROL* X = 0;
-	//X->PlayerGet(Player.x[c.i], Player.y[c.i]);
-	//Y->PlayerGet(Player.x[c.i], Player.y[c.i]);
-	//Control.cppから値持ってくる
-	//1:左が敵に普通にあたる, 2:左が敵の弾に当たる
-	//3:右が敵に普通にあたる, 4:右が敵の弾に当たる
-	//5:トラクタービーム
-/*	if (c.c == 1 || c.c == 2)
+	*SX = bullet.sx[0]+ bullet.sw;
+	*SY = bullet.sy[0];
+	*SW = bullet.sw;
+	*SH = bullet.sh;
+	*SX2 = bullet.sx[1]+ bullet.sw;
+	*SY2 = bullet.sy[1];
+	*HF = Player.hitflg;
+}//Player_judgment()終了
+void Player_hit(int p)
+{
+//Control.cppから値持ってくる
+//1:左が敵に普通にあたる, 2:左が敵の弾に当たる
+//3:右が敵に普通にあたる, 4:右が敵の弾に当たる
+//5:トラクタービーム
+	 c.c = p;
+	if (c.c == 1 || c.c == 2)
 	{
-		explosion.left_flg = true;
+			explosion.left_flg = true;
+			Player.hitflg = 1;
 	}
 	if (c.c == 3 || c.c == 4)
 	{
-		explosion.right_flg = true;
+			explosion.right_flg = true;
+			Player.hitflg = 1;
 	}
 
 	if (c.c == 5)
 	{
-		tractor.left_flg = true;
+			tractor.left_flg = true;
+			Player.hitflg = 1;
 	}
 	if (c.c == 6)
 	{
-		tractor.right_flg = true;
-	}*/
-}//Player_judgment()終了
+			tractor.right_flg = true;
+			Player.hitflg = 1;
+	}
+}
+void Player_Score(int s)
+{
+	Player.zanki = s;
+}
+void Player_hitflg(int h)
+{
+	Player.hitflg = h;
+	DrawFormatString(50, 620, GetColor(255, 255, 255), "%d", Player.hitflg);
+}

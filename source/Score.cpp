@@ -13,7 +13,6 @@ void Score_Update() {
 
 //描画
 void Score_Save() {
-
 	//ハイスコアのファイルを開く
 	FileHandle = FileRead_open("res/source/high_score.dat");
 
@@ -38,9 +37,6 @@ void Score_Save() {
 }
 
 void Score_Draw() {
-
-	score += 1;
-
 	// ハイスコアの文字描画
 	DrawFormatString(900, 30, Red, "HIGH");
 	DrawFormatString(950, 60, Red, "SCORE");
@@ -66,7 +62,9 @@ void Score_Draw() {
 	if (count < 30) {
 		DrawFormatString(950, 160, Red, "1UP");
 	}
-
+	Score_up(score);
+	Player.zanki = score / 2000;
+	Player_Score(Player.zanki);
 }
 
 void Score_Title() {
@@ -88,4 +86,9 @@ void Score_Title() {
 
 	//スコア数字の描画
 	DrawFormatString(650, 90, White, "0");
+
+}
+void Score_up(int p)
+{
+	score = p;
 }

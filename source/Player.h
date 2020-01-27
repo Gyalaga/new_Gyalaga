@@ -11,7 +11,7 @@ typedef struct
 	//  width:横幅, height:縦幅, center:中心
 	int width = 32, height = 32, center = width / 2;
 	//  rote:角度,image:画像,hp:体力
-	int L_rote = 0,R_rote=0, image[2],  hp = 3;
+	int L_rote = 0, R_rote = 0, image[2], hp = 3, zanki = 0;
 	//  mode:  0_通常  ,2_捕縛されそう ,3_捕縛 ,4_破壊(非表示)
 	int mode = 0;
 	//デュアルモードフラグ
@@ -22,7 +22,7 @@ typedef struct
 						   false,false,false,false,false,false,false,false };
 	bool right_flg[16] = { false,false,false,false,false,false,false,false,
 						   false,false,false,false,false,false,false,false };
-
+	int hitflg = 0;
 }PLAYER;
 
 static PLAYER Player;    // Playerの構造体
@@ -87,7 +87,11 @@ void Player_Move();            //Playerの動きの管理
 void Player_Animation();       //Playerのアニメーションの管理
 void Player_Shot();            //Playerの弾の全体管理
 void Player_judgment(int* PX, int* PY, int* PW, int* PH,
-	                 int* SX, int* SY, int* SW, int* SH);        //Playerの当たり判定の管理
+	                 int* SX, int* SY, int* SW, int* SH,
+	                 int* SX2,int* SY2,int* HF);        //Playerの当たり判定の管理
+void Player_hit(int p);
+void Player_hitflg(int h);
+void Player_Score(int s);
 void Player_int();             //Playerの変数確認
 
 #endif
