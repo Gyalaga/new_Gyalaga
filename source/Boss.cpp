@@ -34,8 +34,8 @@ void BOSS::Load_OnActive(bool setOnActive) {
 void BOSS::Init(int ix, int iy) {
 	x			= ix;		//xÀ•W‚Ì‰Šú‰»
 	y			= iy;		//yÀ•W‚Ì‰Šú‰»
-	width		= 18;		//‰¡•
-	height		= 18;		//‚‚³
+	width		= 30;		//‰¡•
+	height		= 30;		//‚‚³
 	durability	= 1;		//‘Ï‹v—Í
 	atkActive	= false;	//UŒ‚”»’è
 	onAcitve	= true;		//¶‘¶”»’è

@@ -43,8 +43,8 @@ void ZAKO::Init(int ix,int iy) {
 	angle       = 75;       //angleの初期値
 	R           = 200;      //ラジアンの初期値
 	i           = 0;        //ザコの画像を切り替えるよう
-	width		= 18;		//横幅
-	height		= 18;		//高さ
+	width		= 30;		//横幅
+	height		= 30;		//高さ
 	FLAG_X      = 800;      //zakoflgで使う値
 	FLAG_Y      = 200;      //zakoflgで使う値
 	durability	= 1;		//耐久力
