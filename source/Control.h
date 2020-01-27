@@ -14,6 +14,7 @@ private:
 	int px;
 	int py;
 	ENEMYMGR* enemyMgr;
+	int flg;
 public:
 	CONTROL();									//コンストラクタ
 	~CONTROL();									//デストラクタ
