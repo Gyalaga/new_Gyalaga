@@ -16,6 +16,7 @@ void Player_All()//全体
 	Player_Move();       //動き
 	Player_Shot();            //Playerの弾の全体管理
 	Player_Animation();  //アニメーション
+	Player_hit(c.c);
 }
 
 void Player_int()//数値の確認用
@@ -125,7 +126,7 @@ void Player_Shot()//Playerの弾の全体管理
 		qwert = 1;
 	}
 	Shot_draw();
-	Shot_Check(Player.x[c.i] - 1 , Player.y[c.i] - Player.center);
+	Shot_Check(Player.x[c.i] , Player.y[c.i] - Player.center);
 }
 
 void Player_Animation()//アニメーション
@@ -423,7 +424,8 @@ void Player_Animation()//アニメーション
 }//Player_Animation()終了
 
 void Player_judgment(int* PX, int* PY, int* PW, int* PH,
-                 	 int* SX, int* SY, int* SW, int* SH)//当たり判定
+                 	 int* SX, int* SY, int* SW, int* SH,
+                 	 int* SX2, int* SY2)//当たり判定
 {
 	//Control.cppに座標を渡す
 
@@ -432,19 +434,21 @@ void Player_judgment(int* PX, int* PY, int* PW, int* PH,
 	*PW = Player.height;
 	*PH = Player.width;
 
-	*SX = Player.x[c.i]+16;
-	*SY = bullet.sx[bullet.bi];
-	*SW = bullet.sh;
-	*SH = bullet.sw;
-	//CONTROL* Y = 0;
-	//CONTROL* X = 0;
-	//X->PlayerGet(Player.x[c.i], Player.y[c.i]);
-	//Y->PlayerGet(Player.x[c.i], Player.y[c.i]);
-	//Control.cppから値持ってくる
-	//1:左が敵に普通にあたる, 2:左が敵の弾に当たる
-	//3:右が敵に普通にあたる, 4:右が敵の弾に当たる
-	//5:トラクタービーム
-/*	if (c.c == 1 || c.c == 2)
+	*SX = bullet.sx[0]+ bullet.sw;
+	*SY = bullet.sy[0];
+	*SW = bullet.sw;
+	*SH = bullet.sh;
+	*SX2 = bullet.sx[1]+ bullet.sw;
+	*SY2 = bullet.sy[1];
+}//Player_judgment()終了
+void Player_hit(int p)
+{
+//Control.cppから値持ってくる
+//1:左が敵に普通にあたる, 2:左が敵の弾に当たる
+//3:右が敵に普通にあたる, 4:右が敵の弾に当たる
+//5:トラクタービーム
+	 c.c = p;
+	if (c.c == 1 || c.c == 2)
 	{
 		explosion.left_flg = true;
 	}
@@ -460,5 +464,5 @@ void Player_judgment(int* PX, int* PY, int* PW, int* PH,
 	if (c.c == 6)
 	{
 		tractor.right_flg = true;
-	}*/
-}//Player_judgment()終了
+	}
+}

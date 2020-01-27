@@ -21,4 +21,5 @@ void Score_Save();
 //タイトル画面スコア
 void Score_Title();
 
+void Score_up(int p);
 #endif

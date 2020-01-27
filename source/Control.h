@@ -3,6 +3,8 @@
 
 #include "EnemyMgr.h"
 #include "Player.h"
+#include"Shot_Extern.h"
+#include "Score.h"
 
 //ƒQ[ƒ€ŠÇ—ƒNƒ‰ƒX‚ÌéŒ¾
 class CONTROL {
@@ -17,6 +19,8 @@ private:
 	int ph;
 	int sx;
 	int sy;
+	int sx2;
+	int sy2;
 	int sw;
 	int sh;
 	bool hit;
