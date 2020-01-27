@@ -13,6 +13,12 @@ private:
 	int		eHeight[40];	//“G‚Ì‚‚³
 	int px;
 	int py;
+	int pw;
+	int ph;
+	int sx;
+	int sy;
+	int sw;
+	int sh;
 	ENEMYMGR* enemyMgr;
 	int flg;
 public:

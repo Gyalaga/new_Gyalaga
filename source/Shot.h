@@ -10,7 +10,7 @@ typedef struct shot {
 	int i;
 	int bullet;
 	int sx[SHOT], sy[SHOT],
-		sx2[SHOT], sy2[SHOT], sw = 9, sh = 12, i;
+		sx2[SHOT], sy2[SHOT], sw = 6, sh = 16, i;
 	int sf[SHOT];
 	int sf2;
 };

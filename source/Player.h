@@ -86,7 +86,8 @@ void Player_Draw();            //Playerの描画の管理
 void Player_Move();            //Playerの動きの管理
 void Player_Animation();       //Playerのアニメーションの管理
 void Player_Shot();            //Playerの弾の全体管理
-void Player_judgment(int* PX, int* PY);        //Playerの当たり判定の管理
+void Player_judgment(int* PX, int* PY, int* PW, int* PH,
+	                 int* SX, int* SY, int* SW, int* SH);        //Playerの当たり判定の管理
 void Player_int();             //Playerの変数確認
 
 #endif

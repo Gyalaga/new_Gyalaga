@@ -2,14 +2,13 @@
 #include"Shot_Extern.h"
 
 int Shot_init() {
-	int i;
 	shot = LoadGraph("./res/img/bullet.png");
 
 	//弾が画面上に存在しているか保持する変数に
 	//「存在していない」を意味する0を代入しておく
 
-	for (i = 0; i < SHOT; i++) {
-		bullet.sf[i] = 0;
+	for (bullet.bi = 0; bullet.bi < SHOT; bullet.bi++) {
+		bullet.sf[bullet.bi] = 0;
 	}
 
 	//ショットボタンを前のフレームで押されたかどうかを保持する
