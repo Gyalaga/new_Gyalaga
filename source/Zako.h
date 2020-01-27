@@ -18,21 +18,22 @@ private:
 	int zakoflg;                        //ザコ敵の挙動を変えるフラグ
 	int FLAG_X,FLAG_Y;				    //zakoflgで使う値
 public:
-	ZAKO(int getX, int getY);			//コンストラクタ
-	void Init(int ix, int iy);			//初期化処理
-	void Final();						//終了処理
-	void Update();						//更新処理
-	void Atacck(bool atk);              //敵の攻撃
-	void Draw();						//描画処理
-	void Draw_angle();                  //描画の角度を変える
-	void Zako_change(int interVal);     //ザコの画像を切り替える
-	void Load_Image(int* sGh);			//画像読み込み処理
-	void Overall_Move();				//全体共通の動き
-	void Load_AddMove(int addMove);		//エネミー管理クラスからの読み込み
-	int Send_Width();					//横幅を送る処理
-	int Send_Height();					//高さを送る処理
-	double Send_X();					//x座標を送る処理
-	double Send_Y();					//y座標を送る処理
+	ZAKO(int getX, int getY);				//コンストラクタ
+	void Init(int ix, int iy);				//初期化処理
+	void Final();							//終了処理
+	void Update();							//更新処理
+	void Atacck(bool atk);					//敵の攻撃
+	void Draw();							//描画処理
+	void Draw_angle();						//描画の角度を変える
+	void Zako_change(int interVal);			//ザコの画像を切り替える
+	void Load_Image(int* sGh);				//画像読み込み処理
+	void Overall_Move();					//全体共通の動き
+	void Load_AddMove(int addMove);			//エネミー管理クラスからの読み込み
+	void Load_OnActive(bool setOnActive);	//エネミー管理クラスからの読み込み
+	int Send_Width();						//横幅を送る処理
+	int Send_Height();						//高さを送る処理
+	double Send_X();						//x座標を送る処理
+	double Send_Y();						//y座標を送る処理
 };
 
 #endif // !_ZAKO_H_

@@ -25,6 +25,11 @@ void BOSS::Load_AddMove(int addMove) {
 	}
 }
 
+//onActive‚ğfalse‚É‚·‚é
+void BOSS::Load_OnActive(bool setOnActive) {
+	onAcitve = setOnActive;
+}
+
 //‰Šú‰»ˆ—
 void BOSS::Init(int ix, int iy) {
 	x			= ix;		//xÀ•W‚Ì‰Šú‰»
@@ -48,7 +53,10 @@ void BOSS::Update() {
 
 //•`‰æˆ—
 void BOSS::Draw() {
-	DrawRotaGraph(x, y, 2.0, 0, gh[0], TRUE);
+
+	if (onAcitve == true) {
+		DrawRotaGraph(x, y, 2.0, 0, gh[0], TRUE);
+	}
 }
 
 //‘S‘Ì‚Ì“®‚«

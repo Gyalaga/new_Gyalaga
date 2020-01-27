@@ -29,6 +29,7 @@ private:
 	double enemyX[40];	//敵のX座標を取得
 	double enemyY[40];	//敵のY座標を取得
 	int sincount;       //sin挙動のカウント
+	Enemy enemy_type;	//エネミー構造体の実体
 	ZAKO* zako[20];		//ザコの実体の配列
 	GOEI* goei[16];		//ゴエイの実体の配列
 	BOSS* boss[4];		//ボスギャラガの実体の配列
@@ -40,6 +41,7 @@ public:
 	void Update();																		//更新処理
 	void Draw();																		//描画処理
 	void Send_Coordinate(double* setX, double* setY, int* setWidth, int* setHeight);	//取得したポインタにポインタを代入する
+	void Hit_ChangeOnActive(bool getOnActive, int n);									//Hitした敵のonActiveをfalseにする
 };
 
 #endif // !_ENEMYMGR_H_

@@ -26,6 +26,11 @@ void GOEI::Load_AddMove(int addMove) {
 	}
 }
 
+//onActive‚ğfalse‚É‚·‚é
+void GOEI::Load_OnActive(bool setOnActive) {
+	onAcitve = setOnActive;
+}
+
 //‰Šú‰»ˆ—
 void GOEI::Init(int ix, int iy) {
 	x			= ix;		//xÀ•W
@@ -117,7 +122,10 @@ void GOEI::Atacck(bool atk) {
 
 //•`‰æˆ—
 void GOEI::Draw() {
-	DrawRotaGraph(x, y, Rota_zome, Rota_angle, gh[i], TRUE);
+
+	if (onAcitve == true) {
+		DrawRotaGraph(x, y, Rota_zome, Rota_angle, gh[i], TRUE);
+	}
 }
 
 void GOEI::Goei_change(int interVal) {

@@ -19,8 +19,8 @@ private:
 	int sy;
 	int sw;
 	int sh;
+	bool hit;
 	ENEMYMGR* enemyMgr;
-	int flg;
 public:
 	CONTROL();									//コンストラクタ
 	~CONTROL();									//デストラクタ

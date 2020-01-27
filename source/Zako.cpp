@@ -29,6 +29,11 @@ void ZAKO::Load_AddMove(int addMove) {
 
 }
 
+//onActiveをfalseにする
+void ZAKO::Load_OnActive(bool setOnActive) {
+	onAcitve = setOnActive;
+}
+
 //初期化処理
 void ZAKO::Init(int ix,int iy) {
 	x			= ix;		//x座標の初期化
@@ -56,7 +61,6 @@ void ZAKO::Final() {
 
 //更新処理
 void ZAKO::Update() {
-
 
 }
 
@@ -123,7 +127,10 @@ void ZAKO::Atacck(bool atk) {
 
 //描画処理
 void ZAKO::Draw() {
-	DrawRotaGraph(x, y, Rota_zome,Rota_angle,gh[i], TRUE);
+
+	if (onAcitve == true) {
+		DrawRotaGraph(x, y, Rota_zome, Rota_angle, gh[i], TRUE);
+	}
 
 	int Red = GetColor(255, 0, 0);            //赤の色
 	DrawFormatString(900, 500, Red, "%d",Rota_angle);

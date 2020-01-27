@@ -209,3 +209,17 @@ void ENEMYMGR::Send_Coordinate(double* setX, double* setY, int* setWidth, int* s
 		setHeight[i]	= height[i];
 	}
 }
+
+//コントロールクラスから取得したHitした敵のonActiveをfalseにする
+void ENEMYMGR::Hit_ChangeOnActive(bool getOnActive, int n) {
+	
+	if (n < 20) {
+		zako[n]->Load_OnActive(getOnActive);
+	}
+	else if (n >= 20 && n < 36) {
+		goei[n - GOEI_ORDER]->Load_OnActive(getOnActive);
+	}
+	else if (n >= 36 && n < 40) {
+		boss[n - BOSS_ORDER]->Load_OnActive(getOnActive);
+	}
+}
