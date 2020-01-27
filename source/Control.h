@@ -20,6 +20,7 @@ private:
 	int sw;
 	int sh;
 	bool hit;
+	bool hitCheck[40];
 	ENEMYMGR* enemyMgr;
 public:
 	CONTROL();									//コンストラクタ
