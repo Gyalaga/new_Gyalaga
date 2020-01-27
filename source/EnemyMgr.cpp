@@ -110,20 +110,26 @@ void ENEMYMGR::Update() {
 
 	//ザコの現在の座標を取得する
 	for (int i = 0; i < 20; i++) {
-		enemyX[i] = zako[i]->Send_X();
-		enemyY[i] = zako[i]->Send_Y();
+		enemyX[i]	= zako[i]->Send_X();
+		enemyY[i]	= zako[i]->Send_Y();
+		width[i]	= zako[i]->Send_Width();
+		height[i]	= zako[i]->Send_Height();
 	}
 
 	//ゴエイの現在の座標を取得する
 	for (int i = 0; i < 16; i++) {
-		enemyX[i + GOEI_ORDER] = goei[i]->Send_X();
-		enemyY[i + GOEI_ORDER] = goei[i]->Send_Y();
+		enemyX[i + GOEI_ORDER]	= goei[i]->Send_X();
+		enemyY[i + GOEI_ORDER]	= goei[i]->Send_Y();
+		width[i + GOEI_ORDER]	= goei[i]->Send_Width();
+		height[i + GOEI_ORDER]	= goei[i]->Send_Height();
 	}
 
 	//ボスギャラガの現在の座標を取得する
 	for (int i = 0; i < 4; i++) {
-		enemyX[i + BOSS_ORDER] = boss[i]->Send_X();
-		enemyY[i + BOSS_ORDER] = boss[i]->Send_Y();
+		enemyX[i + BOSS_ORDER]	= boss[i]->Send_X();
+		enemyY[i + BOSS_ORDER]	= boss[i]->Send_Y();
+		width[i + BOSS_ORDER]	= boss[i]->Send_Width();
+		height[i + BOSS_ORDER]	= boss[i]->Send_Height();
 	}
 
 	//間隔カウントが240を超えるとき初期化する
@@ -195,9 +201,11 @@ void ENEMYMGR::Draw() {
 }
 
 //コントロールクラスで定義した変数のポインタに座標を代入する
-void ENEMYMGR::Send_Coordinate(double* setX, double* setY) {
+void ENEMYMGR::Send_Coordinate(double* setX, double* setY, int* setWidth, int* setHeight) {
 	for (int i = 0; i < 40; i++) {
-		*(setX + i) = enemyX[i];
-		*(setY + i) = enemyY[i];
+		setX[i]			= enemyX[i];
+		setY[i]			= enemyY[i];
+		setWidth[i]		= width[i];
+		setHeight[i]	= height[i];
 	}
 }

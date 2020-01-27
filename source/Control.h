@@ -7,18 +7,18 @@
 //ゲーム管理クラスの宣言
 class CONTROL {
 private:
-	double ex[40];
-	double ey[40];
+	double	ex[40];			//敵のx座標
+	double	ey[40];			//敵のy座標
+	int		eWidth[40];		//敵の横幅
+	int		eHeight[40];	//敵の高さ
 	int px;
 	int py;
 	ENEMYMGR* enemyMgr;
 public:
-	int X;
-    int Y;
 	CONTROL();									//コンストラクタ
 	~CONTROL();									//デストラクタ
 	void GameControl();
+	void Hit_Judgment();						//当たり判定
 };
-static int A ;//　void PlayerGet(int,int)で受け取ったPlayer.x代入
-static int S; //　void PlayerGet(int,int)で受け取ったPlayer.y代入
+
 #endif // !_CONTROL_H_

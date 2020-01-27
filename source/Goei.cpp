@@ -146,3 +146,13 @@ double GOEI::Send_X() {
 double GOEI::Send_Y() {
 	return y;
 }
+
+//‰¡•‚ğ‘—‚éˆ—
+int GOEI::Send_Width() {
+	return width;
+}
+
+//‚‚³‚ğ‘—‚éˆ—
+int GOEI::Send_Height() {
+	return height;
+}

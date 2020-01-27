@@ -175,3 +175,13 @@ double ZAKO::Send_X() {
 double ZAKO::Send_Y() {
 	return y;
 }
+
+//‰¡•‚ğ‘—‚éˆ—
+int ZAKO::Send_Width() {
+	return width;
+}
+
+//‚‚³‚ğ‘—‚éˆ—
+int ZAKO::Send_Height() {
+	return height;
+}

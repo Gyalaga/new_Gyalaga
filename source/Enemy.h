@@ -23,6 +23,8 @@ public:
 	virtual void Load_Image(){}					//画像読み込み処理
 	virtual void Overall_Move(){}				//全体共通の動き
 	virtual void Load_AddMove(int addMove){}	//エネミー管理クラスからの読み込み
+	virtual int Send_Width() = 0;				//横幅を送る処理
+	virtual int Send_Height() = 0;				//高さを送る処理
 	virtual double Send_X() = 0;				//x座標を送る処理
 	virtual double Send_Y() = 0;				//y座標を送る処理
 };

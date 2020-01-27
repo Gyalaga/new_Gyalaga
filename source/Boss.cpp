@@ -65,3 +65,11 @@ double BOSS::Send_X() {
 double BOSS::Send_Y() {
 	return y;
 }
+
+int BOSS::Send_Width() {
+	return width;
+}
+
+int BOSS::Send_Height() {
+	return height;
+}
