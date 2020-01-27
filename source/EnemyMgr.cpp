@@ -108,29 +108,33 @@ void ENEMYMGR::Update() {
 		boss[i]->Update();
 	}
 
-	//間隔カウントが60を超えるとき初期化する
-	if (intervalCnt > 120)intervalCnt = 0;
+	//間隔カウントが240を超えるとき初期化する
+	if (intervalCnt > 240)intervalCnt = 0;
 	
 	//sinカウントが100を超えると動かす
-	if (sincount >= 100) {
+	if (sincount >= 100 ) {
 		bool atkActive = true;
-		zako[0]->Atacck(atkActive);
+		goei[0]->Atacck(atkActive);
 	}
 
-	//カウントが60の時全体を動かす
-	if (intervalCnt == 120) {
+	//カウントが120の時全体を動かす
+	if (intervalCnt % 120 == 0) {
 		enemyAll += enemyAllMove;
+
+		//zako[0]->Zako_change(intervalCnt);
 		
 
 		//ザコに全体の移動量を送る
 		for (int i = 0; i < 20; i++) {
 			zako[i]->Load_AddMove(enemyAllMove);
+	
 		}
 
 		
 		//ゴエイに全体の移動量を送る
 		for (int i = 0; i < 16; i++) {
 			goei[i]->Load_AddMove(enemyAllMove);
+			goei[i]->Goei_change(intervalCnt);
 		}
 
 		//ボスギャラガの移動量を送る

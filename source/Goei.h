@@ -7,12 +7,22 @@
 class GOEI :public ENEMY {
 private:
 	int gh[5];		//画像格納変数
+	int sincount;                       //sinのカウント
+	double Rota_zome, Rota_angle;       //拡大率と描画角度
+	double angle;                          //なんかの角度
+	int R;                              //ラジアン
+	int i;                              //ザコの画像を切り替えるよう
+	int goei_change;                    //ザコの画像を切り替えるよう
+	int goeiflg;                        //ザコ敵の挙動を変えるフラグ
+	int FLAG_X, FLAG_Y;				    //zakoflgで使う値
 public:
 	GOEI(int getX, int getY);			//コンストラクタ
 	void Init(int ix, int iy);			//初期化処理
 	void Final();						//終了処理
 	void Update();						//更新処理
 	void Draw();						//描画処理
+	void Atacck(bool atk);              //敵の攻撃
+	void Goei_change(int interVal);     //ザコの画像を切り替える
 	void Load_Image(int* sGh);			//画像読み込み処理
 	void Overall_Move();				//全体共通の動き
 	void Load_AddMove(int addMove);		//エネミー管理クラスからの読み込み
