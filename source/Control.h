@@ -9,6 +9,8 @@ class CONTROL {
 private:
 	double ex[40];
 	double ey[40];
+	int px;
+	int py;
 	ENEMYMGR* enemyMgr;
 public:
 	int X;
@@ -16,7 +18,6 @@ public:
 	CONTROL();									//コンストラクタ
 	~CONTROL();									//デストラクタ
 	void GameControl();
-	void PlayerGet(int,int);	//ゲームの全体管理
 };
 static int A ;//　void PlayerGet(int,int)で受け取ったPlayer.x代入
 static int S; //　void PlayerGet(int,int)で受け取ったPlayer.y代入

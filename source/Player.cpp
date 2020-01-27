@@ -16,7 +16,6 @@ void Player_All()//全体
 	Player_Move();       //動き
 	Player_Shot();            //Playerの弾の全体管理
 	Player_Animation();  //アニメーション
-	Player_judgment();   //当たり判定
 }
 
 void Player_int()//数値の確認用
@@ -423,18 +422,22 @@ void Player_Animation()//アニメーション
 
 }//Player_Animation()終了
 
-void Player_judgment()//当たり判定
+void Player_judgment(int* PX, int* PY)//当たり判定
 {
 	//Control.cppに座標を渡す
-	CONTROL* Y = 0;
-	CONTROL* X = 0;
-	X->PlayerGet(Player.x[c.i], Player.y[c.i]);
-	Y->PlayerGet(Player.x[c.i], Player.y[c.i]);
+
+	*PX = Player.x[c.i];
+	*PY = Player.y[c.i];
+
+	//CONTROL* Y = 0;
+	//CONTROL* X = 0;
+	//X->PlayerGet(Player.x[c.i], Player.y[c.i]);
+	//Y->PlayerGet(Player.x[c.i], Player.y[c.i]);
 	//Control.cppから値持ってくる
 	//1:左が敵に普通にあたる, 2:左が敵の弾に当たる
 	//3:右が敵に普通にあたる, 4:右が敵の弾に当たる
 	//5:トラクタービーム
-	if (c.c == 1 || c.c == 2)
+/*	if (c.c == 1 || c.c == 2)
 	{
 		explosion.left_flg = true;
 	}
@@ -450,5 +453,5 @@ void Player_judgment()//当たり判定
 	if (c.c == 6)
 	{
 		tractor.right_flg = true;
-	}
+	}*/
 }//Player_judgment()終了
