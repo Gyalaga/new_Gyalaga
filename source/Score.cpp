@@ -1,6 +1,6 @@
 #include "DxLib.h"
 #include "Score.h"
-//#pragma warning(disable : 4996)
+#pragma warning(disable : 6387)
 
 int Black = GetColor(0, 0, 0);            //塗りつぶす用の黒の色
 int Red = GetColor(255, 0, 0);            //赤の色
@@ -17,31 +17,27 @@ void Score_Save() {
 	//ハイスコアのファイルを開く
 	FileHandle = FileRead_open("res/source/high_score.dat");
 
-	// 一行読む
-	FileRead_gets(String, 256, FileHandle);
-
 	// 画面に描画
 	DrawString(h_scorex, h_scorey, String, White);
 
 	// ファイルを閉じる
 	FileRead_close(FileHandle);
-}
-
-
-void Score_Draw() {
 
 	FILE* fp;
 	errno_t error;
 
 	// ハイスコアの記録
-	if ((error = fopen_s(&fp, "res/source/high_score.dat", "wb")) != 0) {
-		//printf("ファイルオープンエラー");
+	if ((error = fopen_s(&fp, "res/source/high_score.dat", "w")) != 0) {
+		DrawFormatString(50, 50, Red, "ファイルオープンエラー");
 		exit(EXIT_FAILURE);
 	}
 
-		fprintf(fp, "%d", h_score);
+	fprintf(fp, "%d", h_score);
 
-		fclose(fp);
+	fclose(fp);
+}
+
+void Score_Draw() {
 
 	score += 1;
 
@@ -51,9 +47,6 @@ void Score_Draw() {
 
 	//スコア数字の描画
 	DrawFormatString(scorex, scorey, White, "%d", score);
-
-	// ハイスコアの数字描画char型
-	DrawFormatString(h_scorex, h_scorey, White, "%s", String);
 
 	//char型からint型への変換
 	h_score = atoi(String);
