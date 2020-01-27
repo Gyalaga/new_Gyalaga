@@ -21,6 +21,7 @@ void CONTROL::GameControl() {
 	enemyMgr->Send_Coordinate(ex, ey, eWidth, eHeight);
 	Score_Save();
 	Score_Draw();
+	Hit_Judgment();
 
 	DrawFormatString(50, 520, GetColor(255, 255, 255), "%d,%d",px,py);
 	DrawFormatString(50, 540, GetColor(255, 255, 255), "%f,%f", ex[20], ey[20]);
@@ -35,7 +36,7 @@ void CONTROL::GameControl() {
 void CONTROL::Hit_Judgment() {
 
 	for (int i = 0; i < 40; i++) {
-		if ((double)px + pw >= ex[20] && (double)px <= ex[20] + eWidth[20] && (double)py + ph >= ex[20] && (double)py <= ey[20] + eHeight[20]) {
+		if ((double)px + pw >= ex[i] && (double)px <= ex[i] + eWidth[i] && (double)py + ph >= ey[i] && (double)py <= ey[i] + eHeight[i]) {
 			flg = 1;
 		}
 	}
