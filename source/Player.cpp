@@ -422,13 +422,20 @@ void Player_Animation()//アニメーション
 
 }//Player_Animation()終了
 
-void Player_judgment(int* PX, int* PY)//当たり判定
+void Player_judgment(int* PX, int* PY, int* PW, int* PH,
+                 	 int* SX, int* SY, int* SW, int* SH)//当たり判定
 {
 	//Control.cppに座標を渡す
 
 	*PX = Player.x[c.i];
 	*PY = Player.y[c.i];
+	*PW = Player.height;
+	*PH = Player.width;
 
+	*SX = Player.x[c.i]+16;
+	*SY = bullet.sx[bullet.bi];
+	*SW = bullet.sh;
+	*SH = bullet.sw;
 	//CONTROL* Y = 0;
 	//CONTROL* X = 0;
 	//X->PlayerGet(Player.x[c.i], Player.y[c.i]);

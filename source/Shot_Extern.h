@@ -10,9 +10,10 @@ extern int shot;
 typedef struct {
 	int sx[SHOT], sy[SHOT],
 		sx2[SHOT], sy2[SHOT],
-		sw = 9, sh = 12;
+		sw = 6, sh = 16;
 	int sf[SHOT];
 	int sf2;
+	int bi = 0;
 } BULLET;
 extern BULLET bullet;
 

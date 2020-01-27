@@ -1,14 +1,13 @@
 #include "DxLib.h"
 #include"Shot_Extern.h"
 int Shot_Check(int px,int py) {
-	int i;
 	if (CheckHitKey(KEY_INPUT_SPACE)) {
-		for (i = 0; i < SHOT; i++) {
+		for (bullet.bi = 0; bullet.bi < SHOT; bullet.bi++) {
 			if (bullet.sf2 == 0) {
-				if (bullet.sf[i] == 0) {
-					bullet.sf[i] = 1;
-					bullet.sx[i] = px;
-					bullet.sy[i] = py;
+				if (bullet.sf[bullet.bi] == 0) {
+					bullet.sf[bullet.bi] = 1;
+					bullet.sx[bullet.bi] = px;
+					bullet.sy[bullet.bi] = py;
 
 					break;
 				}
@@ -19,11 +18,11 @@ int Shot_Check(int px,int py) {
 
 	else { bullet.sf2 = 0; }
 
-	for (i = 0; i < SHOT; i++) {
-		if (bullet.sf[i] == 1) {
-			bullet.sy[i] -= 10;
-			if (bullet.sy[i] < -50) {
-				bullet.sf[i] = 0;
+	for (bullet.bi = 0; bullet.bi < SHOT; bullet.bi++) {
+		if (bullet.sf[bullet.bi] == 1) {
+			bullet.sy[bullet.bi] -= 10;
+			if (bullet.sy[bullet.bi] < -50) {
+				bullet.sf[bullet.bi] = 0;
 			}
 		}
 	}
@@ -31,10 +30,9 @@ int Shot_Check(int px,int py) {
 }
 
 int Shot_draw() {
-	int i;
-	for (i = 0; i < SHOT; i++) {
-		if (bullet.sf[i] == 1) {
-			DrawRotaGraph(bullet.sx[i], bullet.sy[i],2,0, shot, TRUE);
+	for (bullet.bi = 0; bullet.bi < SHOT; bullet.bi++) {
+		if (bullet.sf[bullet.bi] == 1) {
+			DrawRotaGraph(bullet.sx[bullet.bi], bullet.sy[bullet.bi],2,0, shot, TRUE);
 		}
 	}
 	return 0;
