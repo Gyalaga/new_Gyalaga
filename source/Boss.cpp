@@ -32,6 +32,11 @@ void BOSS::Load_OnActive(bool setOnActive) {
 	
 }
 
+//atkActiveをtrueにする
+void BOSS::Load_AtkActive(bool setAtkActive) {
+	atkActive = setAtkActive;
+}
+
 //初期化処理
 void BOSS::Init(int ix, int iy) {
 
@@ -43,16 +48,17 @@ void BOSS::Init(int ix, int iy) {
 		ani[i] = initAni[i];
 	}
 
-	x = ix;		//x座標の初期化
-	y = iy;		//y座標の初期化
-	width = 30;		//横幅
-	height = 30;		//高さ
-	durability = 1;		//耐久力
-	atkActive = false;	//攻撃判定
+	x = ix;					//x座標の初期化
+	y = iy;					//y座標の初期化
+	width = 30;				//横幅
+	height = 30;			//高さ
+	durability = 2;			//耐久力
+	atkActive = false;		//攻撃判定
 	onAcitve = true;		//生存判定
-	beamCnt = 0;		//トラクタービームカウント
-	beamOrder = 0;		//表示する場所指定
-	bcnt = 0;		//アニメーション用フラグ
+	beamCnt = 0;			//トラクタービームカウント
+	beamOrder = 0;			//表示する場所指定
+	bcnt = 0;				//アニメーション用フラグ
+	tractorFlg = false;		//トラクタービームが発射してるか判定
 }
 
 //終了処理
@@ -78,9 +84,21 @@ void BOSS::Tractor_Beam() {
 	}
 }
 
+void BOSS::Tractor_Move() {
+	if (y < (double)600 + height)y++;
+}
+
 //更新処理
 void BOSS::Update() {
-	Tractor_Beam();
+
+	if (atkActive == true) {
+		tractorFlg = true;
+	}
+
+	if (tractorFlg == true) {
+		Tractor_Beam();
+		Tractor_Move();
+	}
 }
 
 //描画処理
