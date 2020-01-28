@@ -496,4 +496,5 @@ void Player_hitflg(int h)
 {
 	Player.hitflg = h;
 	DrawFormatString(50, 620, GetColor(255, 255, 255), "%d", Player.hitflg);
+	}
 }
