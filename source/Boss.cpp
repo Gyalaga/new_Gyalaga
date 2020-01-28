@@ -34,11 +34,22 @@ void BOSS::Load_Damage(int damage) {
 void BOSS::Load_Interval(int interval) {
 
 	if (atkActive == false) {
-		if (interval == 120) {
-			moveAni = 1;
+
+		if (durability == 2) {
+			if (interval == 120) {
+				moveAni = 1;
+			}
+			else if (interval == 240) {
+				moveAni = 0;
+			}
 		}
-		else if (interval == 240) {
-			moveAni = 0;
+		else if (durability == 1) {
+			if (interval == 120) {
+				moveAni = 5;
+			}
+			else if (interval == 240) {
+				moveAni = 6;
+			}
 		}
 		aniOrder = moveAni;
 	}
