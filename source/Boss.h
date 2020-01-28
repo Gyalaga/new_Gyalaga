@@ -30,6 +30,7 @@ public:
 	int Send_Height();						//‚‚³‚ğ‘—‚éˆ—
 	double Send_X();						//xÀ•W‚ğ‘—‚éˆ—
 	double Send_Y();						//yÀ•W‚ğ‘—‚éˆ—
+	bool Send_OnActive();					//onActive‚ğ‘—‚éˆ—
 };
 
 #endif // !_BOSS_H_

@@ -228,6 +228,43 @@ void ENEMYMGR::Hit_ChangeOnActive(int getDamage, int n) {
 	}
 }
 
+//コントロールクラスに当たり判定が必要か返す処理
+void ENEMYMGR::Judgment_OnActive(bool* setHitCheck) {
+
+	//各ザコが当たり判定を必要か判定
+	for (int i = 0; i < ENEMY_ZAKONUM; i++) {
+
+		if (zako[i]->Send_OnActive() == true) {
+			setHitCheck[i] = false;
+		}
+		else {
+			setHitCheck[i] = true;
+		}
+	}
+
+	//各ゴエイが当たり判定を必要か判定
+	for (int i = 0; i < ENEMY_GOEINUM; i++) {
+
+		if (goei[i]->Send_OnActive() == true) {
+			setHitCheck[i + GOEI_ORDER] = false;
+		}
+		else {
+			setHitCheck[i + GOEI_ORDER] = true;
+		}
+	}
+
+	//各ボスギャラガが当たり判定を必要か判定
+	for (int i = 0; i < ENEMY_BOSSNUM; i++) {
+
+		if (boss[i]->Send_OnActive() == true) {
+			setHitCheck[i + BOSS_ORDER] = false;
+		}
+		else {
+			setHitCheck[i + BOSS_ORDER] = true;
+		}
+	}
+}
+
 void ENEMYMGR::All() {
 	Update();
 	Draw();

@@ -42,6 +42,7 @@ public:
 	void Draw();																		//描画処理
 	void Send_Coordinate(double* setX, double* setY, int* setWidth, int* setHeight);	//取得したポインタにポインタを代入する
 	void Hit_ChangeOnActive(int getDamage, int n);										//Hitした敵のonActiveをfalseにする
+	void Judgment_OnActive(bool* setHitCheck);											//当たり判定領域を消すかどうか判定
 	void All();																			//エネミー管理クラス全体を管理
 };
 

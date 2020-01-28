@@ -85,14 +85,15 @@ void CONTROL::GameControl() {
 //当たり判定処理
 void CONTROL::Hit_Judgment() {
 
+	enemyMgr->Judgment_OnActive(hitCheck);		//hitCheckに当たり判定が必要かの情報を格納する
+
 	for (int i = 0; i < 40; i++) {
 
-		if (hitCheck[i] == true)continue;	//書き直し予定
+		if (hitCheck[i] == true)continue;	//当たり判定が必要ではない場合次のループへ
 
 		//プレイヤーと敵の当たり判定
 		if (hf == 0 && (double)px + pw >= ex[i] && (double)px <= ex[i] + eWidth[i] && (double)py + ph >= ey[i] && (double)py <= ey[i] + eHeight[i]) {
 			enemyMgr->Hit_ChangeOnActive(damage, i);
-			hitCheck[i] = true;
 			c.c = 1;
 			Player_hit(c.c);
 			hf = 1;
@@ -102,7 +103,6 @@ void CONTROL::Hit_Judgment() {
 		//プレイヤーの1発目の弾と敵の当たり判定
 		if (bullet.sf[0] == 1 && (double)sx + sw >= ex[i] && (double)sx <= ex[i] + eWidth[i] && (double)sy+sh  >= ey[i] && (double)sy+sh <= ey[i] + eHeight[i]) {
 			enemyMgr->Hit_ChangeOnActive(damage, i);
-			hitCheck[i] = true;
 			bullet.sf[0] = 0;
 			score += 100;
 		    Score_up(score);
@@ -111,7 +111,6 @@ void CONTROL::Hit_Judgment() {
 		//プレイヤーの2発目の弾と敵の当たり判定
 		if (bullet.sf[1] == 1 && (double)sx2 + sw >= ex[i] && (double)sx2 <= ex[i] + eWidth[i] && (double)sy2+sh >= ey[i] && (double)sy2+sh <= ey[i] + eHeight[i]) {
 			enemyMgr->Hit_ChangeOnActive(damage, i);
-			hitCheck[i] = true;
 			bullet.sf[1] = 0;
 			score += 100;
 			Score_up(score);

@@ -197,3 +197,8 @@ int ZAKO::Send_Width() {
 int ZAKO::Send_Height() {
 	return height;
 }
+
+//onActive‚ğ‘—‚éˆ—
+bool ZAKO::Send_OnActive() {
+	return onAcitve;
+}

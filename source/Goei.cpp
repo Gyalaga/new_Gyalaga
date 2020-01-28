@@ -169,3 +169,8 @@ int GOEI::Send_Width() {
 int GOEI::Send_Height() {
 	return height;
 }
+
+//onActive‚ğ‘—‚éˆ—
+bool GOEI::Send_OnActive() {
+	return onAcitve;
+}

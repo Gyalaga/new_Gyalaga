@@ -130,10 +130,17 @@ double BOSS::Send_Y() {
 	return y;
 }
 
+//‰¡•‚ğ‘—‚éˆ—
 int BOSS::Send_Width() {
 	return width;
 }
 
+//‚‚³‚ğ‘—‚éˆ—
 int BOSS::Send_Height() {
 	return height;
+}
+
+//onActive‚ğ‘—‚éˆ—
+bool BOSS::Send_OnActive() {
+	return onAcitve;
 }
