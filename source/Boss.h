@@ -6,12 +6,7 @@
 //ボスギャラガクラスの宣言
 class BOSS :public ENEMY {
 private:
-	int ani[29];	//アニメーション
 	int gh[10];		//画像格納変数
-	int tGh[12];	//トラクタービームの画像格納
-	int beamCnt;	//トラクタービーム用カウント変数
-	int beamOrder;	//描画する画像の指定
-	int bcnt;		//トラクタービームアニメーション用
 public:
 	BOSS(int getX, int getY);				//コンストラクタ
 	void Init(int ix, int iy);				//初期化処理
@@ -22,7 +17,6 @@ public:
 	void Overall_Move();					//全体共通の動き
 	void Load_AddMove(int addMove);			//エネミー管理クラスからの読み込み
 	void Load_OnActive(bool setOnActive);	//エネミー管理クラスからの読み込み
-	void Tractor_Beam();					//トラクタービームの動き
 	int Send_Width();						//横幅を送る処理
 	int Send_Height();						//高さを送る処理
 	double Send_X();						//x座標を送る処理
