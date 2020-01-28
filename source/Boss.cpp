@@ -32,6 +32,15 @@ void BOSS::Load_OnActive(bool setOnActive) {
 
 //初期化処理
 void BOSS::Init(int ix, int iy) {
+
+	int initAni[29] = { 0,1,2,3,4,5,6,7,8,9,10,11,10,11,10,11,10,11,10,9,8,7,6,5,4,3,2,1,0 };
+
+	LoadDivGraph("./res/img/Galaga_OBJ_effect.png", 12, 5, 3, 51, 83, tGh);    // 画像の分割読み込み
+
+	for (int i = 0; i < 29; i++) {
+		ani[i] = initAni[i];
+	}
+
 	x			= ix;		//x座標の初期化
 	y			= iy;		//y座標の初期化
 	width		= 30;		//横幅
@@ -39,6 +48,9 @@ void BOSS::Init(int ix, int iy) {
 	durability	= 1;		//耐久力
 	atkActive	= false;	//攻撃判定
 	onAcitve	= true;		//生存判定
+	beamCnt		= 0;		//トラクタービームカウント
+	beamOrder	= 0;		//表示する場所指定
+	bcnt		= 0;		//アニメーション用フラグ
 }
 
 //終了処理
@@ -46,9 +58,27 @@ void BOSS::Final() {
 
 }
 
+//トラクタービーム発射処理
+void BOSS::Tractor_Beam() {
+
+	beamCnt++;
+
+	if (beamCnt > 100)beamCnt = 100;
+
+	if (beamCnt == 100) {
+
+		bcnt++;
+
+		if (bcnt >= 10)beamOrder++, bcnt = 0;
+
+		if (beamOrder >= 27)beamOrder = 0, beamCnt = 0;
+
+	}
+}
+
 //更新処理
 void BOSS::Update() {
-
+	Tractor_Beam();
 }
 
 //描画処理
@@ -56,6 +86,7 @@ void BOSS::Draw() {
 
 	if (onAcitve == true) {
 		DrawRotaGraph(x, y, 2.0, 0, gh[0], TRUE);
+		DrawGraph(x - (double)13 * 2, y - 5, tGh[ani[beamOrder]], TRUE); // 画像を表示
 	}
 }
 
