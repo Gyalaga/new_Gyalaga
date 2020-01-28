@@ -30,6 +30,20 @@ void BOSS::Load_Damage(int damage) {
 	durability -= damage;
 }
 
+//アニメーション処理
+void BOSS::Load_Interval(int interval) {
+
+	if (atkActive == false) {
+		if (interval == 120) {
+			moveAni = 1;
+		}
+		else if (interval == 240) {
+			moveAni = 0;
+		}
+		aniOrder = moveAni;
+	}
+}
+
 //atkActiveをtrueにする
 void BOSS::Load_AtkActive(bool setAtkActive) {
 	atkActive = setAtkActive;
@@ -43,13 +57,15 @@ void BOSS::Init(int ix, int iy) {
 	LoadDivGraph("./res/img/Galaga_OBJ_effect.png", 12, 5, 3, 51, 83, tGh);    // 画像の分割読み込み
 
 	for (int i = 0; i < 29; i++) {
-		ani[i] = initAni[i];
+		tractorAni[i] = initAni[i];
 	}
 
 	x = ix;					//x座標の初期化
 	y = iy;					//y座標の初期化
 	width = 30;				//横幅
 	height = 30;			//高さ
+	aniOrder = 0;			//描画する画像番号
+	moveAni = 0;			//全体の動きのアニメーション
 	durability = 2;			//耐久力
 	atkActive = false;		//攻撃判定
 	onAcitve = true;		//生存判定
@@ -107,11 +123,10 @@ void BOSS::Update() {
 
 //描画処理
 void BOSS::Draw() {
-	DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", durability);
 
 	if (onAcitve == true) {
-		DrawRotaGraph(x, y, 2.0, 0, gh[0], TRUE);
-		DrawGraph(x - (double)13 * 2, y - 5, tGh[ani[beamOrder]], TRUE); // 画像を表示
+		DrawRotaGraph(x, y, 2.0, 0, gh[aniOrder], TRUE);
+		DrawGraph(x - (double)13 * 2, y - 5, tGh[tractorAni[beamOrder]], TRUE); // 画像を表示
 	}
 }
 

@@ -24,6 +24,8 @@ protected:
 	int width, height;		//敵の横幅と高さ
 	int durability;			//敵の耐久力
 	int allMoveAmount;		//移動量
+	int moveAni;			//全体の動き中のアニメーション
+	int aniOrder;			//表示する画像
 	bool atkActive;			//敵の攻撃フラグ　true:攻撃中 false:非アクティブ
 	bool onAcitve;			//敵が生きてるかフラグ	true:生存中 false:非アクティブ
 public:
@@ -36,6 +38,7 @@ public:
 	virtual void Load_AddMove(int addMove){}			//エネミー管理クラスからの読み込み
 	virtual void Load_LoadDamage(int damege){}			//エネミー管理クラスからの読み込み
 	virtual void Load_AtkActive(bool setAtkActive){}	//エネミー管理クラスからの読み込み
+	virtual void Load_Interval(int interval){}			//エネミー管理クラスからの読み込み
 	virtual int Send_Width() = 0;						//横幅を送る処理
 	virtual int Send_Height() = 0;						//高さを送る処理
 	virtual double Send_X() = 0;						//x座標を送る処理

@@ -148,21 +148,22 @@ void ENEMYMGR::Update() {
 		//zako[0]->Zako_change(intervalCnt);
 		
 
-		//ザコに全体の移動量を送る
+		//ザコに全体の移動量・間隔を送る
 		for (int i = 0; i < 20; i++) {
 			zako[i]->Load_AddMove(enemyAllMove);
-	
+			zako[i]->Load_Interval(intervalCnt);
 		}
 		
-		//ゴエイに全体の移動量を送る
+		//ゴエイに全体の移動量・間隔を送る
 		for (int i = 0; i < 16; i++) {
 			goei[i]->Load_AddMove(enemyAllMove);
-			goei[i]->Goei_change(intervalCnt);
+			goei[i]->Load_Interval(intervalCnt);
 		}
 
-		//ボスギャラガの移動量を送る
+		//ボスギャラガの移動量・間隔を送る
 		for (int i = 0; i < 4; i++) {
 			boss[i]->Load_AddMove(enemyAllMove);
+			boss[i]->Load_Interval(intervalCnt);
 		}
 
 	}

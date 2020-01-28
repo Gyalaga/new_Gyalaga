@@ -34,6 +34,20 @@ void ZAKO::Load_Damage(int damage) {
 	durability -= damage;
 }
 
+//アニメーション処理
+void ZAKO::Load_Interval(int interval) {
+	
+	if (atkActive == false) {
+		if (interval == 120) {
+			moveAni = 1;
+		}
+		else if (interval == 240) {
+			moveAni = 0;
+		}
+		aniOrder = moveAni;
+	}
+}
+
 //初期化処理
 void ZAKO::Init(int ix,int iy) {
 	x			= ix;		//x座標の初期化
@@ -42,12 +56,13 @@ void ZAKO::Init(int ix,int iy) {
 	Rota_angle  = 0;        //描画角度
 	angle       = 75;       //angleの初期値
 	R           = 200;      //ラジアンの初期値
-	i           = 0;        //ザコの画像を切り替えるよう
 	width		= 30;		//横幅
 	height		= 30;		//高さ
 	FLAG_X      = 800;      //zakoflgで使う値
 	FLAG_Y      = 200;      //zakoflgで使う値
 	durability	= 1;		//耐久力
+	aniOrder	= 0;		//描画する画像番号
+	moveAni		= 0;		//全体の動きのアニメーション
 	atkActive	= false;	//攻撃判定
 	onAcitve	= true;		//生存判定
 	zakoflg     = 0;        //ザコ敵の挙動を変えるフラグ
@@ -134,7 +149,7 @@ void ZAKO::Atacck(bool atk) {
 void ZAKO::Draw() {
 
 	if (onAcitve == true) {
-		DrawRotaGraph(x, y, Rota_zome, Rota_angle, gh[i], TRUE);
+		DrawRotaGraph(x, y, Rota_zome, Rota_angle, gh[aniOrder], TRUE);
 	}
 
 	int Red = GetColor(255, 0, 0);            //赤の色
@@ -142,18 +157,6 @@ void ZAKO::Draw() {
 	
 	sincount += 1;
 	angle += 1;
-}
-
-void ZAKO::Zako_change(int interVal) {
-
-	zako_change = interVal;
-
-	if (zako_change == 120) {
-		i = 1;
-	}
-	if (zako_change == 240){
-		i = 0;
-	}
 }
 
 /*****脳みそ死んだ*******
