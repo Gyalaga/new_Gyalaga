@@ -8,7 +8,7 @@ int Shot_Check(int px,int py) {
 					bullet.sf[bullet.bi] = 1;
 					bullet.sx[bullet.bi] = px;
 					bullet.sy[bullet.bi] = py;
-
+					PlaySoundFile("./res/wav/gal_se_fighter_shot.wav", DX_PLAYTYPE_BACK);
 					break;
 				}
 			}

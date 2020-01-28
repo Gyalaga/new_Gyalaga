@@ -29,6 +29,7 @@ void GOEI::Load_AddMove(int addMove) {
 //onActive‚ğfalse‚É‚·‚é
 void GOEI::Load_OnActive(bool setOnActive) {
 	onAcitve = setOnActive;
+	PlaySoundFile("./res/wav/gal_se_goei_striken.wav", DX_PLAYTYPE_BACK);
 }
 
 //‰Šú‰»ˆ—

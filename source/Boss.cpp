@@ -28,6 +28,8 @@ void BOSS::Load_AddMove(int addMove) {
 //onActive‚ğfalse‚É‚·‚é
 void BOSS::Load_OnActive(bool setOnActive) {
 	onAcitve = setOnActive;
+	PlaySoundFile("./res/wav/gal_se_boss_striken_2.wav", DX_PLAYTYPE_BACK);
+	
 }
 
 //‰Šú‰»ˆ—

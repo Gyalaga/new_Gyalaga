@@ -24,6 +24,8 @@ private:
 	int sw;
 	int sh;
 	int hf;
+	int wavflg = 0;
+	int wavcnt = 0;
 	bool hit;
 	bool hitCheck[40];
 	ENEMYMGR* enemyMgr;

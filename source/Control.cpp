@@ -18,18 +18,28 @@ CONTROL::~CONTROL() {
 
 //ƒQ[ƒ€‚Ì‘S‘Ì§Œä
 void CONTROL::GameControl() {
-    Player_All();
-	Player_judgment(&px,&py, &pw, &ph, &sx, &sy, &sw, &sh, &sx2, &sy2,&hf);
-	enemyMgr->Update();
-	enemyMgr->Draw();
-	enemyMgr->Send_Coordinate(ex, ey, eWidth, eHeight);
+	wavcnt++;
 	Score_Save();
 	Score_Draw();
-	Hit_Judgment();
-	DrawFormatString(0, 160, GetColor(255, 255, 255), "%d", c.c);
-	DrawFormatString(50, 520, GetColor(255, 255, 255), "%d,%d",px,py);
-	DrawFormatString(50, 540, GetColor(255, 255, 255), "%f,%f", ex[20], ey[20]);
-
+	if (wavcnt >= 10)
+	{
+		if (wavcnt <= 800)DrawFormatString(380, 380, GetColor(255, 255, 255), "START");
+		if (wavflg == 0)PlaySoundFile("./res/wav/gal_music_gamestart.wav", DX_PLAYTYPE_BACK);
+		wavflg = 1;
+	}
+	if (wavcnt >= 800)
+	{
+		Player_All();
+		Player_judgment(&px, &py, &pw, &ph, &sx, &sy, &sw, &sh, &sx2, &sy2, &hf);
+		enemyMgr->Update();
+		enemyMgr->Draw();
+		enemyMgr->Send_Coordinate(ex, ey, eWidth, eHeight);
+		Hit_Judgment();
+		DrawFormatString(0, 160, GetColor(255, 255, 255), "%d", c.c);
+		DrawFormatString(50, 520, GetColor(255, 255, 255), "%d,%d", px, py);
+		DrawFormatString(50, 540, GetColor(255, 255, 255), "%f,%f", ex[20], ey[20]);
+		wavcnt = 800;
+	}
 }
 
 //“–‚½‚è”»’èˆ—

@@ -32,6 +32,7 @@ void ZAKO::Load_AddMove(int addMove) {
 //onActive‚ğfalse‚É‚·‚é
 void ZAKO::Load_OnActive(bool setOnActive) {
 	onAcitve = setOnActive;
+	PlaySoundFile("./res/wav/gal_se_zako_striken.wav", DX_PLAYTYPE_BACK);
 }
 
 //‰Šú‰»ˆ—
