@@ -1,71 +1,116 @@
 #include "Control.h"
 #include "DxLib.h"
+
 //コントロールクラスのコンストラクタ
 CONTROL::CONTROL() {
-	enemyMgr = new ENEMYMGR;
-	hit = false;
 
-	for (int i = 0; i < 40; i++) {
-		hitCheck[i] = false;
-	}
-
+	Init();		//初期化処理
 }
 
 //コントロールクラスのデストラクタ
 CONTROL::~CONTROL() {
+
+	Final();	//終了処理
+}
+
+//初期化処理
+void CONTROL::Init() {
+
+	enemyMgr = new ENEMYMGR;	//エネミー管理クラスの動的確保をする
+
+	//エネミー関連で使用する変数の初期化
+	for (int i = 0; i < 40; i++) {
+		ex[i]		= 0;
+		ey[i]		= 0;
+		eWidth[i]	= 0;
+		eHeight[i]	= 0;
+		hitCheck[i] = false;
+	}
+	damage = 1;
+
+	//プレイヤー関連で使用する変数の初期化
+	px	= 0;
+	py	= 0;
+	pw	= 0;
+	ph	= 0;
+	sx	= 0;
+	sy	= 0;
+	sx2 = 0;
+	sy2 = 0;
+	sw	= 0;
+	sh	= 0;
+	hf	= 0;
+
+	//SE関連で使用する変数の初期化
+	wavcnt = 0;
+	wavflg = 0;
+}
+
+//終了処理
+void CONTROL::Final() {
+
 	delete enemyMgr;
 }
 
 //ゲームの全体制御
 void CONTROL::GameControl() {
-	wavcnt++;
-	Score_Save();
-	Score_Draw();
-	if (wavcnt >= 10)
-	{
-		if (wavcnt <= 800)DrawFormatString(380, 380, GetColor(255, 255, 255), "START");
+
+	Score_Save();		//ハイスコアを記録する
+	Score_Draw();		//スコアの描画
+	
+	if(wavcnt < 800)wavcnt++;	//SE用カウントを増やす
+
+	//スタート時
+	if (wavcnt >= 10) {
+
+		if (wavcnt < 800)DrawFormatString(380, 380, GetColor(255, 255, 255), "START");
 		if (wavflg == 0)PlaySoundFile("./res/wav/gal_music_gamestart.wav", DX_PLAYTYPE_BACK);
 		wavflg = 1;
 	}
-	if (wavcnt >= 800)
-	{
-		Player_All();
+
+	//SEが鳴り終わったら
+	if (wavcnt == 800) {
+
+		Player_All();		//プレイヤー全体管理
+		enemyMgr->All();	//エネミー管理クラスの全体管理
+
+		//当たり判定関連の座標取得処理
 		Player_judgment(&px, &py, &pw, &ph, &sx, &sy, &sw, &sh, &sx2, &sy2, &hf);
-		enemyMgr->Update();
-		enemyMgr->Draw();
 		enemyMgr->Send_Coordinate(ex, ey, eWidth, eHeight);
-		Hit_Judgment();
-		DrawFormatString(0, 160, GetColor(255, 255, 255), "%d", c.c);
-		DrawFormatString(50, 520, GetColor(255, 255, 255), "%d,%d", px, py);
-		DrawFormatString(50, 540, GetColor(255, 255, 255), "%f,%f", ex[20], ey[20]);
-		wavcnt = 800;
+
+		Hit_Judgment();		//当たり判定処理
 	}
 }
 
 //当たり判定処理
 void CONTROL::Hit_Judgment() {
-	for (int i = 0; i < 40; i++) {
-		if (CheckHitKey(KEY_INPUT_Q))hitCheck[i] = false;       //確認用
-		//もしも当たっていること
-		if (hitCheck[i] == true)continue;
 
-		if (hf == 0 && hitCheck[i] == false && (double)px + pw >= ex[i] && (double)px <= ex[i] + eWidth[i] && (double)py + ph >= ey[i] && (double)py <= ey[i] + eHeight[i]) {
-			enemyMgr->Hit_ChangeOnActive(hit, i);
+	for (int i = 0; i < 40; i++) {
+
+		if (hitCheck[i] == true)continue;	//書き直し予定
+
+		//プレイヤーと敵の当たり判定
+		if (hf == 0 && (double)px + pw >= ex[i] && (double)px <= ex[i] + eWidth[i] && (double)py + ph >= ey[i] && (double)py <= ey[i] + eHeight[i]) {
+			enemyMgr->Hit_ChangeOnActive(damage, i);
 			hitCheck[i] = true;
 			c.c = 1;
 			Player_hit(c.c);
 			hf = 1;
 			Player_hitflg(hf);
 		}
-		if (hitCheck[i] == false && bullet.sf[0] == 1 && (double)sx + sw >= ex[i] && (double)sx <= ex[i] + eWidth[i] && (double)sy+sh  >= ey[i] && (double)sy+sh <= ey[i] + eHeight[i]) {
-			enemyMgr->Hit_ChangeOnActive(hit, i);
+
+		//プレイヤーの1発目の弾と敵の当たり判定
+		if (bullet.sf[0] == 1 && (double)sx + sw >= ex[i] && (double)sx <= ex[i] + eWidth[i] && (double)sy+sh  >= ey[i] && (double)sy+sh <= ey[i] + eHeight[i]) {
+			enemyMgr->Hit_ChangeOnActive(damage, i);
 			hitCheck[i] = true;
 			bullet.sf[0] = 0;
 			score += 100;
 		    Score_up(score);
 		}
-		if (hitCheck[i] == false && bullet.sf[1] == 1 && (double)sx2 + sw >= ex[i] && (double)sx2 <= ex[i] + eWidth[i] && (double)sy2+sh >= ey[i] && (double)sy2+sh <= ey[i] + eHeight[i]) {
-			enemyMgr->Hit_ChangeOnActive(hit, i);
+
+		//プレイヤーの2発目の弾と敵の当たり判定
+		if (bullet.sf[1] == 1 && (double)sx2 + sw >= ex[i] && (double)sx2 <= ex[i] + eWidth[i] && (double)sy2+sh >= ey[i] && (double)sy2+sh <= ey[i] + eHeight[i]) {
+			enemyMgr->Hit_ChangeOnActive(damage, i);
 			hitCheck[i] = true;
 			bullet.sf[1] = 0;
 			score += 100;

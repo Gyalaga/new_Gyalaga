@@ -202,7 +202,7 @@ void ENEMYMGR::Draw() {
 
 //コントロールクラスで定義した変数のポインタに座標を代入する
 void ENEMYMGR::Send_Coordinate(double* setX, double* setY, int* setWidth, int* setHeight) {
-	for (int i = 0; i < 40; i++) {
+	for (int i = 0; i < ENEMY_MAXNUM; i++) {
 		setX[i]			= enemyX[i];
 		setY[i]			= enemyY[i];
 		setWidth[i]		= width[i];
@@ -211,15 +211,24 @@ void ENEMYMGR::Send_Coordinate(double* setX, double* setY, int* setWidth, int* s
 }
 
 //コントロールクラスから取得したHitした敵のonActiveをfalseにする
-void ENEMYMGR::Hit_ChangeOnActive(bool getOnActive, int n) {
-	
-	if (n < 20) {
-		zako[n]->Load_OnActive(getOnActive);
+void ENEMYMGR::Hit_ChangeOnActive(int getDamage, int n) {
+
+	//ダメージを各敵クラスへ送る
+	if (n < GOEI_ORDER) {
+
+		zako[n]->Load_Damage(getDamage);
 	}
-	else if (n >= 20 && n < 36) {
-		goei[n - GOEI_ORDER]->Load_OnActive(getOnActive);
+	else if (n >= GOEI_ORDER && n < BOSS_ORDER) {
+
+		goei[n - GOEI_ORDER]->Load_Damage(getDamage);
 	}
-	else if (n >= 36 && n < 40) {
-		boss[n - BOSS_ORDER]->Load_OnActive(getOnActive);
+	else if (n >= BOSS_ORDER && n < ENEMY_MAXNUM) {
+
+		boss[n - BOSS_ORDER]->Load_Damage(getDamage);
 	}
+}
+
+void ENEMYMGR::All() {
+	Update();
+	Draw();
 }

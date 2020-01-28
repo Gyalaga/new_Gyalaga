@@ -41,7 +41,8 @@ public:
 	void Update();																		//更新処理
 	void Draw();																		//描画処理
 	void Send_Coordinate(double* setX, double* setY, int* setWidth, int* setHeight);	//取得したポインタにポインタを代入する
-	void Hit_ChangeOnActive(bool getOnActive, int n);									//Hitした敵のonActiveをfalseにする
+	void Hit_ChangeOnActive(int getDamage, int n);										//Hitした敵のonActiveをfalseにする
+	void All();																			//エネミー管理クラス全体を管理
 };
 
 #endif // !_ENEMYMGR_H_

@@ -22,7 +22,7 @@ public:
 	void Load_Image(int* sGh);				//画像読み込み処理
 	void Overall_Move();					//全体共通の動き
 	void Load_AddMove(int addMove);			//エネミー管理クラスからの読み込み
-	void Load_OnActive(bool setOnActive);	//エネミー管理クラスからの読み込み
+	void Load_Damage(int damage);			//エネミー管理クラスからの読み込み
 	void Load_AtkActive(bool setAtkActive);	//エネミー管理クラスからの読み込み
 	void Tractor_Beam();					//トラクタービームの発射
 	void Tractor_Move();					//トラクタービームの動き

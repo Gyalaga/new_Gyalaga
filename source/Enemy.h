@@ -3,6 +3,7 @@
 
 #include "Task.h"
 
+#define ENEMY_MAXNUM	40		//敵の最大数
 #define ENEMY_MOVERIGHT	10		//右側への移動
 #define ENEMY_MOVELEFT	-10		//左側への移動
 
@@ -30,7 +31,7 @@ public:
 	virtual void Load_Image(){}							//画像読み込み処理
 	virtual void Overall_Move(){}						//全体共通の動き
 	virtual void Load_AddMove(int addMove){}			//エネミー管理クラスからの読み込み
-	virtual void Load_OnActive(bool setOnActive){}		//エネミー管理クラスからの読み込み
+	virtual void Load_LoadDamage(int damege){}			//エネミー管理クラスからの読み込み
 	virtual void Load_AtkActive(bool setAtkActive){}	//エネミー管理クラスからの読み込み
 	virtual int Send_Width() = 0;						//横幅を送る処理
 	virtual int Send_Height() = 0;						//高さを送る処理

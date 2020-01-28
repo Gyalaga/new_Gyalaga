@@ -25,11 +25,9 @@ void BOSS::Load_AddMove(int addMove) {
 	}
 }
 
-//onActiveをfalseにする
-void BOSS::Load_OnActive(bool setOnActive) {
-	onAcitve = setOnActive;
-	PlaySoundFile("./res/wav/gal_se_boss_striken_2.wav", DX_PLAYTYPE_BACK);
-	
+//ダメージを受ける処理
+void BOSS::Load_Damage(int damage) {
+	durability -= damage;
 }
 
 //atkActiveをtrueにする
@@ -91,6 +89,12 @@ void BOSS::Tractor_Move() {
 //更新処理
 void BOSS::Update() {
 
+	//onActiveをfalseにする
+	if (durability == 0 && onAcitve == true) {
+		onAcitve = false;
+		PlaySoundFile("./res/wav/gal_se_boss_striken_2.wav", DX_PLAYTYPE_BACK);
+	}
+
 	if (atkActive == true) {
 		tractorFlg = true;
 	}
@@ -103,6 +107,7 @@ void BOSS::Update() {
 
 //描画処理
 void BOSS::Draw() {
+	DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", durability);
 
 	if (onAcitve == true) {
 		DrawRotaGraph(x, y, 2.0, 0, gh[0], TRUE);

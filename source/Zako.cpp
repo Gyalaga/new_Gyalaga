@@ -29,10 +29,9 @@ void ZAKO::Load_AddMove(int addMove) {
 
 }
 
-//onActiveをfalseにする
-void ZAKO::Load_OnActive(bool setOnActive) {
-	onAcitve = setOnActive;
-	PlaySoundFile("./res/wav/gal_se_zako_striken.wav", DX_PLAYTYPE_BACK);
+//ダメージを受ける処理
+void ZAKO::Load_Damage(int damage) {
+	durability -= damage;
 }
 
 //初期化処理
@@ -63,6 +62,11 @@ void ZAKO::Final() {
 //更新処理
 void ZAKO::Update() {
 
+	//onActiveをfalseにする
+	if (durability == 0 && onAcitve == true) {
+		onAcitve = false;
+		PlaySoundFile("./res/wav/gal_se_zako_striken.wav", DX_PLAYTYPE_BACK);
+	}
 }
 
 /******************

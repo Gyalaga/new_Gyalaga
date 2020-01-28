@@ -5,14 +5,16 @@
 #include "Player.h"
 #include"Shot_Extern.h"
 #include "Score.h"
+#include "Task.h"
 
 //ゲーム管理クラスの宣言
-class CONTROL {
+class CONTROL :public TASK {
 private:
 	double	ex[40];			//敵のx座標
 	double	ey[40];			//敵のy座標
 	int		eWidth[40];		//敵の横幅
 	int		eHeight[40];	//敵の高さ
+	int		damage;			//ダメージ量
 	int px;
 	int py;
 	int pw;
@@ -24,15 +26,18 @@ private:
 	int sw;
 	int sh;
 	int hf;
-	int wavflg = 0;
-	int wavcnt = 0;
-	bool hit;
-	bool hitCheck[40];
-	ENEMYMGR* enemyMgr;
+	int wavflg;
+	int wavcnt;
+	bool hitCheck[40];		//当たり判定の処理をするかどうかの判定用
+	ENEMYMGR* enemyMgr;		//エネミー管理クラスの実体
 public:
 	CONTROL();									//コンストラクタ
 	~CONTROL();									//デストラクタ
-	void GameControl();
+	void Init();								//初期化処理
+	void Final();								//終了処理
+	void Update(){}								//更新処理
+	void Draw(){}								//描画処理
+	void GameControl();							//ゲームの全体管理
 	void Hit_Judgment();						//当たり判定
 };
 
