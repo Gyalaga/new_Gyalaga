@@ -49,6 +49,10 @@ void GOEI::Init(int ix, int iy) {
 	onAcitve	= true;		//生存判定
 	goeiflg = 0;            //ザコ敵の挙動を変えるフラグ
 							//0:回転移動 1:曲線移動 2:なんか 3:なんか
+	zigzagcnt = 0;          //ジグザグカウント
+	zigzagflg = 0;          //ジグザグフラグ
+	
+	
 }
 
 //終了処理
@@ -67,7 +71,7 @@ void GOEI::Update() {
 }
 
 void GOEI::Atacck(bool atk) {
-
+	
 	atkActive = atk;
 
 	if (atkActive == true) {
@@ -103,10 +107,10 @@ void GOEI::Atacck(bool atk) {
 			Rota_angle -= 0.04;
 		}
 		if (goeiflg == 1) {
-
 			x += 2.5;//sin(PI * sincount / 80.0f) * 2.0f;
 			y += 1.5f;
 		}
+
 		if (goeiflg == 2) {
 
 			x += R * (cos((angle + 1) * (PI / -180)) - cos(angle * (PI / -180)));
@@ -122,6 +126,28 @@ void GOEI::Atacck(bool atk) {
 			y += 2.5f;
 			//Rota_angle += 0.01;
 		}
+
+		/******ジグザグの動き******/
+		if (zigzagflg == 1) {
+			x -= 1.5;
+			y += 1.5f;
+			zigzagcnt += 1;
+		}
+		if (zigzagcnt > 50) {
+			zigzagflg = 2;
+		}
+		if (zigzagflg == 2) {
+			x += 3;
+			y += 1.5f;
+		}
+		if (zigzagcnt > 100) {
+			zigzagflg = 3;
+		}
+		if (zigzagflg == 3) {
+			x -= 1.5;
+			y += 1.5f;
+		}
+		/**************************/
 	}
 }
 

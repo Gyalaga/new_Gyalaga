@@ -9,9 +9,6 @@ static int h_scorex = 950, h_scorey = 90;        //ハイスコア計算座標
 static int count = 0;                             //点滅
 static int FileHandle;                            //ファイル
 
-//更新
-void Score_Update();
-
 //描画
 void Score_Draw();
 	
