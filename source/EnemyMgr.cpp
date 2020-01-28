@@ -153,7 +153,6 @@ void ENEMYMGR::Update() {
 			zako[i]->Load_AddMove(enemyAllMove);
 	
 		}
-
 		
 		//ゴエイに全体の移動量を送る
 		for (int i = 0; i < 16; i++) {
@@ -178,6 +177,7 @@ void ENEMYMGR::Update() {
 	sincount++;         //sin移動カウントを増やす
 	intervalCnt++;		//間隔カウントを増やす
 
+	boss[0]->Load_AtkActive(true);
 
 }
 
