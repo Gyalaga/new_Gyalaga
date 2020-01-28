@@ -6,11 +6,6 @@ int Black = GetColor(0, 0, 0);            //塗りつぶす用の黒の色
 int Red = GetColor(255, 0, 0);            //赤の色
 int White = GetColor(255, 255, 255);      //白の色
 
-//更新
-void Score_Update() {
-	score = 0;
-}
-
 //描画
 void Score_Save() {
 	//ハイスコアのファイルを開く

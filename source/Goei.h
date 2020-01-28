@@ -14,6 +14,9 @@ private:
 	int goei_change;                    //ザコの画像を切り替えるよう
 	int goeiflg;                        //ザコ敵の挙動を変えるフラグ
 	int FLAG_X, FLAG_Y;				    //zakoflgで使う値
+	int zigzagflg;                      //ジグザグのフラグ
+	int zigzagcnt;                      //ジグザグのカウント
+
 public:
 	GOEI(int getX, int getY);				//コンストラクタ
 	void Init(int ix, int iy);				//初期化処理
