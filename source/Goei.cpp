@@ -22,53 +22,42 @@ void GOEI::Load_AddMove(int addMove) {
 
 	//攻撃中ではないとき
 	if (atkActive == false) {
+		if (allMoveAmount == ENEMY_MOVERIGHT) {
+			Move_cnt += 1;
+		}
+		else {
+			Move_cnt -= 1;
+		}
 		Overall_Move();
 	}
 }
 
-//ダメージを受ける処理
-void GOEI::Load_Damage(int damage) {
-	durability -= damage;
-}
-
-//アニメーション処理
-void GOEI::Load_Interval(int interval) {
-
-	if (atkActive == false) {
-		if (interval == 120) {
-			moveAni = 1;
-		}
-		else if (interval == 240) {
-			moveAni = 0;
-		}
-		aniOrder = moveAni;
+	//初期化処理
+	void GOEI::Init(int ix, int iy){
+		x                 = ix;		     //x座標
+		y                 = iy;		     //y座標
+		Rota_zome         = 2.0;         //拡大率
+		Rota_angle        = 0;           //描画角度
+		angle             = 75;          //angleの初期値
+		R                 = 150;         //ラジアンの初期値
+		i                 = 0;           //ループ用
+		goei_change       = 0;           //ゴエイの画像を切り替える
+		goei_gh           = 0;           // 0;開脚 1:閉脚
+		width             = 18;		     //横幅
+		height            = 18;		     //高さ
+		FLAG_X            = 800;         //goeiflgで使う値
+		FLAG_Y            = 200;         //goeiflgで使う値
+		Move              = 0;           //エネミーの移動方向 0:→ 1:←
+		Move_cnt          = 0;
+		Move_RIGHT_cnt    = -1;           //エネミが―右に動いた回数
+		Move_LEFT_cnt     = 1;           //エネミが―左に動いた回数 
+		Move_flg          = true;        // true:起動 false:なし 一度だけ動かしたい処理なので、1にしたら戻らない
+		durability        = 1;		     //耐久力
+		onAcitve          = true;        //生存判定
+		atkActive         = false;       //エネミーが攻撃してるかどうかの判定
+		goeiflg           = 0;           //ゴエイの挙動を変えるフラグ
+								         //0:回転移動 1:直進 2:回転 3:直進 4:何もなし
 	}
-}
-
-//初期化処理
-void GOEI::Init(int ix, int iy) {
-	x			= ix;		//x座標
-	y			= iy;		//y座標
-	Rota_zome = 2.0;        //拡大率
-	Rota_angle = 0;         //描画角度
-	angle = 75;             //angleの初期値
-	R = 150;                //ラジアンの初期値
-	width		= 30;		//横幅
-	height		= 30;		//高さ
-	FLAG_X = 800;           //goeiflgで使う値
-	FLAG_Y = 200;           //goeiflgで使う値
-	durability	= 1;		//耐久力
-	aniOrder = 0;			//描画する画像番号
-	moveAni = 0;			//全体の動きのアニメーション
-	atkActive	= false;	//攻撃判定
-	onAcitve	= true;		//生存判定
-	goeiflg = 0;            //ザコ敵の挙動を変えるフラグ
-							//0:回転移動 1:曲線移動 2:なんか 3:なんか
-	zigzagcnt = 0;          //ジグザグカウント
-	zigzagflg = 0;          //ジグザグフラグ
-	
-	
-}
 
 //終了処理
 void GOEI::Final() {
@@ -78,99 +67,180 @@ void GOEI::Final() {
 //更新処理
 void GOEI::Update() {
 
-	//onActiveをfalseにする
-	if (durability == 0 && onAcitve == true) {
-		onAcitve = false;
-		PlaySoundFile("./res/wav/gal_se_goei_striken.wav", DX_PLAYTYPE_BACK);
-	}
 }
 
-void GOEI::Atacck(bool atk) {
+
+void GOEI::Atacck(bool atk,int dorei,int pataan,double bazin_x,double bazin_y) {//int goei_Move,int cnt_Move
+
+	/***エネミマネージャーから、ゴエイの状態を受け取る***/
+	atkActive        = atk;         //攻撃のフラグを入れる
+	int goei_no      = dorei;       //ゴエイの番号
+	int goei_type    = 0;           //攻撃のパターンを入れる
 	
-	atkActive = atk;
+	/***動かす前に受け取った初期座標を保存しておく***/
+	double x_bazin = bazin_x;    
+	double y_bazin = bazin_y;
 
-	if (atkActive == true) {
-		//Draw_angle();
+	/***パターン１：左側への動き***/
+	if (atkActive == true && goei_type == 0) {
 
+		
+		/***最初の回転***/
+		if (goeiflg == 0) {
+			x -= -R * (cos((angle + 1) * (PI / -180)) - cos(angle * (PI / -180)));
+			y -= -R * (sin((angle + 1) * (PI / -180)) - sin(angle * (PI / -180)));
+			angle += 1;
+			Rota_angle -= 0.04;
+		}
+		/***回転をしたら、次の行動え移す為にフラグを切り替える***/
 		if (FLAG_Y <= y && goeiflg == 0) {
 			goeiflg = 1;
 			FLAG_Y = 550;
 		}
+		/***一定距離まで直進したら、次の行動に移させるためフラグを切り替える***/
 		if (FLAG_Y <= y && goeiflg == 1) {
 			goeiflg = 2;
 			angle = -90;
 			R = 150;
 		}
-		if (y >= 1120) {
-			x = 350;
-			y = -50;
-			if (y < 120) {
-				y += 2;
-				x -= 2;
-			}
-			else {
-				atkActive = false;
-			}
-		}
-
-		if (goeiflg == 0) {
-			x -= -R * (cos((angle + 1) * (PI / -180)) - cos(angle * (PI / -180)));
-			//sin(PI * sincount / 80.0f) * 2.0f;
-			y -= -R * (sin((angle + 1) * (PI / -180)) - sin(angle * (PI / -180)));
-			//1.5f;
-			angle += 1;
-			Rota_angle -= 0.04;
-		}
+		/***斜めに直進***/
 		if (goeiflg == 1) {
-			x += 2.5;//sin(PI * sincount / 80.0f) * 2.0f;
+
+			x += 2.0;//sin(PI * sincount / 80.0f) * 2.0f;
 			y += 1.5f;
 		}
-
+		/***直進後の回転***/
 		if (goeiflg == 2) {
 
 			x += R * (cos((angle + 1) * (PI / -180)) - cos(angle * (PI / -180)));
 			y += R * (sin((angle + 1) * (PI / -180)) - sin(angle * (PI / -180)));
 			angle += 2;
 			Rota_angle -= 0.04;
-			if (angle >= 200 && goeiflg == 2) {
+			if (angle >= 162 && goeiflg == 2) {
 				goeiflg = 3;
 			}
 		}
+		/***最後の直進***/
 		if (goeiflg == 3) {
-			x -= sin(PI * sincount / 100.0f) * 2.0f;
+			x -= 1.5f; sin(PI * sincount / 100.0f) * 2.0f;
 			y += 2.5f;
-			//Rota_angle += 0.01;
+		}
+		/***画面外に出たゴエイを上にワープさせる***/
+		if (y > 1100) {
+			if (Move == 0) {
+				x_bazin = x_bazin + (10 * Move_cnt);
+			}
+			else {
+				x_bazin = x_bazin - (10 * Move_cnt);
+	
+			}
+			x = x_bazin;
+			if (goei_no == 0) {
+				x = x_bazin + 10;
+			}
+			y = -15;
+			Rota_angle = 0;
+			goeiflg = 4;
+			
+		}
+		/***既に移動を終えたゴエイが上に戻ってきたら、初期一に戻るまで下に移動させる***/
+		if (y <= y_bazin && goeiflg == 4) {
+			y += 2;
+			atkActive = false;
 		}
 
-		/******ジグザグの動き******/
-		if (zigzagflg == 1) {
-			x -= 1.5;
-			y += 1.5f;
-			zigzagcnt += 1;
-		}
-		if (zigzagcnt > 50) {
-			zigzagflg = 2;
-		}
-		if (zigzagflg == 2) {
-			x += 3;
-			y += 1.5f;
-		}
-		if (zigzagcnt > 100) {
-			zigzagflg = 3;
-		}
-		if (zigzagflg == 3) {
-			x -= 1.5;
-			y += 1.5f;
-		}
-		/**************************/
 	}
+
+     /***パターン２：右側への動き***/
+	if (atkActive == true && goei_type == 1 ) {
+		
+		/***最初の回転***/
+		if (goeiflg == 0) {
+			R = -150;
+			x += R * (cos((angle + 1) * (PI / -180)) - cos(angle * (PI / -180)));
+			y -= R * (sin((angle + 1) * (PI / -180)) - sin(angle * (PI / -180)));
+			angle += 1;
+			Rota_angle += 0.04;
+		}
+		/***回転をしたら、次の行動え移す為にフラグを切り替える***/
+		if (FLAG_Y <= y && goeiflg == 0) {
+			goeiflg = 1;
+			FLAG_Y = 550;
+		}
+		/***斜めに直進***/
+		if (goeiflg == 1) {
+
+			x -= 2.0;
+			y += 1.5f;
+		}
+		/***一定距離まで直進したら、次の行動に移させるためフラグを切り替える***/
+		if (FLAG_Y <= y && goeiflg == 1) {
+			goeiflg = 2;
+			angle = -90;
+			R = 150;
+		}
+		/***直進後の回転***/
+		if (goeiflg == 2) {
+
+			x -= R * (cos((angle + 1) * (PI / -180)) - cos(angle * (PI / -180)));
+			y += R * (sin((angle + 1) * (PI / -180)) - sin(angle * (PI / -180)));
+			angle += 2;
+			Rota_angle += 0.04;
+			if (angle >= 162 && goeiflg == 2) {
+				goeiflg = 3;
+			}
+		}
+		/***最後の直進***/
+		if (goeiflg == 3) {
+			x += 1.5;
+			y += 2.5f;	
+		}
+		/***画面外に出たゴエイを上にワープさせる***/
+		if (y > 1100) {
+			if (Move == 0) {
+				x_bazin = x_bazin + (10 * Move_cnt);
+			}
+			else {
+				x_bazin = x_bazin - (10 * Move_cnt);
+
+			}
+			x = x_bazin;
+			if (goei_no == 0) {
+				x = x_bazin + 10;
+			}
+			y = -15;
+			Rota_angle = 0;
+			goeiflg = 4;
+		}
+		/***既に移動を終えたゴエイが上に戻ってきたら、初期一に戻るまで下に移動させる***/
+		if (y <= y_bazin && goeiflg == 4) {
+			y += 2;
+
+		}
+		if (y == 20 && goeiflg == 3) {
+			atkActive = false;
+
+		}
+	}	
 }
 
 //描画処理
 void GOEI::Draw() {
+	DrawRotaGraph(x, y, Rota_zome, Rota_angle, gh[i], TRUE);
+	int Red = GetColor(255, 0, 0);            //赤の色
+	int aaa = 0;
 
-	if (onAcitve == true) {
-		DrawRotaGraph(x, y, Rota_zome, Rota_angle, gh[aniOrder], TRUE);
+}
+
+void GOEI::Goei_change(int interVal) {
+
+	goei_change = interVal;
+
+	if (goei_change == 125) {
+		i = 1;
+	}
+	if (goei_change == 250) {
+		i = 0;
 	}
 }
 
@@ -187,19 +257,4 @@ double GOEI::Send_X() {
 //y座標を送る処理
 double GOEI::Send_Y() {
 	return y;
-}
-
-//横幅を送る処理
-int GOEI::Send_Width() {
-	return width;
-}
-
-//高さを送る処理
-int GOEI::Send_Height() {
-	return height;
-}
-
-//onActiveを送る処理
-bool GOEI::Send_OnActive() {
-	return onAcitve;
 }

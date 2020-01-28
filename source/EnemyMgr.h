@@ -22,28 +22,31 @@ private:
 	int goeiGh[5];		//ゴエイクラスへ画像を送る用変数
 	int bossGh[10];		//ボスギャラガクラスへ画像を送る用変数
 	int enemyAllMove;	//エネミー全体の移動用変数
+	int enemy_GO;       //エネミーが進んでいる方向を判定 0;→ 1:←
+	double Move_cnt;       //エネミーが左右に進んだ回数を記録
 	int enemyAll;		//各敵に送る用変数
 	int intervalCnt;	//全体で動く間隔カウント
-	int width[40];		//敵の横幅を取得
-	int height[40];		//敵の高さを取得
+	int dbl_flg;        //敵のダブリチェックで使う
+	bool goei_flg;      //動くゴエイを変える          
 	double enemyX[40];	//敵のX座標を取得
 	double enemyY[40];	//敵のY座標を取得
+	double goei_bazin_x[16]; //ゴエイの初期x座標を保存
+	double goei_bazin_y[16]; //ゴエイの初期y座標を保存
 	int sincount;       //sin挙動のカウント
-	Enemy enemy_type;	//エネミー構造体の実体
+	bool atkActive;     //エネミーの攻撃フラグ
+	int goei_pataan;    //ゴエイの攻撃パターン
+	int goei_no;        //動かすゴエイの番号
 	ZAKO* zako[20];		//ザコの実体の配列
 	GOEI* goei[16];		//ゴエイの実体の配列
 	BOSS* boss[4];		//ボスギャラガの実体の配列
 public:
-	ENEMYMGR();																			//コンストラクタ
-	~ENEMYMGR();																		//デストラクタ
-	void Init();																		//初期化処理
-	void Final();																		//終了処理
-	void Update();																		//更新処理
-	void Draw();																		//描画処理
-	void Send_Coordinate(double* setX, double* setY, int* setWidth, int* setHeight);	//取得したポインタにポインタを代入する
-	void Hit_ChangeOnActive(int getDamage, int n);										//Hitした敵のonActiveをfalseにする
-	void Judgment_OnActive(bool* setHitCheck);											//当たり判定領域を消すかどうか判定
-	void All();																			//エネミー管理クラス全体を管理
+	ENEMYMGR();											//コンストラクタ
+	~ENEMYMGR();										//デストラクタ
+	void Init();										//初期化処理
+	void Final();										//終了処理
+	void Update();										//更新処理
+	void Draw();										//描画処理
+	void Send_Coordinate(double* setX, double* setY);	//取得したポインタにポインタを代入する
 };
 
 #endif // !_ENEMYMGR_H_
