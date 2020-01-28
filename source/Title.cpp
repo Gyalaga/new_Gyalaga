@@ -44,6 +44,15 @@ void TITLE::Draw() {
 	static int score1 = LoadGraph("./res/img/1UP.png"); static int score2 = LoadGraph("./res/img/2UP.png");
 	static int hiscore = LoadGraph("./res/img/HISCORE.png");
 
+	/*********‰B‚µƒXƒRƒA*********/
+	if (ONEUP_Y >= 50) {
+		Score_Title();
+	}
+	if (ONEUP_Y > 50) {
+		SetDrawScreen(DX_SCREEN_BACK);  //“h‚è‚Â‚Ô‚µ                        
+		DrawBox(800, 90, 100, 110, GetColor(0, 0, 0), TRUE);
+	}
+	/*****************************/
 	/***ƒ^ƒCƒgƒ‹ƒƒS***/
 	DrawGraph(240, TITLE_Y, title, TRUE);
 	if (TITLE_Y > 150) {
