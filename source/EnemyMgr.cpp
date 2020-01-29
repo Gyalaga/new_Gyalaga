@@ -45,7 +45,7 @@ void ENEMYMGR::Init() {
 	}
 
 	//ザコの実体を生成する
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < ENEMY_ZAKONUM; i++) {
 		zako[i] = new ZAKO(x, y);
 		zako[i]->Load_Image(zakoGh);
 		x += 30;
@@ -56,7 +56,7 @@ void ENEMYMGR::Init() {
 	}
 
 	//ゴエイの実体を生成する
-	for (int i = 0; i < 16; i++) {
+	for (int i = 0; i < ENEMY_GOEINUM; i++) {
 		goei[i] = new GOEI(x2, y2);
 		goei[i]->Load_Image(goeiGh);
 		goei_bazin_x[i] = x2;
@@ -70,7 +70,7 @@ void ENEMYMGR::Init() {
 	}
 
 	//ボスギャラガの実体を追加する
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < ENEMY_BOSSNUM; i++) {
 		boss[i] = new BOSS(x3, y3);
 		boss[i]->Load_Image(bossGh);
 		x3 += 35;
@@ -81,17 +81,17 @@ void ENEMYMGR::Init() {
 void ENEMYMGR::Final() {
 
 	//確保していたザコクラスのメモリを解放する
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < ENEMY_ZAKONUM; i++) {
 		delete zako[i];
 	}
 
 	//確保していたゴエイクラスのメモリを解放する
-	for (int i = 0; i < 16; i++) {
+	for (int i = 0; i < ENEMY_GOEINUM; i++) {
 		delete goei[i];
 	}
 
 	//確保していたボスギャラガクラスのメモリを解放する
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < ENEMY_BOSSNUM; i++) {
 		delete boss[i];
 	}
 }
@@ -100,17 +100,17 @@ void ENEMYMGR::Final() {
 void ENEMYMGR::Update() {
 
 	//ザコ
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < ENEMY_ZAKONUM; i++) {
 		zako[i]->Update();
 	}
 
 	//ゴエイ
-	for (int i = 0; i < 16; i++) {
+	for (int i = 0; i < ENEMY_GOEINUM; i++) {
 		goei[i]->Update();
 	}
 
 	//ボスギャラガ
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < ENEMY_BOSSNUM; i++) {
 		boss[i]->Update();
 	}
 
@@ -171,19 +171,19 @@ void ENEMYMGR::Update() {
 		enemyAll += enemyAllMove;
 
 		//ザコに全体の移動量・間隔を送る
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < ENEMY_ZAKONUM; i++) {
 			zako[i]->Load_AddMove(enemyAllMove);
 			zako[i]->Load_Interval(intervalCnt);
 		}
 
 		//ゴエイに全体の移動量・間隔を送る
-		for (int i = 0; i < 16; i++) {
+		for (int i = 0; i < ENEMY_GOEINUM; i++) {
 			goei[i]->Load_AddMove(enemyAllMove);
 			goei[i]->Load_Interval(intervalCnt);
 		}
 
 		//ボスギャラガの移動量・間隔を送る
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < ENEMY_BOSSNUM; i++) {
 			boss[i]->Load_AddMove(enemyAllMove);
 			boss[i]->Load_Interval(intervalCnt);
 		}
@@ -207,21 +207,19 @@ void ENEMYMGR::Update() {
 void ENEMYMGR::Draw() {
 
 	//ザコ
-	for (int i = 0; i < 20; i++) {
+	for (int i = 0; i < ENEMY_ZAKONUM; i++) {
 		zako[i]->Draw();
 	}
 
 	//ゴエイ
-	for (int i = 0; i < 16; i++) {
+	for (int i = 0; i < ENEMY_GOEINUM; i++) {
 		goei[i]->Draw();
 	}
 
 	//ボスギャラガ
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < ENEMY_BOSSNUM; i++) {
 		boss[i]->Draw();
 	}
-	int Red = GetColor(255, 0, 0);            //赤の色
-	DrawFormatString(600, 500, Red, "%d", sincount);
 }
 
 //コントロールクラスで定義した変数のポインタに座標を代入する
@@ -234,7 +232,7 @@ void ENEMYMGR::Send_Coordinate(double* setX, double* setY, int* setWidth, int* s
 	}
 }
 void ENEMYMGR::Yes_Judgment(bool* flg) {
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < ENEMY_BOSSNUM; i++) {
 		flg[i] = Yes[i];
 	}
 }

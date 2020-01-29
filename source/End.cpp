@@ -2,6 +2,15 @@
 #include "DxLib.h"
 
 END::END(ISCENECHANGER* changer) :BASESCENE(changer) {
+	Init();
+}
+
+void END::Init() {
+	image = LoadGraph("./res/img/result_v2.png");
+}
+
+void END::Final() {
+	DeleteGraph(image);
 }
 
 void END::Update() {
@@ -11,6 +20,5 @@ void END::Update() {
 }
 
 void END::Draw() {
-	DrawString(370, 300, "Thank you for playing !!", GetColor(255, 255, 255));
-	DrawString(370, 400, "press the space to return to the title", GetColor(255, 255, 255));
+	DrawGraph(0, 0, image, TRUE);
 }

@@ -5,8 +5,11 @@
 
 class END :public BASESCENE {
 private:
+	int image;
 public:
 	END(ISCENECHANGER* changer);
+	void Init();
+	void Final();
 	void Update();
 	void Draw();
 };

@@ -104,28 +104,22 @@ void BOSS::Final() {
 //トラクタービーム発射処理
 void BOSS::Tractor_Beam() {
 
-	if (tractorFlg == true) {
-
 		bcnt++;
 
-		if (bcnt >= 10)beamOrder++, bcnt = 0;
-		if (tractorAni[beamOrder] >= 8)
-		{
-			biimflg = true;
-		}
-		else
-		{
-			biimflg = false;
-		}
 		if (beamOrder >= 27)beamOrder = 0, tractorFlg == false;
 
-	}
+		if (bcnt >= 10)beamOrder++, bcnt = 0;
+		if (tractorAni[beamOrder] >= 8) {
+			biimflg = true;
+		}
+		else {
+			biimflg = false;
+		}
 }
 
 void BOSS::Tractor_Move() {
 	if (y < (double)600 + height)y++;
-	if (y == (double)600 + height)tractorFlg == true;
-	if (tractorFlg == false && y < (double)800 + height)y++;
+	if (y == (double)600 + height)tractorFlg = true;
 }
 
 //更新処理
@@ -152,11 +146,10 @@ void BOSS::Update() {
 	}
 
 	if (atkActive == true) {
-		tractorFlg = true;
+		Tractor_Move();
 	}
 
 	if (tractorFlg == true) {
-		Tractor_Move();
 		Tractor_Beam();
 	}
 }

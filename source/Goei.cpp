@@ -200,8 +200,6 @@ void GOEI::Atacck(bool atk, int dorei_no, double bazin_x, double bazin_y) {
 void GOEI::Draw() {
 
 	if (onAcitve == true) {
-		int Red = GetColor(255, 0, 0);            //�Ԃ̐F
-		DrawFormatString(600, 500, Red, "%d", sincount);
 		DrawRotaGraph(x, y, Rota_zome, Rota_angle, gh[aniOrder], TRUE);
 	}
 }

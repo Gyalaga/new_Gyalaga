@@ -6,15 +6,16 @@
 //ボスギャラガクラスの宣言
 class BOSS :public ENEMY {
 private:
-	int tractorAni[29];	//アニメーション
-	int gh[10];			//画像格納変数
-	int tGh[12];		//トラクタービームの画像格納
-	int beamCnt;		//トラクタービーム用カウント変数
-	int beamOrder;		//描画する画像の指定
-	int bcnt;			//トラクタービームアニメーション用
-	bool tractorFlg;	//トラクタービーム用フラグ
-	bool changeMode;	//第二形態を管理するもの
-	bool biimflg;       //biimの当たり判定に使います
+	int tractorAni[29];		//アニメーション
+	int gh[10];				//画像格納変数
+	int tGh[12];			//トラクタービームの画像格納
+	int beamCnt;			//トラクタービーム用カウント変数
+	int beamOrder;			//描画する画像の指定
+	int bcnt;				//トラクタービームアニメーション用
+	bool tractorFlg;		//トラクタービーム用フラグ
+	bool tractorInitFlg;	//トラクタービームかてい
+	bool changeMode;		//第二形態を管理するもの
+	bool biimflg;			//biimの当たり判定に使います
 public:
 	BOSS(int getX, int getY);				//コンストラクタ
 	void Init(int ix, int iy);				//初期化処理
