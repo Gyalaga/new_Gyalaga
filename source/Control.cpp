@@ -140,7 +140,7 @@ void CONTROL::Hit_Judgment() {
 			if (No[j] == true)
 			{
 				//ƒvƒŒƒCƒ„[‚Æ“G‚Ì“–‚½‚è”»’è
-				if (hf == 0 && (double)px + pw >= ex[i] - 10 && (double)px <= ex[i] + eWidth[i] + 10 && (double)py + ph >= ey[i] && (double)py <= ey[i] + eHeight[i] + 60) {
+				if (hf == 0 && (double)px + pw >= ex[i+ BOSS_ORDER] - 10 && (double)px <= ex[i] + eWidth[i+ BOSS_ORDER] + 10 && (double)py + ph >= ey[i+ BOSS_ORDER] && (double)py <= ey[i] + eHeight[i+ BOSS_ORDER] + 60) {
 					c.c = 5;
 					Player_hit(c.c);
 					hf = 1;
