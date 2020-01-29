@@ -4,7 +4,7 @@
 typedef enum {
 	eScene_Title,		//タイトル画面
 	eScene_Game,		//ゲーム画面
-	eScene_Config,		//設定画面
+	eScene_End,		//設定画面
 
 	eScene_None			//無し
 }eScene;

@@ -44,6 +44,10 @@ void CONTROL::Init() {
 	//SE関連で使用する変数の初期化
 	wavcnt = 0;
 	wavflg = 0;
+
+	//ゲーム終了関連で使用する変数の初期化
+	gameEnd		= false;
+	gameEndCnt	= 0;
 }
 
 //終了処理
@@ -55,30 +59,40 @@ void CONTROL::Final() {
 //ゲームの全体制御
 void CONTROL::GameControl() {
 
-	Score_Save();		//ハイスコアを記録する
-	Score_Draw();		//スコアの描画
-	
-	if(wavcnt < 800)wavcnt++;	//SE用カウントを増やす
-
-	//スタート時
-	if (wavcnt >= 10) {
-
-		if (wavcnt < 800)DrawFormatString(380, 380, GetColor(255, 255, 255), "START");
-		if (wavflg == 0)PlaySoundFile("./res/wav/gal_music_gamestart.wav", DX_PLAYTYPE_BACK);
-		wavflg = 1;
+	for (int i = 0; i < 40; i++) {
+		if (hitCheck[i] == true)gameEndCnt++;
 	}
 
-	//SEが鳴り終わったら
-	if (wavcnt == 800) {
+	if (gameEndCnt == 40)gameEnd = true;
+	else gameEndCnt = 0;
 
-		Player_All();		//プレイヤー全体管理
-		enemyMgr->All();	//エネミー管理クラスの全体管理
+	if (gameEnd == false) {
 
-		//当たり判定関連の座標取得処理
-		Player_judgment(&px, &py, &pw, &ph, &sx, &sy, &sw, &sh, &sx2, &sy2, &hf);
-		enemyMgr->Send_Coordinate(ex, ey, eWidth, eHeight);
+		Score_Save();		//ハイスコアを記録する
+		Score_Draw();		//スコアの描画
 
-		Hit_Judgment();		//当たり判定処理
+		if (wavcnt < 800)wavcnt++;	//SE用カウントを増やす
+
+		//スタート時
+		if (wavcnt >= 10) {
+
+			if (wavcnt < 800)DrawFormatString(380, 380, GetColor(255, 255, 255), "START");
+			if (wavflg == 0)PlaySoundFile("./res/wav/gal_music_gamestart.wav", DX_PLAYTYPE_BACK);
+			wavflg = 1;
+		}
+
+		//SEが鳴り終わったら
+		if (wavcnt == 800) {
+
+			Player_All();		//プレイヤー全体管理
+			enemyMgr->All();	//エネミー管理クラスの全体管理
+
+			//当たり判定関連の座標取得処理
+			Player_judgment(&px, &py, &pw, &ph, &sx, &sy, &sw, &sh, &sx2, &sy2, &hf);
+			enemyMgr->Send_Coordinate(ex, ey, eWidth, eHeight);
+
+			Hit_Judgment();		//当たり判定処理
+		}
 	}
 }
 
@@ -117,4 +131,9 @@ void CONTROL::Hit_Judgment() {
 		}
 		DrawFormatString(50, 640, GetColor(255, 255, 255), "%d", hf);
 	}
+}
+
+//ゲーム終了かどうかをゲームクラスへ送る
+bool CONTROL::GameEnd_Judgment() {
+	return gameEnd;
 }

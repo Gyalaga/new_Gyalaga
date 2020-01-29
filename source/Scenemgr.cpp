@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include "Game.h"
 #include "Title.h"
+#include "End.h"
 #include"Keyborad.h"
 
 SCENEMGR::SCENEMGR() :mNextScene(eScene_None) {
@@ -27,6 +28,9 @@ void SCENEMGR::Update() {
 			break;
 		case eScene_Game:
 			mScene = (BASESCENE*)new GAME(this);
+			break;
+		case eScene_End:
+			mScene = (BASESCENE*)new END(this);
 			break;
 		}
 		mNextScene = eScene_None;

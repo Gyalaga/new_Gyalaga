@@ -61,7 +61,10 @@ void BOSS::Load_Interval(int interval) {
 
 //atkActive‚ğtrue‚É‚·‚é
 void BOSS::Load_AtkActive(bool setAtkActive) {
-	atkActive = setAtkActive;
+
+	if (onAcitve == true) {
+		atkActive = setAtkActive;
+	}
 }
 
 //‰Šú‰»ˆ—
@@ -136,6 +139,8 @@ void BOSS::Update() {
 	//onActive‚ğfalse‚É‚·‚é
 	if (durability == 0 && onAcitve == true) {
 		onAcitve = false;
+		atkActive = false;
+		tractorFlg = false;
 		PlaySoundFile("./res/wav/gal_se_boss_striken_2.wav", DX_PLAYTYPE_BACK);
 	}
 

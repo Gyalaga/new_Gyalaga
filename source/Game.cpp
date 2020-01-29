@@ -10,5 +10,11 @@ GAME::~GAME() {
 }
 
 void GAME::Update() {
+
 	control->GameControl();
+	gameEnd = control->GameEnd_Judgment();
+
+	if (gameEnd == true) {
+		mSceneChanger->ChangeScene(eScene_End);
+	}
 }

@@ -7,6 +7,7 @@
 class GAME :public BASESCENE {
 private:
 	CONTROL* control;
+	bool gameEnd;
 public:
 	GAME(ISCENECHANGER* changer);
 	~GAME();
