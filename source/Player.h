@@ -86,7 +86,7 @@ void Player_Animation();       //Playerのアニメーションの管理
 void Player_Shot();            //Playerの弾の全体管理
 void Player_judgment(int* PX, int* PY, int* PW, int* PH,
 	                 int* SX, int* SY, int* SW, int* SH,
-	                 int* SX2,int* SY2,int* HF);        //Playerの当たり判定の管理
+	                 int* SX2,int* SY2,int* HF,int* HP);        //Playerの当たり判定の管理
 void Player_hit(int p);
 void Player_hitflg(int h);
 void Player_Score(int s);
