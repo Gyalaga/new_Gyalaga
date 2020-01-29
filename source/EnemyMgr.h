@@ -29,6 +29,7 @@ private:
 	double enemyX[40];	//敵のX座標を取得
 	double enemyY[40];	//敵のY座標を取得
 	int sincount;       //sin挙動のカウント
+	bool Yes[4];        //biimflg
 	Enemy enemy_type;	//エネミー構造体の実体
 	ZAKO* zako[20];		//ザコの実体の配列
 	GOEI* goei[16];		//ゴエイの実体の配列
@@ -42,7 +43,8 @@ public:
 	void Draw();																		//描画処理
 	void Send_Coordinate(double* setX, double* setY, int* setWidth, int* setHeight);	//取得したポインタにポインタを代入する
 	void Hit_ChangeOnActive(int getDamage, int n);										//Hitした敵のonActiveをfalseにする
-	void Judgment_OnActive(bool* setHitCheck);											//当たり判定領域を消すかどうか判定
+	void Judgment_OnActive(bool* setHitCheck);		
+	void Yes_Judgment(bool* flg);
 	void All();																			//エネミー管理クラス全体を管理
 };
 

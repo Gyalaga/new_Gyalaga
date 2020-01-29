@@ -28,6 +28,7 @@ protected:
 	int aniOrder;			//表示する画像
 	bool atkActive;			//敵の攻撃フラグ　true:攻撃中 false:非アクティブ
 	bool onAcitve;			//敵が生きてるかフラグ	true:生存中 false:非アクティブ
+	bool Yes_Acitve;
 public:
 	virtual void Init(){}								//初期化処理
 	virtual void Final(){}								//終了処理

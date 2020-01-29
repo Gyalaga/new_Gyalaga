@@ -6,23 +6,21 @@
 typedef struct
 {
 	//x,y座標配列
-	int x[16] = { 400,400,400,400,400,400,400,400,400,400,400,400,400,400,400,400 };
-	int y[16] = { 700,700,700,700,700,700,700,700,700,700,700,700,700,700,700,700 };
+	int x[16];
+	int y[16];
 	//  width:横幅, height:縦幅, center:中心
-	int width = 32, height = 32, center = width / 2;
+	int width, height, center;
 	//  rote:角度,image:画像,hp:体力
-	int L_rote = 0, R_rote = 0, image[2], hp = 3, zanki = 0;
+	int L_rote, R_rote, image[2], hp, zanki;
 	//  mode:  0_通常  ,2_捕縛されそう ,3_捕縛 ,4_破壊(非表示)
-	int mode = 0;
+	int mode;
 	//デュアルモードフラグ
 	bool dualmode = false;
 
 	//表示フラグ
-	bool  left_flg[16] = { false,false,false,false,false,false,false,false,
-						   false,false,false,false,false,false,false,false };
-	bool right_flg[16] = { false,false,false,false,false,false,false,false,
-						   false,false,false,false,false,false,false,false };
-	int hitflg = 0;
+	bool  left_flg[16];
+	bool right_flg[16];
+	int hitflg;
 }PLAYER;
 
 static PLAYER Player;    // Playerの構造体
@@ -92,6 +90,7 @@ void Player_judgment(int* PX, int* PY, int* PW, int* PH,
 void Player_hit(int p);
 void Player_hitflg(int h);
 void Player_Score(int s);
+void Player_Enemy(double x, double y);
 void Player_int();             //Playerの変数確認
 
 #endif

@@ -92,6 +92,7 @@ void BOSS::Init(int ix, int iy) {
 	bcnt = 0;				//アニメーション用フラグ
 	tractorFlg = false;		//トラクタービームが発射してるか判定
 	changeMode = false;		//第二形態用
+	biimflg = false;        //当たり判定用
 }
 
 //終了処理
@@ -111,7 +112,14 @@ void BOSS::Tractor_Beam() {
 		bcnt++;
 
 		if (bcnt >= 10)beamOrder++, bcnt = 0;
-
+		if (tractorAni[beamOrder] >= 8)
+		{
+			biimflg = true;
+		}
+		else
+		{
+			biimflg = false;
+		}
 		if (beamOrder >= 27)beamOrder = 0, beamCnt = 0;
 
 	}
@@ -193,4 +201,8 @@ int BOSS::Send_Height() {
 //onActiveを送る処理
 bool BOSS::Send_OnActive() {
 	return onAcitve;
+}
+//biimflgを送る処理
+bool BOSS::Yes_OnActive() {
+	return biimflg;
 }

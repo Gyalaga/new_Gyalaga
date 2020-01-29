@@ -130,6 +130,7 @@ void ENEMYMGR::Update() {
 		enemyY[i + BOSS_ORDER]	= boss[i]->Send_Y();
 		width[i + BOSS_ORDER]	= boss[i]->Send_Width();
 		height[i + BOSS_ORDER]	= boss[i]->Send_Height();
+		Yes[i] = boss[i]->Yes_OnActive();
 	}
 
 	//ŠÔŠuƒJƒEƒ“ƒg‚ª240‚ğ’´‚¦‚é‚Æ‚«‰Šú‰»‚·‚é
@@ -208,6 +209,11 @@ void ENEMYMGR::Send_Coordinate(double* setX, double* setY, int* setWidth, int* s
 		setY[i]			= enemyY[i];
 		setWidth[i]		= width[i];
 		setHeight[i]	= height[i];
+	}
+}
+void ENEMYMGR::Yes_Judgment(bool* flg) {
+	for (int i = 0; i < 4; i++) {
+		flg[i] = Yes[i];
 	}
 }
 

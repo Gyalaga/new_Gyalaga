@@ -14,6 +14,7 @@ private:
 	int bcnt;			//トラクタービームアニメーション用
 	bool tractorFlg;	//トラクタービーム用フラグ
 	bool changeMode;	//第二形態を管理するもの
+	bool biimflg;       //biimの当たり判定に使います
 public:
 	BOSS(int getX, int getY);				//コンストラクタ
 	void Init(int ix, int iy);				//初期化処理
@@ -33,6 +34,7 @@ public:
 	double Send_X();						//x座標を送る処理
 	double Send_Y();						//y座標を送る処理
 	bool Send_OnActive();					//onActiveを送る処理
+	bool Yes_OnActive();                    //biimflgを送る処理
 };
 
 #endif // !_BOSS_H_

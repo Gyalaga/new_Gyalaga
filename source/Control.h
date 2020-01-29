@@ -29,6 +29,7 @@ private:
 	int hf;
 	int wavflg;
 	int wavcnt;
+	bool No[4];
 	bool hitCheck[40];		//当たり判定の処理をするかどうかの判定用
 	bool gameEnd;			//ゲームを終了するか判定
 	ENEMYMGR* enemyMgr;		//エネミー管理クラスの実体

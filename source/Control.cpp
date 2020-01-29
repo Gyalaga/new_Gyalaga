@@ -29,6 +29,8 @@ void CONTROL::Init() {
 	damage = 1;
 
 	//プレイヤー関連で使用する変数の初期化
+	Player_Init();   //初期化
+	Shot_init();
 	px	= 0;
 	py	= 0;
 	pw	= 0;
@@ -82,7 +84,7 @@ void CONTROL::GameControl() {
 		}
 
 		//SEが鳴り終わったら
-		if (wavcnt == 800) {
+	if (wavcnt == 800) {
 
 			Player_All();		//プレイヤー全体管理
 			enemyMgr->All();	//エネミー管理クラスの全体管理
@@ -100,7 +102,7 @@ void CONTROL::GameControl() {
 void CONTROL::Hit_Judgment() {
 
 	enemyMgr->Judgment_OnActive(hitCheck);		//hitCheckに当たり判定が必要かの情報を格納する
-
+	enemyMgr->Yes_Judgment(No);
 	for (int i = 0; i < 40; i++) {
 
 		if (hitCheck[i] == true)continue;	//当たり判定が必要ではない場合次のループへ
@@ -129,7 +131,20 @@ void CONTROL::Hit_Judgment() {
 			score += 100;
 			Score_up(score);
 		}
-		DrawFormatString(50, 640, GetColor(255, 255, 255), "%d", hf);
+		for (int j = 0; j <= 4; j++)
+		{
+			if (No[j] == true)
+			{
+				//プレイヤーと敵の当たり判定
+				if (hf == 0 && (double)px + pw >= ex[i] - 10 && (double)px <= ex[i] + eWidth[i] + 10 && (double)py + ph >= ey[i] && (double)py <= ey[i] + eHeight[i] + 60) {
+					c.c = 5;
+					Player_hit(c.c);
+					hf = 1;
+					Player_hitflg(hf);
+					Player_Enemy(ex[i], ey[i]);
+				}
+			}
+		}
 	}
 }
 

@@ -2,16 +2,9 @@
 #include "Player.h"
 #include "Keyborad.h"
 #include "Shot_Extern.h"
-int qwert = 0;
 int asdfg = 0;
 void Player_All()//全体
 {
-	DrawFormatString(0, 20, GetColor(255, 255, 255), "Player_All動き卍");
-	if (c.init == false)
-	{
-		Player_Init();   //初期化
-		c.init = true;
-	}
 	//Player_int();        //数値の確認用
 	Player_Draw();       //描画
 	Player_Move();       //動き
@@ -54,6 +47,23 @@ void Player_int()//数値の確認用
 
 void Player_Init()//初期化
 {
+	//x,y座標配列
+	for (int i = 0; i < 16; i++)
+	{
+		Player.x[i] = 400;
+		Player.y[i] = 700;
+		Player.left_flg[i] = false;
+		Player.right_flg[i] = false;
+	}
+	//  width:横幅, height:縦幅, center:中心
+	 Player.width = 32, Player.height = 32, Player.center = Player.width / 2;
+	//  rote:角度,image:画像,hp:体力
+	 Player.L_rote = 0, Player.R_rote = 0, Player.image[2], Player.hp = 3, Player.zanki = 0;
+	//  mode:  0_通常  ,2_捕縛されそう ,3_捕縛 ,4_破壊(非表示)
+	 Player.mode = 0;
+	//デュアルモードフラグ
+	 Player.dualmode = false;
+	Player.hitflg = 0;
 	LoadDivGraph("./res/img/自機.png", 2, 1, 2, 16, 16, Player.image);         // 自機画像の分割読み込み
 	LoadDivGraph("./res/img/bakuhatu.png", 9, 9, 1, 32, 32, explosion.image);  // 爆破画像の分割
 }
@@ -128,11 +138,6 @@ void Player_Move()//動き
 
 void Player_Shot()//Playerの弾の全体管理
 {
-	if (qwert == 0)
-	{
-		Shot_init();
-		qwert = 1;
-	}
 	Shot_draw();
 	Shot_Check(Player.x[c.i] , Player.y[c.i] - Player.center);
 }
@@ -495,5 +500,9 @@ void Player_Score(int s)
 void Player_hitflg(int h)
 {
 	Player.hitflg = h;
-	DrawFormatString(50, 620, GetColor(255, 255, 255), "%d", Player.hitflg);
+}
+void Player_Enemy(double x, double y)
+{
+	c.teki_x = x;
+	c.teki_y = y;
 }
