@@ -27,6 +27,7 @@ private:
 	int sw;
 	int sh;
 	int hf;
+	int hp;
 	int wavflg;
 	int wavcnt;
 	bool No[4];

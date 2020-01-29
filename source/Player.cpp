@@ -447,7 +447,7 @@ void Player_Animation()//アニメーション
 
 void Player_judgment(int* PX, int* PY, int* PW, int* PH,
                  	 int* SX, int* SY, int* SW, int* SH,
-                 	 int* SX2, int* SY2,int* HF)//当たり判定
+                 	 int* SX2, int* SY2,int* HF,int*HP)//当たり判定
 {
 	//Control.cppに座標を渡す
 
@@ -463,6 +463,7 @@ void Player_judgment(int* PX, int* PY, int* PW, int* PH,
 	*SX2 = bullet.sx[1]+ bullet.sw;
 	*SY2 = bullet.sy[1];
 	*HF = Player.hitflg;
+	*HP = Player.zanki + Player.hp;
 }//Player_judgment()終了
 void Player_hit(int p)
 {

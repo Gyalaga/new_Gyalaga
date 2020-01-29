@@ -42,6 +42,7 @@ void CONTROL::Init() {
 	sw	= 0;
 	sh	= 0;
 	hf	= 0;
+	hp  = 3;
 
 	//SE関連で使用する変数の初期化
 	wavcnt = 0;
@@ -64,7 +65,7 @@ void CONTROL::GameControl() {
 	for (int i = 0; i < 40; i++) {
 		if (hitCheck[i] == true)gameEndCnt++;
 	}
-
+	if (hp == 0)gameEnd = true;
 	if (gameEndCnt == 40)gameEnd = true;
 	else gameEndCnt = 0;
 
@@ -90,7 +91,7 @@ void CONTROL::GameControl() {
 			enemyMgr->All();	//エネミー管理クラスの全体管理
 
 			//当たり判定関連の座標取得処理
-			Player_judgment(&px, &py, &pw, &ph, &sx, &sy, &sw, &sh, &sx2, &sy2, &hf);
+			Player_judgment(&px, &py, &pw, &ph, &sx, &sy, &sw, &sh, &sx2, &sy2, &hf,&hp);
 			enemyMgr->Send_Coordinate(ex, ey, eWidth, eHeight);
 
 			Hit_Judgment();		//当たり判定処理
