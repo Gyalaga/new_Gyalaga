@@ -76,7 +76,13 @@ void CONTROL::GameControl() {
 
 		Score_Save();		//ハイスコアを記録する
 		Score_Draw();		//スコアの描画
-
+		SetFontSize(48);
+		DrawString(850, 270, "操作方法", GetColor(255, 255, 255));
+		SetFontSize(32);
+		DrawString(850, 350, "弾発射：SPACE", GetColor(255, 255, 255));
+		DrawString(850, 400, "右移動：　→", GetColor(255, 255, 255));
+		DrawString(850, 450, "下移動：　←", GetColor(255, 255, 255));
+		SetFontSize(16);
 		if (wavcnt < 800)wavcnt++;	//SE用カウントを増やす
 
 		//スタート時

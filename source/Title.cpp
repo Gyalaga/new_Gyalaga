@@ -108,5 +108,11 @@ void TITLE::Draw() {
 		break;
 	}
 	DrawString(250, y, "■", GetColor(255, 255, 255));
-
+	SetFontSize(48);
+	DrawString(850, 270, "操作方法", GetColor(255, 255, 255));
+	SetFontSize(32);
+	DrawString(850, 350, "プレイ：ENTER", GetColor(255, 255, 255));
+	DrawString(850, 400, "上移動：　↑", GetColor(255, 255, 255));
+	DrawString(850, 450, "下移動：　↓", GetColor(255, 255, 255));
+	SetFontSize(16);
 }
