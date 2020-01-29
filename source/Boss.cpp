@@ -28,6 +28,10 @@ void BOSS::Load_AddMove(int addMove) {
 //ダメージを受ける処理
 void BOSS::Load_Damage(int damage) {
 	durability -= damage;
+
+	if (durability == 1) {
+		changeMode = true;
+	}
 }
 
 //アニメーション処理
@@ -45,10 +49,10 @@ void BOSS::Load_Interval(int interval) {
 		}
 		else if (durability == 1) {
 			if (interval == 120) {
-				moveAni = 5;
+				moveAni = 6;
 			}
 			else if (interval == 240) {
-				moveAni = 6;
+				moveAni = 5;
 			}
 		}
 		aniOrder = moveAni;
@@ -84,6 +88,7 @@ void BOSS::Init(int ix, int iy) {
 	beamOrder = 0;			//表示する場所指定
 	bcnt = 0;				//アニメーション用フラグ
 	tractorFlg = false;		//トラクタービームが発射してるか判定
+	changeMode = false;		//第二形態用
 }
 
 //終了処理
@@ -116,6 +121,18 @@ void BOSS::Tractor_Move() {
 //更新処理
 void BOSS::Update() {
 
+	if (durability == 1 && changeMode == true) {
+
+		if (aniOrder == 0) {
+			aniOrder = 5;
+		}
+		else if (aniOrder == 1) {
+			aniOrder = 6;
+		}
+
+		changeMode = false;
+	}
+
 	//onActiveをfalseにする
 	if (durability == 0 && onAcitve == true) {
 		onAcitve = false;
@@ -137,6 +154,8 @@ void BOSS::Draw() {
 
 	if (onAcitve == true) {
 		DrawRotaGraph(x, y, 2.0, 0, gh[aniOrder], TRUE);
+	}
+	if (tractorFlg == true) {
 		DrawGraph(x - (double)13 * 2, y - 5, tGh[tractorAni[beamOrder]], TRUE); // 画像を表示
 	}
 }

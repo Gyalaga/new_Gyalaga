@@ -13,6 +13,7 @@ private:
 	int beamOrder;		//描画する画像の指定
 	int bcnt;			//トラクタービームアニメーション用
 	bool tractorFlg;	//トラクタービーム用フラグ
+	bool changeMode;	//第二形態を管理するもの
 public:
 	BOSS(int getX, int getY);				//コンストラクタ
 	void Init(int ix, int iy);				//初期化処理
