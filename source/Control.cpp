@@ -29,7 +29,7 @@ void CONTROL::Init() {
 	damage = 1;
 
 	//プレイヤー関連で使用する変数の初期化
-	Player_Init();   //初期化
+	Player_Init();
 	Shot_init();
 	px	= 0;
 	py	= 0;
@@ -42,6 +42,9 @@ void CONTROL::Init() {
 	sw	= 0;
 	sh	= 0;
 	hf	= 0;
+
+	//スコア関連の初期化
+	Score_Init();
 
 	//SE関連で使用する変数の初期化
 	wavcnt = 0;

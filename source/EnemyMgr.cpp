@@ -18,11 +18,11 @@ void ENEMYMGR::Init() {
 
 	int x, y, x2, y2, x3, y3;	//※ファイルからデータを読み込む機能実装後削除します
 	x = 310;
-	y = 120;
+	y = 132;
 	x2 = 328;
-	y2 = 68;
+	y2 = 82;
 	x3 = 380;
-	y3 = 15;
+	y3 = 32;
 	sincount = 0;
 
 	enemyAll = 0;
@@ -58,7 +58,7 @@ void ENEMYMGR::Init() {
 		goei[i]->Load_Image(goeiGh);
 		x2 += 35;
 		if (i == 7) {
-			y2 -= 20;
+			y2 -= 25;
 			x2 = 328;
 		}
 	}
