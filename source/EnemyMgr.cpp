@@ -1,6 +1,8 @@
 #include "EnemyMgr.h"
 #include "DxLib.h"
-#include<math.h>
+#include <math.h>
+#include <time.h>
+#include <stdlib.h>
 #define PI 3.1415926f
 
 //コンストラクタ
@@ -24,8 +26,9 @@ void ENEMYMGR::Init() {
 	x3 = 380;
 	y3 = 32;
 	sincount = 0;
-
 	enemyAll = 0;
+	goei_no = 0;
+	atkActive = false;
 	enemyAllMove = ENEMY_MOVERIGHT;
 	intervalCnt = 0;
 
@@ -56,6 +59,9 @@ void ENEMYMGR::Init() {
 	for (int i = 0; i < 16; i++) {
 		goei[i] = new GOEI(x2, y2);
 		goei[i]->Load_Image(goeiGh);
+		goei_bazin_x[i] = x2;
+		goei_bazin_y[i] = y2;
+		goei[i]->Atacck(atkActive, i, goei_bazin_x[i], goei_bazin_y[i]);
 		x2 += 35;
 		if (i == 7) {
 			y2 -= 25;
@@ -110,51 +116,66 @@ void ENEMYMGR::Update() {
 
 	//ザコの現在の座標を取得する
 	for (int i = 0; i < 20; i++) {
-		enemyX[i]	= zako[i]->Send_X();
-		enemyY[i]	= zako[i]->Send_Y();
-		width[i]	= zako[i]->Send_Width();
-		height[i]	= zako[i]->Send_Height();
+		enemyX[i] = zako[i]->Send_X();
+		enemyY[i] = zako[i]->Send_Y();
+		width[i] = zako[i]->Send_Width();
+		height[i] = zako[i]->Send_Height();
 	}
 
 	//ゴエイの現在の座標を取得する
 	for (int i = 0; i < 16; i++) {
-		enemyX[i + GOEI_ORDER]	= goei[i]->Send_X();
-		enemyY[i + GOEI_ORDER]	= goei[i]->Send_Y();
-		width[i + GOEI_ORDER]	= goei[i]->Send_Width();
-		height[i + GOEI_ORDER]	= goei[i]->Send_Height();
+		enemyX[i + GOEI_ORDER] = goei[i]->Send_X();
+		enemyY[i + GOEI_ORDER] = goei[i]->Send_Y();
+		width[i + GOEI_ORDER] = goei[i]->Send_Width();
+		height[i + GOEI_ORDER] = goei[i]->Send_Height();
 	}
 
 	//ボスギャラガの現在の座標を取得する
 	for (int i = 0; i < 4; i++) {
-		enemyX[i + BOSS_ORDER]	= boss[i]->Send_X();
-		enemyY[i + BOSS_ORDER]	= boss[i]->Send_Y();
-		width[i + BOSS_ORDER]	= boss[i]->Send_Width();
-		height[i + BOSS_ORDER]	= boss[i]->Send_Height();
+		enemyX[i + BOSS_ORDER] = boss[i]->Send_X();
+		enemyY[i + BOSS_ORDER] = boss[i]->Send_Y();
+		width[i + BOSS_ORDER] = boss[i]->Send_Width();
+		height[i + BOSS_ORDER] = boss[i]->Send_Height();
 		Yes[i] = boss[i]->Yes_OnActive();
 	}
 
 	//間隔カウントが240を超えるとき初期化する
-	if (intervalCnt > 240)intervalCnt = 0;
-	
+	if (intervalCnt > 250)intervalCnt = 0;
+
+	/***乱数の初期化***/
+	srand((unsigned)time(NULL));
+
 	//sinカウントが100を超えると動かす
-	if (sincount >= 100 ) {
+	if (sincount >= 100) {
 		bool atkActive = true;
-		goei[0]->Atacck(atkActive);
+		goei[goei_no]->Atacck(atkActive, goei_no,
+			goei_bazin_x[goei_no], goei_bazin_y[goei_no]);
+
+		/***ゴエイが上に戻ってきたタイミングで、攻撃フラグをfalseにする***/
+		if (sincount >= 863) {
+			/***ゴエイ…もう戦わなくていいんだ！！！***/
+			bool atkActive = false;
+			goei[goei_no]->Atacck(atkActive, goei_no,
+				goei_bazin_x[goei_no], goei_bazin_y[goei_no]);
+			/***次のドレイをランダムにする***/
+			goei_no = (rand() % 15);
+			/***戦わなきゃ…生き残れない!!!***/
+			goei[goei_no]->Atacck(atkActive, goei_no,
+				goei_bazin_x[goei_no], goei_bazin_y[goei_no]);
+			sincount = 0;
+
+		}
 	}
-
-	//カウントが120の時全体を動かす
-	if (intervalCnt % 120 == 0) {
+	//カウントが125の時全体を動かす
+	if (intervalCnt % 125 == 0) {
 		enemyAll += enemyAllMove;
-
-		//zako[0]->Zako_change(intervalCnt);
-		
 
 		//ザコに全体の移動量・間隔を送る
 		for (int i = 0; i < 20; i++) {
 			zako[i]->Load_AddMove(enemyAllMove);
 			zako[i]->Load_Interval(intervalCnt);
 		}
-		
+
 		//ゴエイに全体の移動量・間隔を送る
 		for (int i = 0; i < 16; i++) {
 			goei[i]->Load_AddMove(enemyAllMove);
@@ -166,7 +187,6 @@ void ENEMYMGR::Update() {
 			boss[i]->Load_AddMove(enemyAllMove);
 			boss[i]->Load_Interval(intervalCnt);
 		}
-
 	}
 
 	//全体で動く方向の判定
@@ -200,15 +220,17 @@ void ENEMYMGR::Draw() {
 	for (int i = 0; i < 4; i++) {
 		boss[i]->Draw();
 	}
+	int Red = GetColor(255, 0, 0);            //赤の色
+	DrawFormatString(600, 500, Red, "%d", sincount);
 }
 
 //コントロールクラスで定義した変数のポインタに座標を代入する
 void ENEMYMGR::Send_Coordinate(double* setX, double* setY, int* setWidth, int* setHeight) {
 	for (int i = 0; i < ENEMY_MAXNUM; i++) {
-		setX[i]			= enemyX[i];
-		setY[i]			= enemyY[i];
-		setWidth[i]		= width[i];
-		setHeight[i]	= height[i];
+		setX[i] = enemyX[i];
+		setY[i] = enemyY[i];
+		setWidth[i] = width[i];
+		setHeight[i] = height[i];
 	}
 }
 void ENEMYMGR::Yes_Judgment(bool* flg) {
