@@ -68,6 +68,10 @@ void BOSS::Load_AtkActive(bool setAtkActive) {
 	}
 }
 
+void BOSS::TractorInit() {
+	tractorInitFlg = true;
+}
+
 //初期化処理
 void BOSS::Init(int ix, int iy) {
 
@@ -92,6 +96,7 @@ void BOSS::Init(int ix, int iy) {
 	beamOrder = 0;			//表示する場所指定
 	bcnt = 0;				//アニメーション用フラグ
 	tractorFlg = false;		//トラクタービームが発射してるか判定
+	tractorInitFlg = false;	//tractorFlgをtrueにするときに
 	changeMode = false;		//第二形態用
 	biimflg = false;        //当たり判定用
 }
@@ -106,7 +111,7 @@ void BOSS::Tractor_Beam() {
 
 		bcnt++;
 
-		if (beamOrder >= 27)beamOrder = 0, tractorFlg == false;
+		if (beamOrder >= 27)beamOrder = 0, tractorFlg = false;
 
 		if (bcnt >= 10)beamOrder++, bcnt = 0;
 		if (tractorAni[beamOrder] >= 8) {
@@ -119,7 +124,10 @@ void BOSS::Tractor_Beam() {
 
 void BOSS::Tractor_Move() {
 	if (y < (double)600 + height)y++;
-	if (y == (double)600 + height)tractorFlg = true;
+	if (y == (double)600 + height && tractorInitFlg == true) {
+		tractorFlg = true;
+		tractorInitFlg = false;
+	}
 }
 
 //更新処理
@@ -194,6 +202,11 @@ int BOSS::Send_Height() {
 bool BOSS::Send_OnActive() {
 	return onAcitve;
 }
+
+bool BOSS::Send_AtkActive() {
+	return atkActive;
+}
+
 //biimflgを送る処理
 bool BOSS::Yes_OnActive() {
 	return biimflg;

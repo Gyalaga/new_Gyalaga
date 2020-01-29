@@ -99,6 +99,9 @@ void ENEMYMGR::Final() {
 //更新処理
 void ENEMYMGR::Update() {
 
+	/***乱数の初期化***/
+	srand((unsigned)time(NULL));
+
 	//ザコ
 	for (int i = 0; i < ENEMY_ZAKONUM; i++) {
 		zako[i]->Update();
@@ -142,9 +145,6 @@ void ENEMYMGR::Update() {
 	//間隔カウントが240を超えるとき初期化する
 	if (intervalCnt > INTERVAL_RESET)intervalCnt = 0;
 
-	/***乱数の初期化***/
-	srand((unsigned)time(NULL));
-
 	//sinカウントが100を超えると動かす
 	if (sincount >= 100) {
 		bool atkActive = true;
@@ -166,6 +166,17 @@ void ENEMYMGR::Update() {
 
 		}
 	}
+
+	for (int i = 0; i < ENEMY_BOSSNUM; i++) {
+		if (boss[i]->Send_AtkActive() == true)break;
+		if (i == 3) {
+			boss_rand = rand() % 4;
+			boss[boss_rand]->TractorInit();
+		}
+	}
+
+	boss[boss_rand]->Load_AtkActive(true);
+
 	//カウントが125の時全体を動かす
 	if (intervalCnt % INTERVAL_MIDDLE == 0) {
 		enemyAll += enemyAllMove;
@@ -198,8 +209,6 @@ void ENEMYMGR::Update() {
 	}
 	sincount++;         //sin移動カウントを増やす
 	intervalCnt++;		//間隔カウントを増やす
-
-	boss[0]->Load_AtkActive(true);
 
 }
 

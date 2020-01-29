@@ -17,25 +17,27 @@ private:
 	bool changeMode;		//第二形態を管理するもの
 	bool biimflg;			//biimの当たり判定に使います
 public:
-	BOSS(int getX, int getY);				//コンストラクタ
-	void Init(int ix, int iy);				//初期化処理
-	void Final();							//終了処理
-	void Update();							//更新処理
-	void Draw();							//描画処理
-	void Load_Image(int* sGh);				//画像読み込み処理
-	void Overall_Move();					//全体共通の動き
-	void Load_AddMove(int addMove);			//エネミー管理クラスからの読み込み
-	void Load_Damage(int damage);			//エネミー管理クラスからの読み込み
-	void Load_AtkActive(bool setAtkActive);	//エネミー管理クラスからの読み込み
-	void Load_Interval(int interval);		//エネミー管理クラスからの読み込み
-	void Tractor_Beam();					//トラクタービームの発射
-	void Tractor_Move();					//トラクタービームの動き
-	int Send_Width();						//横幅を送る処理
-	int Send_Height();						//高さを送る処理
-	double Send_X();						//x座標を送る処理
-	double Send_Y();						//y座標を送る処理
-	bool Send_OnActive();					//onActiveを送る処理
-	bool Yes_OnActive();                    //biimflgを送る処理
+	BOSS(int getX, int getY);					//コンストラクタ
+	void Init(int ix, int iy);					//初期化処理
+	void Final();								//終了処理
+	void Update();								//更新処理
+	void Draw();								//描画処理
+	void Load_Image(int* sGh);					//画像読み込み処理
+	void Overall_Move();						//全体共通の動き
+	void Load_AddMove(int addMove);				//エネミー管理クラスからの読み込み
+	void Load_Damage(int damage);				//エネミー管理クラスからの読み込み
+	void TractorInit();							//エネミー管理クラスからの読み込み
+	void Load_Interval(int interval);			//エネミー管理クラスからの読み込み
+	void Load_AtkActive(bool setAtkActive);		//エネミー管理クラスで使用
+	void Tractor_Beam();						//トラクタービームの発射
+	void Tractor_Move();						//トラクタービームの動き
+	int Send_Width();							//横幅を送る処理
+	int Send_Height();							//高さを送る処理
+	double Send_X();							//x座標を送る処理
+	double Send_Y();							//y座標を送る処理
+	bool Send_OnActive();						//onActiveを送る処理
+	bool Send_AtkActive();						//atkActiveを送る処理
+	bool Yes_OnActive();						//biimflgを送る処理
 };
 
 #endif // !_BOSS_H_
