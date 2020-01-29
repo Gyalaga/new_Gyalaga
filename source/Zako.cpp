@@ -151,9 +151,6 @@ void ZAKO::Draw() {
 	if (onAcitve == true) {
 		DrawRotaGraph(x, y, Rota_zome, Rota_angle, gh[aniOrder], TRUE);
 	}
-
-	int Red = GetColor(255, 0, 0);            //�Ԃ̐F
-	DrawFormatString(900, 500, Red, "%d",Rota_angle);
 	
 	sincount += 1;
 	angle += 1;
