@@ -1,4 +1,5 @@
 #include "Boss.h"
+#include "EnemyMgr.h"
 #include "DxLib.h"
 
 //コンストラクタ
@@ -40,18 +41,18 @@ void BOSS::Load_Interval(int interval) {
 	if (atkActive == false) {
 
 		if (durability == 2) {
-			if (interval == 120) {
+			if (interval == INTERVAL_MIDDLE) {
 				moveAni = 1;
 			}
-			else if (interval == 240) {
+			else if (interval == INTERVAL_RESET) {
 				moveAni = 0;
 			}
 		}
 		else if (durability == 1) {
-			if (interval == 120) {
+			if (interval == INTERVAL_MIDDLE) {
 				moveAni = 6;
 			}
-			else if (interval == 240) {
+			else if (interval == INTERVAL_RESET) {
 				moveAni = 5;
 			}
 		}

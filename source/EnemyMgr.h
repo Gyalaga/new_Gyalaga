@@ -13,6 +13,8 @@
 #define GENERAL_TYPE	5		//最大数と最小数の間の数
 #define GOEI_ORDER		20		//ゴエイの順番
 #define BOSS_ORDER		36		//ボスギャラガの順番
+#define INTERVAL_MIDDLE	125		//間隔の中間
+#define INTERVAL_RESET	250		//間隔の終点
 #define GOEI_NUM        15;     //ゴエイの数
 #define GOEI_P           1;     //ゴエイの種類
 

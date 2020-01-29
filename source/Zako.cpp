@@ -1,5 +1,6 @@
 #include "Zako.h"
 #include "DxLib.h"
+#include "EnemyMgr.h"
 #include<math.h>
 
 #define PI 3.1415926f
@@ -38,10 +39,10 @@ void ZAKO::Load_Damage(int damage) {
 void ZAKO::Load_Interval(int interval) {
 	
 	if (atkActive == false) {
-		if (interval == 120) {
+		if (interval == INTERVAL_MIDDLE) {
 			moveAni = 1;
 		}
-		else if (interval == 240) {
+		else if (interval == INTERVAL_RESET) {
 			moveAni = 0;
 		}
 		aniOrder = moveAni;

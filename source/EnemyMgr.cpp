@@ -140,7 +140,7 @@ void ENEMYMGR::Update() {
 	}
 
 	//間隔カウントが240を超えるとき初期化する
-	if (intervalCnt > 250)intervalCnt = 0;
+	if (intervalCnt > INTERVAL_RESET)intervalCnt = 0;
 
 	/***乱数の初期化***/
 	srand((unsigned)time(NULL));
@@ -167,7 +167,7 @@ void ENEMYMGR::Update() {
 		}
 	}
 	//カウントが125の時全体を動かす
-	if (intervalCnt % 125 == 0) {
+	if (intervalCnt % INTERVAL_MIDDLE == 0) {
 		enemyAll += enemyAllMove;
 
 		//ザコに全体の移動量・間隔を送る
