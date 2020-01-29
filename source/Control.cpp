@@ -43,10 +43,9 @@ void CONTROL::Init() {
 	sh	= 0;
 	hf	= 0;
 	hp  = 3;
-
+	score = 0;
 	//スコア関連の初期化
 	Score_Init();
-
 	//SE関連で使用する変数の初期化
 	wavcnt = 0;
 	wavflg = 0;

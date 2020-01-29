@@ -21,7 +21,7 @@ void TITLE::Update() {
 	if (Key_get(KEY_INPUT_UP) == 1) {//上キーが押されていたら
 		Select = (Select + (eMenu_Num - 1)) % eMenu_Num;//選択状態を一つ上げる
 	}
-	if (Key_get(KEY_INPUT_RETURN) == 1) {//エンターキーが押されたら
+	if (Key_get(KEY_INPUT_SPACE) == 1) {//エンターキーが押されたら
 
 		switch (Select) {                            //現在選択中の状態によって処理を分岐
 		case eMenu_1PLAYER:                           //ゲーム選択中なら
@@ -111,7 +111,7 @@ void TITLE::Draw() {
 	SetFontSize(48);
 	DrawString(850, 570, "操作方法", GetColor(255, 255, 255));
 	SetFontSize(32);
-	DrawString(850, 650, "プレイ：ENTER", GetColor(255, 255, 255));
+	DrawString(850, 650, "プレイ：SPACE", GetColor(255, 255, 255));
 	DrawString(850, 700, "上移動：　↑", GetColor(255, 255, 255));
 	DrawString(850, 750, "下移動：　↓", GetColor(255, 255, 255));
 	SetFontSize(16);
