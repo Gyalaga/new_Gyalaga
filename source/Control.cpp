@@ -140,12 +140,12 @@ void CONTROL::Hit_Judgment() {
 			if (No[j] == true)
 			{
 				//ƒvƒŒƒCƒ„[‚Æ“G‚Ì“–‚½‚è”»’è
-				if (hf == 0 && (double)px + pw >= ex[i+ BOSS_ORDER] - 10 && (double)px <= ex[i] + eWidth[i+ BOSS_ORDER] + 10 && (double)py + ph >= ey[i+ BOSS_ORDER] && (double)py <= ey[i] + eHeight[i+ BOSS_ORDER] + 60) {
+				if (hf == 0 && (double)px + pw >= ex[j+ BOSS_ORDER] - 10 && (double)px <= ex[j+ BOSS_ORDER] + eWidth[j+ BOSS_ORDER] + 10 && (double)py + ph >= ey[j+ BOSS_ORDER] && (double)py <= ey[j+ BOSS_ORDER] + eHeight[j+ BOSS_ORDER] + 60) {
 					c.c = 5;
 					Player_hit(c.c);
 					hf = 1;
 					Player_hitflg(hf);
-					Player_Enemy(ex[i], ey[i]);
+					Player_Enemy(ex[j + BOSS_ORDER], ey[j + BOSS_ORDER]);
 				}
 			}
 		}

@@ -63,7 +63,9 @@ void Player_Init()//初期化
 	 Player.mode = 0;
 	//デュアルモードフラグ
 	 Player.dualmode = false;
-	Player.hitflg = 0;
+	 Player.hitflg = 0;
+	 c.cnt = 0, c.i = 0;
+	 c.j = 1;
 	LoadDivGraph("./res/img/自機.png", 2, 1, 2, 16, 16, Player.image);         // 自機画像の分割読み込み
 	LoadDivGraph("./res/img/bakuhatu.png", 9, 9, 1, 32, 32, explosion.image);  // 爆破画像の分割
 }
