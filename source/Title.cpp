@@ -107,6 +107,7 @@ void TITLE::Draw() {
 		y = PLAYER2_Y;
 		break;
 	}
+	SetFontSize(26);
 	DrawString(250, y, "Å°", GetColor(255, 255, 255));
 	SetFontSize(48);
 	DrawString(850, 570, "ëÄçÏï˚ñ@", GetColor(255, 255, 255));
