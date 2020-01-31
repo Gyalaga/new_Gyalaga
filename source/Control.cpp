@@ -79,8 +79,8 @@ void CONTROL::GameControl() {
 		DrawString(850, 570, "操作方法", GetColor(255, 255, 255));
 		SetFontSize(32);
 		DrawString(850, 650, "弾発射：SPACE", GetColor(255, 255, 255));
-		DrawString(850, 700, "右移動：　→", GetColor(255, 255, 255));
-		DrawString(850, 750, "下移動：　←", GetColor(255, 255, 255));
+		DrawString(850, 750, "右移動：　→", GetColor(255, 255, 255));
+		DrawString(850, 700, "左移動：　←", GetColor(255, 255, 255));
 		SetFontSize(16);
 		if (wavcnt < 800)wavcnt++;	//SE用カウントを増やす
 
