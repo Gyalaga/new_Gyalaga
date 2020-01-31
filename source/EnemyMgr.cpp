@@ -31,6 +31,8 @@ void ENEMYMGR::Init() {
 	atkActive = false;
 	enemyAllMove = ENEMY_MOVERIGHT;
 	intervalCnt = 0;
+	boss_rand = 0;
+	tmpBoss_rand = 0;
 
 	//“G‚Ì‰æ‘œ‚ðˆêŽž“I‚ÉbaseGh‚ÉŠi”[‚·‚é
 	LoadDivGraph("./res/img/Galaga_OBJ_enemy.png", 50, 5, 10, 18, 18, baseGh);

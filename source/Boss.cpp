@@ -122,12 +122,22 @@ void BOSS::Tractor_Beam() {
 		}
 }
 
+//トラクタービームの動き
 void BOSS::Tractor_Move() {
-	if (y < (double)600 + height)y++;
+
+	if (!(y < (double)32 + height) && y < (double)600 + height)y++;	//初動
+
+	//トラクタービームを発射切り替え
 	if (y == (double)600 + height && tractorInitFlg == true) {
 		tractorFlg = true;
 		tractorInitFlg = false;
 	}
+	//トラクタービームを発射後隊列に戻る処理
+	if (!(y < (double)600) + height && y < (double)800 + height && tractorFlg == false)y++;
+	if (y == (double)800)y = 0;
+	if (y < (double)32)y++;
+	if (y == (double)32)atkActive = false;
+
 }
 
 //更新処理

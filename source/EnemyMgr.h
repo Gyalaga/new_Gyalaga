@@ -33,6 +33,7 @@ private:
 	int sincount;           //sin‹““®‚ÌƒJƒEƒ“ƒg
 	int goei_no;            //ƒSƒGƒC‚Ì”Ô†‚ğŠi”[
 	int boss_rand;			//ƒ{ƒXƒMƒƒƒ‰ƒK‚ÌUŒ‚”»’è—p
+	int tmpBoss_rand;		//boss_rand‚ğˆê“I‚ÉŠi”[—p
 	double enemyX[40];	    //“G‚ÌXÀ•W‚ğæ“¾
 	double enemyY[40];	    //“G‚ÌYÀ•W‚ğæ“¾
 	double goei_bazin_x[16];//ƒSƒGƒC‚Ì‰ŠúxÀ•W‚ğŠi”[
