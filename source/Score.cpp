@@ -14,7 +14,7 @@ void Score_Init() {
 //描画
 void Score_Save() {
 	//ハイスコアのファイルを開く
-	FileHandle = FileRead_open("res/source/high_score.dat");
+	FileHandle = FileRead_open("res/score/high_score.dat");
 
 	// 画面に描画
 	DrawString(h_scorex, h_scorey, String, White);
@@ -26,7 +26,7 @@ void Score_Save() {
 	errno_t error;
 
 	// ハイスコアの記録
-	if ((error = fopen_s(&fp, "res/source/high_score.dat", "w")) != 0) {
+	if ((error = fopen_s(&fp, "res/score/high_score.dat", "w")) != 0) {
 		DrawFormatString(50, 50, Red, "ファイルオープンエラー");
 		exit(EXIT_FAILURE);
 	}
@@ -70,7 +70,7 @@ void Score_Draw() {
 void Score_Title() {
 
 	//ハイスコアのファイルを開く
-	FileHandle = FileRead_open("res/source/high_score.dat");
+	FileHandle = FileRead_open("res/score/high_score.dat");
 
 	// 一行読む
 	FileRead_gets(String, 256, FileHandle);
