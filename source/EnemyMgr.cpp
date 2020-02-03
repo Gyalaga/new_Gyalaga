@@ -149,7 +149,11 @@ void ENEMYMGR::Update() {
 
 	//sinカウントが100を超えると動かす
 	if (sincount >= 100) {
+
+		//動かすゴエイをランダムで決める
+		static int goei_no = rand() % GOEI_NUM;
 		bool atkActive = true;
+
 		goei[goei_no]->Atacck(atkActive, goei_no,
 			goei_bazin_x[goei_no], goei_bazin_y[goei_no]);
 

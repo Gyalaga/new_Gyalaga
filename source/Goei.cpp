@@ -24,15 +24,12 @@ void GOEI::Load_AddMove(int addMove) {
 	//攻撃中ではないとき
 	if (atkActive == false) {
 		if (allMoveAmount == ENEMY_MOVERIGHT) {
-			Move_flg = 0;  //右
 			Move_cnt += 1;
-			Overall_Move();
 		}
 		else {
-			Move_flg = 1;
 			Move_cnt -= 1; //左
-			Overall_Move();
 		}
+		Overall_Move();
 	}
 }
 
@@ -76,8 +73,7 @@ void GOEI::Init(int ix, int iy) {
 							//0:回転移動 1:曲線移動 2:なんか 3:なんか
 	zigzagcnt = 0;          //ジグザグカウント
 	zigzagflg = 0;          //ジグザグフラグ
-	Move_flg = 0;          //最初は→  0:右 1:左
-	Move_cnt = 0;
+	Move_cnt = -1;          //全体が左右に進んだ回数をカウント
 
 }
 
@@ -149,25 +145,27 @@ void GOEI::Atacck(bool atk, int dorei_no, double bazin_x, double bazin_y) {
 			//Rota_angle += 0.01;
 		}
 		/***画面外に出たゴエイを上にワープさせる***/
-		if (y >= 1100) {
-			if (Move_flg == 0) { //エネミー全体が右に進んでた場合
-				x_bazin = x_bazin + (10 * Move_cnt);
-				x = x_bazin;
-				if (goei_no == 0) {
-					x = x_bazin - 10;
-				}
-			}
-			else {              //エネミー全体が左に進んでいた場合
+		if (y >= 1140) {
+
+			/***エネミー全体が右に進んでた場合***/
+			if (allMoveAmount == ENEMY_MOVERIGHT) {
 				x_bazin = x_bazin - (10 * Move_cnt);
-				x = x_bazin;
+
+				/***右に進むときだけずれるのでその修正***/
+				x_bazin = x_bazin - 20;
 			}
-			y = -15;
+			/***エネミー全体が左に進んでいた場合***/
+			if (allMoveAmount == ENEMY_MOVELEFT) {
+				x_bazin = x_bazin - (10 * Move_cnt);
+			}
+			x = x_bazin;
+			y = -7;
 			Rota_angle = 0;
 			goeiflg = 4;
 		}
 		/***既に移動を終えたゴエイが上に戻ってきたら、初期一に戻るまで下に移動させる***/
 		if (y <= y_bazin && goeiflg == 4) {
-			y += 2;
+			y += 3;
 			atkActive = false;
 
 		}
