@@ -1,3 +1,4 @@
+//extern—p‚ÌéŒ¾
 #ifndef _SHOT_EXTERN_H_
 #define _SHOT_EXTERN_H_
 #define SHOT 2
